@@ -41,10 +41,9 @@ const ShowMenuStyled = styled.div`
     height: 100%;
   }
 `;
-const DropDownMenu = () => {
+const DropDownMenu = ({ downMenu }) => {
   const [isOpacity, setOpacity] = useState(0);
   const [isCursor, setCursor] = useState("none");
-
 
   const showMenu = (props) => {
     console.log("xxxx");
@@ -61,12 +60,9 @@ const DropDownMenu = () => {
     <MenuStyled onMouseEnter={() => showMenu(true)} onMouseLeave={() => showMenu(false)}>
       Что мы делаем
       <ShowMenuStyled $opacity={isOpacity} $cursor={isCursor}>
-        <LinkLargeStyled>Ссылка на что то</LinkLargeStyled>
-        <LinkLargeStyled>Ссылка на что то</LinkLargeStyled>
-        <LinkLargeStyled>Ссылка на что то</LinkLargeStyled>
-        <LinkLargeStyled>Ссылка на что то</LinkLargeStyled>
-        <LinkLargeStyled>Ссылка на что то</LinkLargeStyled>
-        <LinkLargeStyled>Ссылка на что то</LinkLargeStyled>
+        {downMenu.map((value, index) => {
+          return <LinkLargeStyled key={index}>{value.name}</LinkLargeStyled>;
+        })}
       </ShowMenuStyled>
     </MenuStyled>
   );

@@ -88,7 +88,7 @@ const Header = () => {
       </HeaderStyled>
       <BottomhMenuStyled>
         <GreenLinkStyled>Служба доставки цветов</GreenLinkStyled>
-        <DropDownMenu />
+        <DropDownMenu downMenu={downMenu} />
         <LinkLargeStyled>Блог</LinkLargeStyled>
       </BottomhMenuStyled>
     </ContainerStyled>
