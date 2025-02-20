@@ -13,6 +13,13 @@ const menu = [
   { link: "/jobs", name: "работа" },
   { link: "/login", name: "войти" },
 ];
+const downMenu = [
+  { link: "delivery", name: "Служба доставки цветов" },
+  { link: "floristics", name: "флористика" },
+  { link: "floral_floristic", name: "траурная флористическая" },
+  { link: "gallery", name: "галерея" },
+  { link: "push", name: "блог " },
+];
 const ContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,7 +83,7 @@ const Header = () => {
         <NavStyled>
           <LinkBlock menu={menu} />
           <Basket />
-          <MobileMenu />
+          <MobileMenu menu={menu} downMenu={downMenu} />
         </NavStyled>
       </HeaderStyled>
       <BottomhMenuStyled>

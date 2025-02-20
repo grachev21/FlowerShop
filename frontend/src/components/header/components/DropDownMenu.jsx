@@ -7,7 +7,6 @@ const MenuStyled = styled.div`
   position: relative;
   padding-right: 20px;
   padding-left: 20px;
-  background-color: red;
   cursor: pointer;
 `;
 const LinkLargeStyled = styled.div`

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
 import styleTools from "../../../styles/styleTools";
+import { NavLink } from "react-router-dom";
 
 const ContainerStyled = styled.div``;
 const MenuIconStyled = styled.div`
@@ -20,12 +21,14 @@ const SlidingBarStyled = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: ${styleTools.color.green};
+  background-color: ${styleTools.color.swamp};
   overflow: hidden;
   width: 100%;
   transition: all 0.3s;
   transform: scaleY(${(props) => props.$scale});
   transform-origin: top;
+  padding-top: 14px;
+  padding-bottom: 14px;
   @media (min-width: ${styleTools.size.lg}) {
     display: none;
   }
@@ -40,8 +43,39 @@ const LinkLargeStyled = styled.div`
     color: ${styleTools.color.green};
   }
 `;
+const DownMenuStyled = styled(NavLink)`
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: ${styleTools.color.black};
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: end;
+`;
 
-const MobileMenu = () => {
+const LinkStyled = styled(NavLink)`
+  height: 1.6rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: ${styleTools.color.black};
+  transition: all 0.3;
+  margin-top: 8px;
+  text-align: end;
+  &:hover {
+    transition: all 0.3s;
+    color: ${styleTools.color.green};
+  }
+  &.active {
+    color: ${styleTools.color.green};
+    border-bottom: 1px solid ${styleTools.color.green};
+  }
+`;
+const MobileMenu = ({ menu, downMenu }) => {
   const [isScale, setScale] = useState(0);
   const [isLuck, setLuck] = useState(true);
 
@@ -54,12 +88,21 @@ const MobileMenu = () => {
     <ContainerStyled>
       <MenuIconStyled onClick={menuShowHidden}>{isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}</MenuIconStyled>
       <SlidingBarStyled $scale={isScale}>
-        <LinkLargeStyled>Link</LinkLargeStyled>
-        <LinkLargeStyled>Link</LinkLargeStyled>
-        <LinkLargeStyled>Link</LinkLargeStyled>
-        <LinkLargeStyled>Link</LinkLargeStyled>
-        <LinkLargeStyled>Link</LinkLargeStyled>
-        <LinkLargeStyled>Link</LinkLargeStyled>
+        {downMenu.map((value, index) => {
+          return (
+            <DownMenuStyled to={value.link} key={index} activeclassname="active">
+              {value.name}
+            </DownMenuStyled>
+          );
+        })}
+
+        {menu.map((value, index) => {
+          return (
+            <LinkStyled to={value.link} key={index} activeclassname="active">
+              {value.name}
+            </LinkStyled>
+          );
+        })}
       </SlidingBarStyled>
     </ContainerStyled>
   );
