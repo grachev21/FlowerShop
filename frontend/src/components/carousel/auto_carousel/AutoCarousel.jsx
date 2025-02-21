@@ -1,65 +1,63 @@
 import { useEffect, useState } from "react";
+import useInterval from "use-interval";
+import useWindowWidth from "../../../customHooks/useWindowWidth";
 import styled from "styled-components";
+import photo from "../../../media/img/102b1bd1cf54efd3bfed89e8558e9200.jpg";
 
-import carouselList from "../../helpers/carouselList";
-import Dot from "./Dot";
-
-const CarouselStyled = styled.div`
-  height: 220px;
+const ContainerStyled = styled.div`
+  height: 400px;
   position: relative;
   overflow: hidden;
-  background-color: var(--background-color-3);
-  margin: 80px;
-  width: ${(props) => props.$width}px;
 `;
-const LineStyled = styled.div`
+const BoardPhotoStyled = styled.div`
+  display: flex;
+  flex-direction: row;
   position: absolute;
-  display: flex;
-  left: ${(props) => props.$left}px;
-  transition: 0.5s;
-`;
-const PictureStyled = styled.img`
-  height: 180px;
-  width: ${(props) => props.$width}px;
-`;
-const LinkCollectionsStyled = styled.dev`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+  background-color: yellow;
+  width: ${(props) => props.$multWi}px;
+  height: 100%;
+  transition: all 0.3s;
+  left: ${(props) => props.$position}px;
 `;
 
-const Carousel = () => {
-  const widthCarousel = 1080;
-  const widthPicture = 360;
-  const quantityPicture = Object.keys(carouselList).length;
-  const numberPoints = quantityPicture - widthCarousel / widthPicture + 1;
-  const listPoints = [];
-  const [isPosition, setPosition] = useState(0);
+const PhotoStyled = styled.div`
+  width: ${(props) => props.$wi}px;
+  height: 400px;
+  border: 4px solid blue;
+  background-size: cover;
+  background-position: center;
+  background-image: url(${(props) => props.$photo});
+`;
 
-  // Receives data from the child
-  const [isIndex, setIndex] = useState(0);
-  const handleChange = (isValue) => {
-    setIndex(isValue);
-  };
+const AutoCarousel = () => {
+  const widthWindow = useWindowWidth();
+  const [isBaseSize, setBaseSize] = useState(widthWindow * 8);
+  const [isPositionLeft, setPositionLeft] = useState(0);
 
-  for (let index = 0; index < numberPoints; index++) {
-    listPoints.push(index * widthPicture);
-  }
+  useInterval(() => {
+    if (-isPositionLeft >= isBaseSize *2 ) {
+      setPositionLeft(0)
+    } else {
+      setPositionLeft(isPositionLeft - widthWindow );
+    }
+  }, 1000);
 
-  useEffect(() => {
-    setPosition(listPoints[isIndex]);
-  });
+  console.log(isPositionLeft);
 
   return (
-    <CarouselStyled $width={widthCarousel}>
-      <LineStyled $left={isPosition}>
-        {carouselList.map((carouselList, index) => {
-          return <PictureStyled key={index} $width={widthPicture} src={carouselList.img} alt="" />;
-        })}
-      </LineStyled>
-      <Dot number={numberPoints} onChange={handleChange} />
-    </CarouselStyled>
+    <ContainerStyled>
+      <BoardPhotoStyled $multWi={isBaseSize} $position={isPositionLeft}>
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        <PhotoStyled $photo={photo} $wi={widthWindow} />
+      </BoardPhotoStyled>
+    </ContainerStyled>
   );
 };
 
-export default Carousel;
+export default AutoCarousel;
