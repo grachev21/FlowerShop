@@ -8,6 +8,7 @@ const ContainerStyled = styled.div`
   height: 400px;
   position: relative;
   overflow: hidden;
+  display: flex;
 `;
 const BoardPhotoStyled = styled.div`
   display: flex;
@@ -31,18 +32,19 @@ const PhotoStyled = styled.div`
 
 const AutoCarousel = () => {
   const widthWindow = useWindowWidth();
+  const [isWidthWindow, setWidthWindow] = useState(widthWindow);
   const [isBaseSize, setBaseSize] = useState(widthWindow * 8);
   const [isPositionLeft, setPositionLeft] = useState(0);
 
   useInterval(() => {
-    if (-isPositionLeft >= isBaseSize *2 ) {
-      setPositionLeft(0)
+    setWidthWindow(widthWindow);
+    if (-isPositionLeft >= isBaseSize) {
+      setPositionLeft(0);
     } else {
-      setPositionLeft(isPositionLeft - widthWindow );
+      setPositionLeft(isPositionLeft - widthWindow);
     }
   }, 1000);
-
-  console.log(isPositionLeft);
+  console.log(isWidthWindow);
 
   return (
     <ContainerStyled>
