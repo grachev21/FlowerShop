@@ -9,54 +9,65 @@ const ContainerStyled = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
+  width: 100%;
 `;
 const BoardPhotoStyled = styled.div`
   display: flex;
   flex-direction: row;
   position: absolute;
-  background-color: yellow;
   width: ${(props) => props.$multWi}px;
   height: 100%;
   transition: all 0.3s;
   left: ${(props) => props.$position}px;
 `;
-
 const PhotoStyled = styled.div`
   width: ${(props) => props.$wi}px;
   height: 400px;
-  border: 4px solid blue;
   background-size: cover;
   background-position: center;
   background-image: url(${(props) => props.$photo});
 `;
+const data = [
+  { link: "", img: photo },
+  { link: "", img: photo },
+  { link: "", img: photo },
+  { link: "", img: photo },
+  { link: "", img: photo },
+  { link: "", img: photo },
+  { link: "", img: photo },
+  { link: "", img: photo },
+];
+
 
 const AutoCarousel = () => {
-  const widthWindow = useWindowWidth();
-  const [isWidthWindow, setWidthWindow] = useState(widthWindow);
-  const [isBaseSize, setBaseSize] = useState(widthWindow * 8);
-  const [isPositionLeft, setPositionLeft] = useState(0);
+  // Hook Usewindowwidth defines the screen size
+  const isWidthWindow = useWindowWidth(); // We get the width of the window from the hook
+  const [isNumberPhotos, setNumberPhoto] = useState(data.length); // The number of photos
+  const [isBaseSize, setBaseSize] = useState(isWidthWindow * isNumberPhotos); // The total width of the canvas
+  const [isPositionLeft, setPositionLeft] = useState(0); // The initial position of the photo
+
+  useEffect(() => {
+    setBaseSize(isWidthWindow * 8);
+    setNumberPhoto(data.length);
+    setBaseSize(isWidthWindow * isNumberPhotos);
+    console.log("..");
+  }, [isWidthWindow]);
 
   useInterval(() => {
-    setWidthWindow(widthWindow);
-    if (-isPositionLeft >= isBaseSize) {
+    // We take one photo from the base canvas so as not to see an empty screen
+    if (-isPositionLeft >= isBaseSize - isWidthWindow) {
       setPositionLeft(0);
     } else {
-      setPositionLeft(isPositionLeft - widthWindow);
+      setPositionLeft(isPositionLeft - isWidthWindow);
     }
-  }, 1000);
-  console.log(isWidthWindow);
+  }, 3000);
 
   return (
     <ContainerStyled>
       <BoardPhotoStyled $multWi={isBaseSize} $position={isPositionLeft}>
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
-        <PhotoStyled $photo={photo} $wi={widthWindow} />
+        {data.map((value, index) => {
+          return <PhotoStyled key={index} $photo={value.img} $wi={isWidthWindow} />;
+        })}
       </BoardPhotoStyled>
     </ContainerStyled>
   );
