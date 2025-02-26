@@ -8,10 +8,10 @@ const CardStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-    height: 58vh;
+  height: 58vh;
   @media (min-width: ${styleTools.size.sm}) {
-    width: 28vw;
-    height: 58vh;
+    width: 100%;
+    height: 48vh;
   }
 `;
 const ImgStyled = styled.div`

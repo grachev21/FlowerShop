@@ -11,6 +11,7 @@ const ContainerStyled = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const Home = () => {
   return (
     <ContainerStyled>
