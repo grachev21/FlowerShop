@@ -4,7 +4,8 @@ import styleTools from "../../styles/styleTools";
 const LinkPaddingStyled = styled.div`
   position: relative;
   color: ${styleTools.color.green};
-  padding: 0.6rem;
+  padding-top: .8rem;
+  padding-bottom: .6rem;
   border: 1px solid ${styleTools.color.green};
   text-transform: uppercase;
   font-size: large;

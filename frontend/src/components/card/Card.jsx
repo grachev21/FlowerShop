@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import LinkPadding from "../links/linkPadding";
+import styleTools from "../../styles/styleTools";
 
 const CardStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 22vw;
-  height: 42vh;
+  width: 100%;
+    height: 58vh;
+  @media (min-width: ${styleTools.size.sm}) {
+    width: 28vw;
+    height: 58vh;
+  }
 `;
 const ImgStyled = styled.div`
   height: 100%;
