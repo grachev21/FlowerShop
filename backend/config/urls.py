@@ -1,12 +1,12 @@
-from core.views import *
+from core.views import ProductCardSet
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path 
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-# router.register(r'WordsList', WordsListSet)
+router.register(r'ProductCard', ProductCardSet)
 # router.register(r'Settings', SettingsSet)
 # router.register(r'CreateWordListSet', CreateWordListSet, basename='CreateWordListSet')
 # router.register(r'ShowUserWordsList', ShowUserWordsListSet)
@@ -14,7 +14,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include(router.urls)),
+    path("api/", include(router.urls)),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
 ]
