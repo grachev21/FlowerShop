@@ -2,11 +2,11 @@ import styled from "styled-components";
 import styleTools from "../../styles/styleTools";
 
 const BannerStyled = styled.div`
-  width: 100%;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  max-width: 1050px;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   display: flex;
   flex-direction: column;
   @media (min-width: ${styleTools.size.sm}) {
@@ -18,7 +18,7 @@ const ImageStyled = styled.div`
   background-position: center;
   background-image: url(${(props) => props.$img});
   width: 100%;
-  height: 30vh;
+  height: 36vh;
   margin-top: 3rem;
   @media (min-width: ${styleTools.size.sm}) {
     width: 50%;
@@ -35,6 +35,8 @@ const NameStyled = styled.div`
   margin-bottom: 2rem;
 `;
 const InfoStyled = styled.div`
+  font-size: large;
+  margin-right: 2rem;
   @media (min-width: ${styleTools.size.sm}) {
     width: 50%;
     padding-right: 1rem ;
