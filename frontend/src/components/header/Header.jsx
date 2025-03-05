@@ -8,9 +8,8 @@ import MobileMenu from "./components/MobileMenu";
 
 const menu = [
   { link: "/", name: "главная" },
-  { link: "/frankfurt", name: "франквуртский" },
-  { link: "/base", name: "центральный" },
-  { link: "/jobs", name: "работа" },
+  { link: "/catalog", name: "каталог" },
+  { link: "/gallery", name: "галерея" },
   { link: "/login", name: "войти" },
 ];
 const downMenu = [

@@ -86,3 +86,8 @@ class CartItem(models.Model):
         # Настройки для отображения модели в админке
         verbose_name = "Элемент корзины"
         verbose_name_plural = "Элементы корзины"
+
+
+    class Gallery(models.Model):
+        content = models.CharField(max_)
+
