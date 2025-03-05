@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logo from "../../media/logo/logo.png";
+import Logo from "../logo/Logo";
 import styleTools from "../../styles/styleTools";
 import LinkBlock from "./components/LinkBlock";
 import Basket from "./components/Basket";
@@ -31,19 +31,11 @@ const HeaderStyled = styled.div`
   justify-content: space-between;
   padding: 20px;
 `;
-const LogoStyled = styled.div`
-  width: 300px;
-  height: 54px;
-  background-image: url(${logo});
-  background-size: cover;
-  background-position: center;
-`;
 const NavStyled = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
-
 const BottomhMenuStyled = styled.div`
   width: 100%;
   display: none;
@@ -78,7 +70,7 @@ const Header = () => {
   return (
     <ContainerStyled>
       <HeaderStyled>
-        <LogoStyled />
+        <Logo />
         <NavStyled>
           <LinkBlock menu={menu} />
           <Basket />
