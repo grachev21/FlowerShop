@@ -29,6 +29,15 @@ const Table = () => {
       <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
       <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
       <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
     </TableStyled>
   );
 };

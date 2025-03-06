@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logoImage from "../../media/logo/logo.png";
 
@@ -10,6 +11,10 @@ const LogoStyled = styled.div`
 `;
 
 const Logo = () => {
-  return <LogoStyled />;
+  return (
+    <NavLink to={"/"}>
+      <LogoStyled />
+    </NavLink>
+  );
 };
 export default Logo;
