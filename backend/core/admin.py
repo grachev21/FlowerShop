@@ -29,3 +29,4 @@ class ProductPhotoInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     # Указываем, что в админ-панели ProductCard будут отображаться связанные фотографии через inline
     inlines = [ProductPhotoInline]
+admin.site.register(CustomUser)

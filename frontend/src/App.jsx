@@ -3,7 +3,7 @@ import GlobalStyle from "./styles/GlobalStyles";
 
 import Home from "./page/Home";
 import Catalog from "./page/Catalog";
-import Login from "./page/Login";
+import LoginAndRegister from "./page/LoginAndRegister";
 
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -16,7 +16,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<LoginAndRegister />} />
           <Route path="/catalog" element={<Catalog />} />
         </Routes>
         <Footer />

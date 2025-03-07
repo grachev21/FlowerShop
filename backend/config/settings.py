@@ -67,6 +67,8 @@ TEMPLATES = [
 # WSGI-приложение для запуска проекта
 WSGI_APPLICATION = "config.wsgi.application"
 
+CORS_ALLOW_ALL_ORIGINS = True  # Разрешить запросы с любых источников
+
 # Настройки базы данных
 DATABASES = {
     "default": {
@@ -92,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Язык и временная зона
-LANGUAGE_CODE = "en"  # Язык по умолчанию (английский)
+LANGUAGE_CODE = "ru"  # Язык по умолчанию (английский)
 TIME_ZONE = "UTC"  # Временная зона (UTC)
 USE_I18N = True  # Включение интернационализации
 USE_TZ = True  # Использование временных зон

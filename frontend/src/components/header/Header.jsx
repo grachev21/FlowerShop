@@ -5,6 +5,8 @@ import LinkBlock from "./components/LinkBlock";
 import Basket from "./components/Basket";
 import DropDownMenu from "./components/DropDownMenu";
 import MobileMenu from "./components/MobileMenu";
+import { userVerification } from "../../utils/userVerification";
+import { useEffect, useState } from "react";
 
 const menu = [
   { link: "/", name: "главная" },
@@ -67,6 +69,24 @@ const LinkLargeStyled = styled.div`
   }
 `;
 const Header = () => {
+  const [isAuth, setAuth] = useState(false);
+
+  useEffect(() => {
+    const chekAuth = async () => {
+      const authStatus = await userVerification();
+      setAuth(authStatus);
+    };
+    chekAuth();
+  }, []);
+
+  if (isAuth) {
+    const login = menu.findIndex((m) => m.link === "/login");
+    menu[login] = { ...menu[login], link: "/logout", name: "Выйти" };
+  } else {
+    const login = menu.findIndex((m) => m.link === "/logout");
+    menu[login] = { ...menu[login], link: "/login", name: "Войти" };
+  }
+
   return (
     <ContainerStyled>
       <HeaderStyled>
