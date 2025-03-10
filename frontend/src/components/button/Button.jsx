@@ -29,7 +29,11 @@ const ButtonStyled = styled.button`
   }
 `;
 
-const Button = ({ content, type }) => {
-  return <ButtonStyled type={type}>{content}</ButtonStyled>;
+const Button = ({ content, type, loading }) => {
+  return (
+    <ButtonStyled type={type} disabled={loading}>
+      {loading ? content[1] : content[0]}
+    </ButtonStyled>
+  );
 };
 export default Button;

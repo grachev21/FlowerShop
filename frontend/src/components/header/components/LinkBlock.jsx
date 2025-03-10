@@ -2,6 +2,8 @@ import styled from "styled-components";
 import styleTools from "../../../styles/styleTools";
 import { NavLink } from "react-router-dom";
 
+import useLogout from "../../../customHooks/useLogout";
+
 const LinkBlockStyled = styled.div`
   display: none;
   flex-direction: row;
@@ -28,16 +30,32 @@ const LinkStyled = styled(NavLink)`
     border-bottom: 1px solid ${styleTools.color.green};
   }
 `;
-const LinkBlock = ({menu}) => {
+const LogOutStyled = styled.div`
+  cursor: pointer;
+  height: 1.6rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: ${styleTools.color.black};
+  transition: all 0.3;
+  margin-top: 8px;
+  &:hover {
+    transition: all 0.3s;
+    color: ${styleTools.color.green};
+  }
+`;
+
+const LinkBlock = ({ menu, isAuthenticated }) => {
+  const { logout } = useLogout();
+
   return (
     <LinkBlockStyled>
-      {menu.map((value, index) => {
-        return (
-          <LinkStyled to={value.link} key={index} activeclassname="active">
-            {value.name}
-          </LinkStyled>
-        );
-      })}
+      <LinkStyled to={menu[0].link}>{menu[0].name}</LinkStyled>
+      <LinkStyled to={menu[1].link}>{menu[1].name}</LinkStyled>
+      <LinkStyled to={menu[2].link}>{menu[2].name}</LinkStyled>
+      {isAuthenticated ? <LogOutStyled onClick={logout}>Выйти</LogOutStyled> : <LinkStyled to={menu[3].link}>{menu[3].name}</LinkStyled>}
     </LinkBlockStyled>
   );
 };

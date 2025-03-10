@@ -7,6 +7,8 @@ const ContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `;
 const LoginStyled = styled.div`
   display: flex;
