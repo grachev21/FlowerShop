@@ -20,6 +20,7 @@ const useLogout = () => {
 
       // Перенаправляем пользователя на страницу входа
       navigate("/login");
+      navigate(0);
     }
   };
 

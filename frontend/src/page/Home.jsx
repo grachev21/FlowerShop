@@ -4,6 +4,7 @@ import TitleXXL from "../components/titles/TitleXXl";
 import Table from "../components/table/Table";
 import Banner from "../components/banner/Banner";
 import banerImg from "../media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
+import useGetRequest from "../customHooks/useGetRequest";
 
 const title_1 = "Добро пожаловать в флористы Blumen Schmidt-Their в главном районе и Франкфурте";
 const title_2 = "Цветы Шмидт - на нас полагается - и уже более 20 лет!";
@@ -15,10 +16,15 @@ const ContainerStyled = styled.div`
 `;
 
 const Home = () => {
+  const { data, loading, error } = useGetRequest("http://127.0.0.1:8000/api/ProductCard/");
+
+  if (loading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error.message}</div>;
+
   return (
     <ContainerStyled>
       <TitleXXL content={title_1} />
-      <AutoCarousel />
+      <AutoCarousel data={data} />
       <TitleXXL content={title_2} />
       <Table />
       <Banner img={banerImg} />

@@ -4,13 +4,15 @@ import useWindowWidth from "../../../customHooks/useWindowWidth";
 import styled from "styled-components";
 import photo from "../../../media/img/102b1bd1cf54efd3bfed89e8558e9200.jpg";
 
+// Стилизованные компоненты
 const ContainerStyled = styled.div`
-  height: 400px;
+  height: 800px;
   position: relative;
   overflow: hidden;
   display: flex;
   width: 100%;
 `;
+
 const BoardPhotoStyled = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,54 +22,46 @@ const BoardPhotoStyled = styled.div`
   transition: all 0.3s;
   left: ${(props) => props.$position}px;
 `;
+
 const PhotoStyled = styled.div`
   width: ${(props) => props.$wi}px;
-  height: 400px;
+  height: 800px;
   background-size: cover;
   background-position: center;
   background-image: url(${(props) => props.$photo});
 `;
-const data = [
-  { link: "", img: photo },
-  { link: "", img: photo },
-  { link: "", img: photo },
-  { link: "", img: photo },
-  { link: "", img: photo },
-  { link: "", img: photo },
-  { link: "", img: photo },
-  { link: "", img: photo },
-];
 
+const AutoCarousel = ({ data }) => {
+  const isWidthWindow = useWindowWidth(); // Ширина окна
+  const [isBaseSize, setBaseSize] = useState(0); // Общая ширина canvas
+  const [isPositionLeft, setPositionLeft] = useState(0); // Позиция карусели
+  const dataSlice = data.slice(0, 4);
 
-const AutoCarousel = () => {
-  // Hook Usewindowwidth defines the screen size
-  const isWidthWindow = useWindowWidth(); // We get the width of the window from the hook
-  const [isNumberPhotos, setNumberPhoto] = useState(data.length); // The number of photos
-  const [isBaseSize, setBaseSize] = useState(isWidthWindow * isNumberPhotos); // The total width of the canvas
-  const [isPositionLeft, setPositionLeft] = useState(0); // The initial position of the photo
+  // Количество фотографий
+  const isNumberPhotos = dataSlice.length;
 
+  // Обновляем базовый размер при изменении ширины окна
   useEffect(() => {
-    setBaseSize(isWidthWindow * 8);
-    setNumberPhoto(data.length);
-    setBaseSize(isWidthWindow * isNumberPhotos);
-    console.log("..");
-  }, [isWidthWindow]);
-
-  useInterval(() => {
-    // We take one photo from the base canvas so as not to see an empty screen
-    if (-isPositionLeft >= isBaseSize - isWidthWindow) {
-      setPositionLeft(0);
-    } else {
-      setPositionLeft(isPositionLeft - isWidthWindow);
+    if (isWidthWindow) {
+      setBaseSize(isWidthWindow * isNumberPhotos);
     }
-  }, 3000);
+  }, [isWidthWindow, isNumberPhotos]);
+
+  // Автоматическая прокрутка карусели
+  useInterval(() => {
+    if (-isPositionLeft >= isBaseSize - isWidthWindow) {
+      setPositionLeft(0); // Сброс позиции, если дошли до конца
+    } else {
+      setPositionLeft(isPositionLeft - isWidthWindow); // Прокрутка на одну фотографию
+    }
+  }, 4000);
 
   return (
     <ContainerStyled>
       <BoardPhotoStyled $multWi={isBaseSize} $position={isPositionLeft}>
-        {data.map((value, index) => {
-          return <PhotoStyled key={index} $photo={value.img} $wi={isWidthWindow} />;
-        })}
+        {dataSlice.map((value, index) => (
+          <PhotoStyled key={value.id} $photo={value.photos[0].image} $wi={isWidthWindow} />
+        ))}
       </BoardPhotoStyled>
     </ContainerStyled>
   );

@@ -2,8 +2,6 @@ import styled from "styled-components";
 import styleTools from "../../styles/styleTools";
 import Card from "../card/Card";
 
-import photo from "../../media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
-
 const TableStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -23,21 +21,19 @@ const TableStyled = styled.div`
     width: 100%;
   }
 `;
-const Table = () => {
+const Table = ({ data }) => {
   return (
     <TableStyled>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
-      <Card img={photo} title={"Что то полезное"} button={"Нажми меня"}></Card>
+      {data &&
+        data.map((value) => (
+          <Card
+            key={value.id}
+            id={value.id}
+            img={value.photos[0].image}
+            title={value.name}
+            price={value.price}
+            button={"Добавить в корзину"}></Card>
+        ))}
     </TableStyled>
   );
 };

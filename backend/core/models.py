@@ -87,7 +87,5 @@ class CartItem(models.Model):
         verbose_name = "Элемент корзины"
         verbose_name_plural = "Элементы корзины"
 
-
     # class Gallery(models.Model):
     #     content = models.CharField(max_)
-
