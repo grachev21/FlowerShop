@@ -1,88 +1,123 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { MdArrowBackIosNew } from "react-icons/md";
+import { useParams, NavLink } from "react-router-dom";
+import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
 import styleTools from "../styles/styleTools";
+import LinkPadding from "../components/links/linkPadding";
 
+const ContainerStyled = styled.div``;
 const ProductStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+  @media (min-width: ${styleTools.size.sm}) {
+    flex-direction: row;
+  }
 `;
 const LinkBackStyled = styled(NavLink)`
   color: ${styleTools.color.green};
   padding-left: 1rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
   width: 100px;
   font-weight: bold;
 `;
 const BlockImgStyled = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2rem;
 `;
-const ListImgStyled = styled.div``;
-const ItemImgStyled = styled.img`
+const ListImgStyled = styled.div`
   width: 40px;
-  height: 40px;
-  margin: 1rem;
+  margin-right: 2rem;
+`;
+const ItemImgStyled = styled.img`
+  min-width: 40px;
+  height: auto;
+  margin-bottom: 1rem;
   cursor: pointer;
-  transition: all, 0.3s;
-  box-shadow: 0px 5px 9px 0px rgba(0, 0, 0, ${(props) => props.$shadow});
+  transition: all 0.3s;
+  box-shadow: 0px 5px 9px 0px
+    rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
 `;
+const BlockBaseImgStyled = styled.div``;
 const BaseImgStyled = styled.img`
-  width: 312px;
-  height: 312px;
-  margin: 1rem;
+  width: 100%;
+  height: auto;
 `;
-const DescriptionStyled = styled.div``;
+
+const BlockUtilsStyled = styled.div``;
+
+const DescriptionStyled = styled.div`
+  font-size: small;
+  width: 100%;
+  margin-top: 1rem;
+`;
+const NameStyled = styled.div`
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+`;
+const PriceStyled = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+`;
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [isListImg, setListImg] = useState(null);
-  const [isIndex, setIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/ProductCard/${id}/`)
       .then((response) => {
         setProduct(response.data);
-        setListImg(response.data.photos);
       })
       .catch((error) => {
         console.error("Ошибка при загрузке продукта:", error);
       });
   }, [id]);
 
-  if (!product) {
-    return <div>Загрузка...</div>;
-  }
+  if (!product) return <div>Загрузка...</div>;
 
   return (
-    <ProductStyled>
-      <LinkBackStyled to={"/catalog"}>
+    <ContainerStyled>
+      <LinkBackStyled to="/catalog">
         <MdArrowBackIosNew />
         Каталог
       </LinkBackStyled>
-      <BlockImgStyled>
-        <ListImgStyled>
-          {isListImg.map((value, index) => {
-            return (
+      <ProductStyled>
+        <BlockImgStyled>
+          <ListImgStyled>
+            {product.photos.map((photo, index) => (
               <ItemImgStyled
                 key={index}
-                src={value.image}
-                onClick={() => setIndex(index)}
-                $shadow={isIndex == index ? 0.8 : 0}
+                src={photo.image}
+                onClick={() => setActiveIndex(index)}
+                $active={activeIndex === index}
               />
-            );
-          })}
-        </ListImgStyled>
-        <BaseImgStyled src={product.photos[isIndex].image} />
-      </BlockImgStyled>
-      <DescriptionStyled>{product.description}</DescriptionStyled>
-    </ProductStyled>
+            ))}
+          </ListImgStyled>
+          <BlockBaseImgStyled>
+            <BaseImgStyled src={product.photos[activeIndex].image} />
+            <DescriptionStyled>{product.description}</DescriptionStyled>
+          </BlockBaseImgStyled>
+        </BlockImgStyled>
+      </ProductStyled>
+
+      <BlockUtilsStyled>
+        <NameStyled>{product.name}</NameStyled>
+        <PriceStyled>
+          {product.price} <MdOutlineCurrencyRuble />
+        </PriceStyled>
+      </BlockUtilsStyled>
+    </ContainerStyled>
   );
 };
+
 export default Product;
