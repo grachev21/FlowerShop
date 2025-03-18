@@ -1,10 +1,18 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import logoImage from "../../media/logo/logo.png";
+import logoImage from "../../media/logo/logo.webp";
 
+const ContainerStyled = styled.div`
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  max-width: 60px;
+  max-height: 60px;
+`;
 const LogoStyled = styled.div`
-  width: 300px;
-  height: 54px;
+  width: 80px;
+  height: 80px;
   background-image: url(${logoImage});
   background-size: cover;
   background-position: center;
@@ -13,7 +21,9 @@ const LogoStyled = styled.div`
 const Logo = () => {
   return (
     <NavLink to={"/"}>
-      <LogoStyled />
+      <ContainerStyled>
+        <LogoStyled />
+      </ContainerStyled>
     </NavLink>
   );
 };

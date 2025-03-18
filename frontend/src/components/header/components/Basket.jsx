@@ -4,10 +4,11 @@ import { SlBasket } from "react-icons/sl";
 const BasketStyled = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   height: min-content;
 `;
 const NumberStyled = styled.div`
-  font-size: 22px;
+  font-size: 1.2rem;
   margin-left: 10px;
 `;
 const Basket = () => {

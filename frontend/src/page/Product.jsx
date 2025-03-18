@@ -5,6 +5,7 @@ import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
 import styleTools from "../styles/styleTools";
 import LinkPadding from "../components/links/linkPadding";
+import useAuthPost from "../customHooks/useAuthPost";
 
 const ContainerStyled = styled.div``;
 const ProductStyled = styled.div`
@@ -28,6 +29,9 @@ const BlockImgStyled = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
+  @media (min-width: ${styleTools.size.sm}) {
+    width: 60%;
+  }
 `;
 const ListImgStyled = styled.div`
   width: 40px;
@@ -42,13 +46,16 @@ const ItemImgStyled = styled.img`
   box-shadow: 0px 5px 9px 0px
     rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
 `;
-const BlockBaseImgStyled = styled.div``;
-const BaseImgStyled = styled.img`
+const BlockBaseImgStyled = styled.div`
   width: 100%;
   height: auto;
 `;
 
-const BlockUtilsStyled = styled.div``;
+const BaseImgStyled = styled.img``;
+const BlockUtilsStyled = styled.div`
+  margin-left: 1rem;
+  margin-top: 1rem;
+`;
 
 const DescriptionStyled = styled.div`
   font-size: small;
@@ -71,6 +78,7 @@ const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [ post, loading, error, data ] = useAuthPost()
 
   useEffect(() => {
     axios
@@ -108,14 +116,15 @@ const Product = () => {
             <DescriptionStyled>{product.description}</DescriptionStyled>
           </BlockBaseImgStyled>
         </BlockImgStyled>
-      </ProductStyled>
 
-      <BlockUtilsStyled>
-        <NameStyled>{product.name}</NameStyled>
-        <PriceStyled>
-          {product.price} <MdOutlineCurrencyRuble />
-        </PriceStyled>
-      </BlockUtilsStyled>
+        <BlockUtilsStyled>
+          <NameStyled>{product.name}</NameStyled>
+          <PriceStyled>
+            {product.price} <MdOutlineCurrencyRuble />
+          </PriceStyled>
+          <LinkPadding content={"Добавить в корзину"} />
+        </BlockUtilsStyled>
+      </ProductStyled>
     </ContainerStyled>
   );
 };

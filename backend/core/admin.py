@@ -2,14 +2,14 @@
 from django.contrib import admin
 
 # Импортируем модели, которые будем регистрировать в админ-панели
-from .models import ProductCard, Cart, CartItem, Photo, CustomUser
+from .models import ProductCard, Cart, Photo, CustomUser
 
 
 # Регистрируем модель Cart в админ-панели с использованием декоратора @admin.register
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     # Указываем, какие поля будут отображаться в списке объектов модели Cart
-    list_display = ("user", "created_at", "updated_at")
+    list_display = ("user", "product", "quantity", "added_at")
 
     # Указываем, по каким полям можно выполнять поиск в админ-панели
     search_fields = ("user",)
@@ -24,9 +24,9 @@ class ProductPhotoInline(admin.TabularInline):
     extra = 3
 
 
-# Регистрируем модель ProductCard в админ-панели
-@admin.register(ProductCard)
-class ProductAdmin(admin.ModelAdmin):
-    # Указываем, что в админ-панели ProductCard будут отображаться связанные фотографии через inline
-    inlines = [ProductPhotoInline]
-admin.site.register(CustomUser)
+# # Регистрируем модель ProductCard в админ-панели
+# @admin.register(ProductCard)
+# class ProductAdmin(admin.ModelAdmin):
+#     # Указываем, что в админ-панели ProductCard будут отображаться связанные фотографии через inline
+#     inlines = [ProductPhotoInline]
+# admin.site.register(CustomUser)

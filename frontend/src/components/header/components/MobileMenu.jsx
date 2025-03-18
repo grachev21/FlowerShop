@@ -5,11 +5,13 @@ import styled from "styled-components";
 import styleTools from "../../../styles/styleTools";
 import { NavLink } from "react-router-dom";
 
-const ContainerStyled = styled.div``;
+const ContainerStyled = styled.div`
+  display: flex;
+  align-items: center;
+`;
 const MenuIconStyled = styled.div`
   padding-left: 30px;
-  margin-top: 4px;
-  display: block;
+  display: flex;
   cursor: pointer;
   @media (min-width: ${styleTools.size.lg}) {
     display: none;
@@ -33,16 +35,6 @@ const SlidingBarStyled = styled.div`
     display: none;
   }
 `;
-const LinkLargeStyled = styled.div`
-  padding-right: 20px;
-  padding-left: 20px;
-  text-transform: uppercase;
-  transition: all 0.3s;
-  cursor: pointer;
-  &:hover {
-    color: ${styleTools.color.green};
-  }
-`;
 const DownMenuStyled = styled(NavLink)`
   font-size: 1rem;
   text-transform: uppercase;
@@ -54,7 +46,6 @@ const DownMenuStyled = styled(NavLink)`
   margin-bottom: 8px;
   text-align: end;
 `;
-
 const LinkStyled = styled(NavLink)`
   height: 1.6rem;
   font-size: 0.9rem;
@@ -86,11 +77,16 @@ const MobileMenu = ({ menu, downMenu }) => {
 
   return (
     <ContainerStyled>
-      <MenuIconStyled onClick={menuShowHidden}>{isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}</MenuIconStyled>
+      <MenuIconStyled onClick={menuShowHidden}>
+        {isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}
+      </MenuIconStyled>
       <SlidingBarStyled $scale={isScale}>
         {downMenu.map((value, index) => {
           return (
-            <DownMenuStyled to={value.link} key={index} activeclassname="active">
+            <DownMenuStyled
+              to={value.link}
+              key={index}
+              activeclassname="active">
               {value.name}
             </DownMenuStyled>
           );

@@ -30,6 +30,7 @@ const HeaderStyled = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
 `;
 const NavStyled = styled.div`
@@ -76,7 +77,7 @@ const Header = () => {
         <Logo />
         <NavStyled>
           <LinkBlock menu={menu} isAuthenticated={isAuthenticated} />
-          <Basket />
+          {isAuthenticated ? <Basket /> : ""}
           <MobileMenu menu={menu} downMenu={downMenu} />
         </NavStyled>
       </HeaderStyled>

@@ -4,13 +4,13 @@ import styleTools from "../../styles/styleTools";
 const LinkPaddingStyled = styled.div`
   position: relative;
   color: ${styleTools.color.green};
-  padding-top: .8rem;
-  padding-bottom: .6rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
   border: 1px solid ${styleTools.color.green};
   text-transform: uppercase;
   font-size: large;
   font-weight: 400;
-  width: 60%;
+  width: 100%;
   text-align: center;
   cursor: pointer;
   &::before {
