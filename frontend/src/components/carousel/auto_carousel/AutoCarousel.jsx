@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import useInterval from "use-interval";
 import useWindowWidth from "../../../customHooks/useWindowWidth";
 import styled from "styled-components";
-import photo from "../../../media/img/102b1bd1cf54efd3bfed89e8558e9200.jpg";
+import styleTools from "../../../styles/styleTools";
 
 // Стилизованные компоненты
 const ContainerStyled = styled.div`
-  height: 800px;
+  height: 500px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -24,11 +24,21 @@ const BoardPhotoStyled = styled.div`
 `;
 
 const PhotoStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: ${(props) => props.$wi}px;
   height: 800px;
   background-size: cover;
   background-position: center;
   background-image: url(${(props) => props.$photo});
+`;
+const TitleStyled = styled.div`
+  color: ${styleTools.color.white};
+  font-size: 3.4rem;
+  font-weight: bold;
+  text-shadow: ${styleTools.shadow.shadowB};
 `;
 
 const AutoCarousel = ({ data }) => {
@@ -60,7 +70,9 @@ const AutoCarousel = ({ data }) => {
     <ContainerStyled>
       <BoardPhotoStyled $multWi={isBaseSize} $position={isPositionLeft}>
         {dataSlice.map((value, index) => (
-          <PhotoStyled key={value.id} $photo={value.photos[0].image} $wi={isWidthWindow} />
+          <PhotoStyled key={index} $photo={value.image} $wi={isWidthWindow}>
+            <TitleStyled>{value.title}</TitleStyled>
+          </PhotoStyled>
         ))}
       </BoardPhotoStyled>
     </ContainerStyled>

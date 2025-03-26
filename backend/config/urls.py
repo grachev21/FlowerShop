@@ -1,15 +1,13 @@
-from core.views import ProductCardSet
+from core.views import ProductCardSet, CarouselSet
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path 
+from django.urls import include, path
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'ProductCard', ProductCardSet)
-# router.register(r'Settings', SettingsSet)
-# router.register(r'CreateWordListSet', CreateWordListSet, basename='CreateWordListSet')
-# router.register(r'ShowUserWordsList', ShowUserWordsListSet)
+router.register(r"ProductCard", ProductCardSet)
+router.register(r"CarouselSet", CarouselSet)
 
 
 urlpatterns = [

@@ -44,9 +44,9 @@ const ShowMenuStyled = styled.div`
 const DropDownMenu = ({ downMenu }) => {
   const [isOpacity, setOpacity] = useState(0);
   const [isCursor, setCursor] = useState("none");
+  
 
   const showMenu = (props) => {
-    console.log("xxxx");
     props ? setOpacity(100) : setOpacity(0);
     if (props) {
       setOpacity(100);

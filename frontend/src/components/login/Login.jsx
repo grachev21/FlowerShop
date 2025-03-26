@@ -21,7 +21,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const { login, loading, error, success, token } = useLogin();
-  console.log(token, "token to");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

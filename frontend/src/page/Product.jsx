@@ -43,8 +43,7 @@ const ItemImgStyled = styled.img`
   margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0px 5px 9px 0px
-    rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
+  box-shadow: 0px 5px 9px 0px rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
 `;
 const BlockBaseImgStyled = styled.div`
   width: 100%;
@@ -78,8 +77,9 @@ const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [ post, loading, error, data ] = useAuthPost()
+  // const [ post, loading, error, data ] = useAuthPost()
 
+  console.log(id, "<<< id");
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/ProductCard/${id}/`)
@@ -103,12 +103,7 @@ const Product = () => {
         <BlockImgStyled>
           <ListImgStyled>
             {product.photos.map((photo, index) => (
-              <ItemImgStyled
-                key={index}
-                src={photo.image}
-                onClick={() => setActiveIndex(index)}
-                $active={activeIndex === index}
-              />
+              <ItemImgStyled key={index} src={photo.image} onClick={() => setActiveIndex(index)} $active={activeIndex === index} />
             ))}
           </ListImgStyled>
           <BlockBaseImgStyled>

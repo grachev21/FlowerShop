@@ -16,7 +16,7 @@ const ContainerStyled = styled.div`
 `;
 
 const Home = () => {
-  const { data, loading, error } = useGetRequest("http://127.0.0.1:8000/api/ProductCard/");
+  const { data, loading, error } = useGetRequest("http://127.0.0.1:8000/api/CarouselSet/");
 
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>Ошибка: {error.message}</div>;

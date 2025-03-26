@@ -54,3 +54,11 @@ class Cart(models.Model):
             "user",
             "product",
         )  # Убедимся, что товар не добавляется в корзину дважды
+
+class Carousel(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="photos/", verbose_name="Фото")
+    
+    class Meta: 
+        verbose_name = "Карусель"
+        verbose_name_plural = "Карусели"
