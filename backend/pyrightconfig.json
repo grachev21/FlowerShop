@@ -1,0 +1,11 @@
+{
+  "venvPath": ".",
+  "venv": "venv",
+  "pythonVersion": "3.13.1",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "pythonPath": "./venv/Scripts/python.exe"
+    }
+  ]
+}

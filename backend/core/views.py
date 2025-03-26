@@ -1,10 +1,14 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from .models import ProductCard, Carousel
-from .serializers import ProductCardSerializer, CarouselSerializer
+
+from core import models
+
+from .models import Carousel, ProductCard
+from .serializers import CarouselSerializer, ProductCardSerializer
 
 
 class ProductCardSet(viewsets.ReadOnlyModelViewSet):
+
+
     queryset = ProductCard.objects.all()
     serializer_class = ProductCardSerializer
 

@@ -6,8 +6,8 @@ import Banner from "../components/banner/Banner";
 import banerImg from "../media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
 import useGetRequest from "../customHooks/useGetRequest";
 
-const title_1 = "Добро пожаловать в флористы Blumen Schmidt-Their в главном районе и Франкфурте";
-const title_2 = "Цветы Шмидт - на нас полагается - и уже более 20 лет!";
+const title_1 = "Добро пожаловать в магазины FlowerShop";
+const title_2 = "Цветы FlowerShop - на нас полагается - и уже более 20 лет!";
 
 const ContainerStyled = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const Home = () => {
       <TitleXXL content={title_2} />
       <Table />
       <Banner img={banerImg} />
-      <Table />
+      {/* <Table /> */}
     </ContainerStyled>
   );
 };

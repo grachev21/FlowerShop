@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Table from "../components/table/Table";
 import useGetRequest from "../customHooks/useGetRequest";
+import CardCatalog from "../components/card/CardCatalog";
 
 const CatalogStyled = styled.div``;
 
@@ -14,7 +15,7 @@ const Catalog = () => {
   if (error) return <div>Error: {error.message}</div>;
   return (
     <CatalogStyled>
-      <Table data={data} />
+      <Table type={"CardCatalog"} data={data} />
     </CatalogStyled>
   );
 };

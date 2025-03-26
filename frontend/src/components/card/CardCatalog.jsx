@@ -39,7 +39,7 @@ const PriceStyled = styled.div`
   margin: 1rem;
 `;
 
-const Card = ({ id, img, title, price, button }) => {
+const CardCatalog = ({ id, img, title, price, button }) => {
   return (
     <CardStyled>
       <ImgStyled to={`/ProductCard/${id}`} $img={img}></ImgStyled>
@@ -51,4 +51,4 @@ const Card = ({ id, img, title, price, button }) => {
     </CardStyled>
   );
 };
-export default Card;
+export default CardCatalog;

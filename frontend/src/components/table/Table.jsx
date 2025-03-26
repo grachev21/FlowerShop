@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import styleTools from "../../styles/styleTools";
-import Card from "../card/Card";
+import CardCatalog from "../card/CardCatalog";
 
 const TableStyled = styled.div`
   display: grid;
@@ -21,18 +21,18 @@ const TableStyled = styled.div`
     width: 100%;
   }
 `;
-const Table = ({ data }) => {
+const Table = ({ type, data }) => {
   return (
     <TableStyled>
       {data &&
         data.map((value) => (
-          <Card
+          <CardCatalog
             key={value.id}
             id={value.id}
             img={value.photos[0].image}
             title={value.name}
             price={value.price}
-            button={"Добавить в корзину"}></Card>
+            button={"Добавить в корзину"}></CardCatalog>
         ))}
     </TableStyled>
   );

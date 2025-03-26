@@ -1,8 +1,33 @@
 from django.db import models
+
 from users.models import CustomUser
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class Type(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
 class ProductCard(models.Model):
+
+    category = models.ForeignKey(
+        Category,
+        related_name="category",
+        on_delete=models.CASCADE,
+        verbose_name="Категория",
+    )
+    type = models.ForeignKey(
+        Category, related_name="type", on_delete=models.CASCADE, verbose_name="Тип"
+    )
     name = models.CharField(max_length=255, verbose_name="Название товара")
     description = models.TextField(verbose_name="Описание товара")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
@@ -41,7 +66,7 @@ class Cart(models.Model):
     product = models.ForeignKey(
         ProductCard, on_delete=models.CASCADE, verbose_name="Товар"
     )
-    quantity = models.PositiveIntegerField(default=1, verbose_name="Количество")
+    quantity = models.PositiveIntegerField(verbose_name="Количество")
     added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     def __str__(self):
@@ -55,10 +80,11 @@ class Cart(models.Model):
             "product",
         )  # Убедимся, что товар не добавляется в корзину дважды
 
+
 class Carousel(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to="photos/", verbose_name="Фото")
-    
-    class Meta: 
+
+    class Meta:
         verbose_name = "Карусель"
         verbose_name_plural = "Карусели"
