@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import useInterval from "use-interval";
-import useWindowWidth from "../../../customHooks/useWindowWidth";
+import useWindowWidth from "../../../../customHooks/useWindowWidth";
 import styled from "styled-components";
-import styleTools from "../../../styles/styleTools";
+import styleTools from "../../../../styles/styleTools";
 
-// Стилизованные компоненты
 const ContainerStyled = styled.div`
   height: 500px;
   position: relative;
@@ -12,7 +11,6 @@ const ContainerStyled = styled.div`
   display: flex;
   width: 100%;
 `;
-
 const BoardPhotoStyled = styled.div`
   display: flex;
   flex-direction: row;
@@ -22,7 +20,6 @@ const BoardPhotoStyled = styled.div`
   transition: all 0.3s;
   left: ${(props) => props.$position}px;
 `;
-
 const PhotoStyled = styled.div`
   display: flex;
   flex-direction: column;

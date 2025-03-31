@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import logoImage from "../../media/logo/logo.webp";
+// import logoImage from "../../media/logo/logo.webp";
+import logoImage from "@/media/logo/logo.webp";
 
 const ContainerStyled = styled.div`
   display: flex;

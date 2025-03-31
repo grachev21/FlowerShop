@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import styleTools from "../../styles/styleTools";
+import styleTools from "@/styles/styleTools";
 
 const InputContainerStyled = styled.div`
   position: relative;

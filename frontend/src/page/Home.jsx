@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import AutoCarousel from "../components/carousel/auto_carousel/AutoCarousel";
-import TitleXXL from "../components/titles/TitleXXl";
-import Banner from "../components/banner/Banner";
+import AutoCarousel from "../components/organisms/carousel/auto_carousel/AutoCarousel";
+import { TitleXXL, Banner } from "@/components";
 import banerImg from "../media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
 import useGetRequest from "../customHooks/useGetRequest";
-import { Logo } from "@/components";
 
 const title_1 = "Добро пожаловать в магазины FlowerShop";
 const title_2 = "Цветы FlowerShop - на нас полагается - и уже более 20 лет!";

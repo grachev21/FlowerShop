@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
 import styleTools from "../styles/styleTools";
-import LinkPadding from "../components/links/linkPadding";
+import LinkPadding from "../components/atoms/linkPadding";
 
 const ContainerStyled = styled.div``;
 const ProductStyled = styled.div`

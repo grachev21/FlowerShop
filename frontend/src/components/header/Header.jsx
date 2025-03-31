@@ -5,6 +5,7 @@ import Basket from "./components/Basket";
 import DropDownMenu from "./components/DropDownMenu";
 import MobileMenu from "./components/MobileMenu";
 import useAuthCheck from "../../customHooks/useAuthCheck";
+import { Logo } from "@/components";
 
 const menu = [
   { link: "/", name: "главная" },
@@ -73,7 +74,7 @@ const Header = () => {
   return (
     <ContainerStyled>
       <HeaderStyled>
-        {/* <Logo /> */}
+        <Logo />
         <NavStyled>
           <LinkBlock menu={menu} isAuthenticated={isAuthenticated} />
           {isAuthenticated ? <Basket /> : ""}

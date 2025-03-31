@@ -4,9 +4,9 @@ import GlobalStyle from "./styles/GlobalStyles";
 import Home from "./page/Home";
 import Catalog from "./page/Catalog";
 import LoginAndRegister from "./page/LoginAndRegister";
-
-import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
+
+import { Footer } from "@/components";
 import Product from "./page/Product";
 
 const App = () => {

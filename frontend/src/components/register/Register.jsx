@@ -4,8 +4,8 @@ import useRegister from "../../customHooks/useRegister";
 import styled from "styled-components";
 import styleTools from "../../styles/styleTools";
 
-import Input from "../input/Input";
-import Button from "../button/Button";
+import Input from "../atoms/Input";
+import Button from "../atoms/button/Button";
 import { useNavigate } from "react-router-dom";
 
 const RegisterStyled = styled.form`

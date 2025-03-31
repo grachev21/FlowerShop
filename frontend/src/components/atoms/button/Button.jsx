@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import styleTools from "../../styles/styleTools";
+import styleTools from "../../../styles/styleTools";
 
-const LinkPaddingStyled = styled.div`
+const ButtonStyled = styled.button`
   position: relative;
   color: ${styleTools.color.green};
-  padding-top: 0.8rem;
-  padding-bottom: 0.6rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   border: 1px solid ${styleTools.color.green};
   text-transform: uppercase;
   font-size: large;
@@ -22,12 +22,18 @@ const LinkPaddingStyled = styled.div`
     height: 100%;
     background-color: ${styleTools.color.green};
     opacity: 0%;
+    transition: all 0.3s;
   }
   &:hover::before {
     opacity: 15%;
   }
 `;
-const LinkPadding = ({ content }) => {
-  return <LinkPaddingStyled>{content}</LinkPaddingStyled>;
+
+const Button = ({ content, type, loading }) => {
+  return (
+    <ButtonStyled type={type} disabled={loading}>
+      {loading ? content[1] : content[0]}
+    </ButtonStyled>
+  );
 };
-export default LinkPadding;
+export default Button;

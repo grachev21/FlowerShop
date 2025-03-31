@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LinkPadding from "../links/linkPadding";
+import LinkPadding from "../atoms/linkPadding";
 import styleTools from "../../styles/styleTools";
 import { MdOutlineCurrencyRuble } from "react-icons/md";
 import { Link } from "react-router-dom";

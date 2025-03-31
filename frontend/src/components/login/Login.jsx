@@ -3,8 +3,8 @@ import styleTools from "../../styles/styleTools";
 import { useState } from "react";
 import useLogin from "../../customHooks/useLogin";
 
-import Input from "../input/Input";
-import Button from "../button/Button";
+import Input from "../atoms/Input";
+import Button from "../atoms/button/Button";
 
 const LoginStyled = styled.form`
   width: 320px;

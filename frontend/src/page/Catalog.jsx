@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import useGetRequest from "../customHooks/useGetRequest";
-import CardCatalog from "../components/card/CardCatalog";
+import CardCatalog from "../components/molecules/CardCatalog";
 import styleTools from "../styles/styleTools";
 
 const TableStyled = styled.div`
