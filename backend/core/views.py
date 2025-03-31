@@ -1,9 +1,16 @@
 from rest_framework import viewsets
 
-from core import models
+from .models import Carousel, ProductCard, TypeProduct
+from .serializers import (
+    CarouselSerializer,
+    ProductCardSerializer,
+    TypeProductSerializer,
+)
 
-from .models import Carousel, ProductCard
-from .serializers import CarouselSerializer, ProductCardSerializer
+
+class TypeProductSet(viewsets.ReadOnlyModelViewSet):
+    queryset = TypeProduct.objects.all()
+    serializer_class = TypeProductSerializer
 
 
 class ProductCardSet(viewsets.ReadOnlyModelViewSet):

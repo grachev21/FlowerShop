@@ -1,4 +1,4 @@
-from core.views import ProductCardSet, CarouselSet
+from core.views import ProductCardSet, CarouselSet, TypeProductSet
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -7,7 +7,8 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r"ProductCard", ProductCardSet)
-router.register(r"CarouselSet", CarouselSet)
+router.register(r"Carousel", CarouselSet)
+router.register(r"TypeProduct", TypeProductSet)
 
 
 urlpatterns = [

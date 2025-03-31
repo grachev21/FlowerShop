@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import LinkPadding from "../links/linkPadding";
 import styleTools from "../../styles/styleTools";
-import { MdOutlineCurrencyRuble } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const CardStyled = styled.div`
@@ -30,13 +29,6 @@ const TitleStyled = styled.div`
   margin-bottom: 1rem;
   font-size: 1.4rem;
   font-weight: 300;
-`;
-const PriceStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 1.6rem;
-  margin: 1rem;
 `;
 
 const CardCategory = ({ id, img, title, button }) => {

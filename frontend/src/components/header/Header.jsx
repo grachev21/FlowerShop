@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Logo from "../logo/Logo";
 import styleTools from "../../styles/styleTools";
 import LinkBlock from "./components/LinkBlock";
 import Basket from "./components/Basket";
@@ -74,7 +73,7 @@ const Header = () => {
   return (
     <ContainerStyled>
       <HeaderStyled>
-        <Logo />
+        {/* <Logo /> */}
         <NavStyled>
           <LinkBlock menu={menu} isAuthenticated={isAuthenticated} />
           {isAuthenticated ? <Basket /> : ""}

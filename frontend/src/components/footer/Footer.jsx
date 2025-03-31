@@ -2,13 +2,15 @@ import styled from "styled-components";
 import styleTools from "../../styles/styleTools";
 import footerData from "./dataFooter";
 
-import Logo from "../logo/Logo";
+// import Logo from "../logo/Logo";
+import { Logo } from "@/components";
 
-const FooterStyled = styled.div` padding-top: 5rem;
-padding-bottom: 5rem;
-display: flex;
-flex-direction: column;
-align-items: center;
+const FooterStyled = styled.div`
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const SeparatingLineStyled = styled.div` position: relative;
 width: 100%;
@@ -33,8 +35,9 @@ width: 100%;
 }
 
 `;
-const LowerBlockStyled = styled.div` padding-left: 2rem;
-padding-right: 2rem;
+const LowerBlockStyled = styled.div`
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
 
 const ListStyled = styled.div` color: $ {
@@ -49,23 +52,18 @@ font-size: 1.1rem;
 `;
 
 const Footer = () => {
-  return (<FooterStyled> <SeparatingLineStyled /> <TopBlockStyled> <Logo /> {
-    footerData.map((value, index) => {
-      return <ListStyled key={
-        index
-      }
-
-      > {
-          value
-        }
-
-      </ListStyled>;
-    })
-  }
-
-  </TopBlockStyled> <LowerBlockStyled></LowerBlockStyled> </FooterStyled>);
-}
-
-  ;
+  return (
+    <FooterStyled>
+      <SeparatingLineStyled />
+      <Logo />
+      <TopBlockStyled>
+        {footerData.map((value, index) => {
+          return <ListStyled key={index}> {value}</ListStyled>;
+        })}
+      </TopBlockStyled>
+      <LowerBlockStyled></LowerBlockStyled>
+    </FooterStyled>
+  );
+};
 
 export default Footer;

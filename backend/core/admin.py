@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Импортируем модели, которые будем регистрировать в админ-панели
-from .models import ProductCard, Cart, Photo, Carousel, Category, Type
+from .models import ProductCard, Cart, Photo, Carousel, Category, TypeProduct
 
 
 # Регистрируем модель Cart в админ-панели с использованием декоратора @admin.register
@@ -34,8 +34,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-@admin.register(Type)
-class TypeAdmin(admin.ModelAdmin):
+@admin.register(TypeProduct)
+class TypeProductAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 

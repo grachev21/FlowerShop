@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",    // Базовый путь — папка src/
+    "paths": {
+      "@/*": ["./*"]       // Алиас @/ → src/
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

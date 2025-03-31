@@ -5,7 +5,6 @@ import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
 import styleTools from "../styles/styleTools";
 import LinkPadding from "../components/links/linkPadding";
-import useAuthPost from "../customHooks/useAuthPost";
 
 const ContainerStyled = styled.div``;
 const ProductStyled = styled.div`

@@ -14,8 +14,10 @@ class Category(models.Model):
         verbose_name_plural = "Категории"
 
 
-class Type(models.Model):
+class TypeProduct(models.Model):
     name = models.CharField(max_length=200)
+    slogan = models.TextField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="photos/")
 
     def __str__(self):
         return self.name
@@ -33,8 +35,11 @@ class ProductCard(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Категория",
     )
-    type = models.ForeignKey(
-        Type, related_name="typeProduct", on_delete=models.CASCADE, verbose_name="Тип"
+    typeproduct = models.ForeignKey(
+        TypeProduct,
+        related_name="typeProduct",
+        on_delete=models.CASCADE,
+        verbose_name="Тип",
     )
     name = models.CharField(max_length=255, verbose_name="Название товара")
     description = models.TextField(verbose_name="Описание товара")
