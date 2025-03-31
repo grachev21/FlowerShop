@@ -31,6 +31,8 @@ const ShowMenuStyled = styled.div`
   box-shadow: ${styleTools.shadow.shadowA};
   pointer-events: ${(props) => props.$cursor};
   padding: 20px;
+  z-index: 50;
+  background-color: ${styleTools.color.white};
   &::before {
     content: "";
     position: absolute;

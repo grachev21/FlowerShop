@@ -9,6 +9,7 @@ const TableStyled = styled.div`
   width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
+  margin-top: 100px;
   @media (min-width: ${styleTools.size.sm}) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -25,15 +26,18 @@ const Table = ({ type, data }) => {
   return (
     <TableStyled>
       {data &&
-        data.map((value) => (
-          <CardCatalog
-            key={value.id}
-            id={value.id}
-            img={value.photos[0].image}
-            title={value.name}
-            price={value.price}
-            button={"Добавить в корзину"}></CardCatalog>
-        ))}
+        data.map((value) =>
+          type == "CardCatalog" ? (
+            <CardCatalog
+              key={value.id}
+              id={value.id}
+              img={value.photos[0].image}
+              title={value.name}
+              button={"Добавить в корзину"}></CardCatalog>
+          ) : (
+            ""
+          )
+        )}
     </TableStyled>
   );
 };

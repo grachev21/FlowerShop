@@ -31,6 +31,7 @@ const SlidingBarStyled = styled.div`
   transform-origin: top;
   padding-top: 14px;
   padding-bottom: 14px;
+  z-index: 50;
   @media (min-width: ${styleTools.size.lg}) {
     display: none;
   }

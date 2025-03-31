@@ -16,15 +16,17 @@ const ContainerStyled = styled.div`
 `;
 
 const Home = () => {
-  const { data, loading, error } = useGetRequest("http://127.0.0.1:8000/api/CarouselSet/");
+  const dataCarousel = useGetRequest("http://127.0.0.1:8000/api/CarouselSet/");
+  const dataType = useGetRequest("http://127.0.0.1:8000/api/ProductCard/")
+  console.log(dataType);
 
-  if (loading) return <div>Загрузка...</div>;
-  if (error) return <div>Ошибка: {error.message}</div>;
+  if (dataCarousel.loading) return <div>Загрузка...</div>;
+  if (dataCarousel.error) return <div>Ошибка: {dataCarousel.error.message}</div>;
 
   return (
     <ContainerStyled>
       <TitleXXL content={title_1} />
-      <AutoCarousel data={data} />
+      <AutoCarousel data={dataCarousel.data} />
       <TitleXXL content={title_2} />
       <Table />
       <Banner img={banerImg} />

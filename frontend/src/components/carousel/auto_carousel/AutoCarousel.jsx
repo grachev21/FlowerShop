@@ -38,7 +38,7 @@ const TitleStyled = styled.div`
   color: ${styleTools.color.white};
   font-size: 3.4rem;
   font-weight: bold;
-  text-shadow: ${styleTools.shadow.shadowB};
+  text-shadow: ${styleTools.shadow.shadoTitle};
 `;
 
 const AutoCarousel = ({ data }) => {

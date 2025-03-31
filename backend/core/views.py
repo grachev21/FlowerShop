@@ -7,10 +7,9 @@ from .serializers import CarouselSerializer, ProductCardSerializer
 
 
 class ProductCardSet(viewsets.ReadOnlyModelViewSet):
-
-
     queryset = ProductCard.objects.all()
     serializer_class = ProductCardSerializer
+
 
 class CarouselSet(viewsets.ReadOnlyModelViewSet):
     queryset = Carousel.objects.all()

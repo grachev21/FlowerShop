@@ -9,12 +9,20 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
 
 class Type(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "Тип"
+        verbose_name_plural = "Типы"
 
 
 class ProductCard(models.Model):
@@ -26,7 +34,7 @@ class ProductCard(models.Model):
         verbose_name="Категория",
     )
     type = models.ForeignKey(
-        Category, related_name="type", on_delete=models.CASCADE, verbose_name="Тип"
+        Type, related_name="typeProduct", on_delete=models.CASCADE, verbose_name="Тип"
     )
     name = models.CharField(max_length=255, verbose_name="Название товара")
     description = models.TextField(verbose_name="Описание товара")

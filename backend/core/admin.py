@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Импортируем модели, которые будем регистрировать в админ-панели
-from .models import ProductCard, Cart, Photo, Carousel
+from .models import ProductCard, Cart, Photo, Carousel, Category, Type
 
 
 # Регистрируем модель Cart в админ-панели с использованием декоратора @admin.register
@@ -23,13 +23,27 @@ class ProductPhotoInline(admin.TabularInline):
     # Указываем количество дополнительных пустых форм для добавления фотографий
     extra = 3
 
+
 @admin.register(Carousel)
 class CarouselAdmin(admin.ModelAdmin):
     list_display = ("title", "image")
 
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+
+@admin.register(Type)
+class TypeAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+
 # # Регистрируем модель ProductCard в админ-панели
 @admin.register(ProductCard)
 class ProductAdmin(admin.ModelAdmin):
-#     # Указываем, что в админ-панели ProductCard будут отображаться связанные фотографии через inline
+    #     # Указываем, что в админ-панели ProductCard будут отображаться связанные фотографии через inline
     inlines = [ProductPhotoInline]
+
+
 # admin.site.register(CustomUser)

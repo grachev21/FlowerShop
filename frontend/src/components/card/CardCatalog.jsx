@@ -26,10 +26,15 @@ const ImgStyled = styled(Link)`
   cursor: pointer;
 `;
 const TitleStyled = styled.div`
-  margin-top: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Количество строк */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 1.4rem;
-  font-weight: 300;
+  font-weight: 300; */
 `;
 const PriceStyled = styled.div`
   display: flex;
@@ -43,7 +48,7 @@ const CardCatalog = ({ id, img, title, price, button }) => {
   return (
     <CardStyled>
       <ImgStyled to={`/ProductCard/${id}`} $img={img}></ImgStyled>
-      <TitleStyled>{title}</TitleStyled>
+      <TitleStyled>{title}...</TitleStyled>
       <PriceStyled>
         {price} <MdOutlineCurrencyRuble />
       </PriceStyled>
