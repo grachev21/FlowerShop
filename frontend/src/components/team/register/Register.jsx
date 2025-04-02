@@ -1,11 +1,10 @@
 import { useState } from "react";
-import useRegister from "../../customHooks/useRegister";
+import useRegister from "@/hooks/useRegister";
 
 import styled from "styled-components";
-import styleTools from "../../styles/styleTools";
+import styleTools from "@/styles/styleTools";
 
-import Input from "../atoms/Input";
-import Button from "../atoms/button/Button";
+import { Input, Button } from "@/components";
 import { useNavigate } from "react-router-dom";
 
 const RegisterStyled = styled.form`
@@ -43,8 +42,18 @@ const Register = () => {
   return (
     <RegisterStyled onSubmit={handleSubmit}>
       <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
-      <Input onDataSend={(data) => setPassword(data)} placeholder={"Введите пароль"} type={"password"} value={password} />
-      <Input onDataSend={(data) => setConfirmPassword(data)} placeholder={"Повторите пароль"} type={"password"} value={confirmPassword} />
+      <Input
+        onDataSend={(data) => setPassword(data)}
+        placeholder={"Введите пароль"}
+        type={"password"}
+        value={password}
+      />
+      <Input
+        onDataSend={(data) => setConfirmPassword(data)}
+        placeholder={"Повторите пароль"}
+        type={"password"}
+        value={confirmPassword}
+      />
       <Button content={["Регистрация", "Регестрируемся"]} type={"submit"} loading={loading} />
       {error && <ErrorStyled>{JSON.stringify(error)}</ErrorStyled>}
       {success && <SuccessStyled>Регистрация прошла успешно!</SuccessStyled>}

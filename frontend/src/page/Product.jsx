@@ -3,10 +3,9 @@ import styled from "styled-components";
 import axios from "axios";
 import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
-import styleTools from "../styles/styleTools";
-import LinkPadding from "../components/atoms/linkPadding";
+import { LinkPadding } from "@/components";
+import styleTools from "@/styles/styleTools";
 
-const ContainerStyled = styled.div``;
 const ProductStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -93,7 +92,7 @@ const Product = () => {
   if (!product) return <div>Загрузка...</div>;
 
   return (
-    <ContainerStyled>
+    <>
       <LinkBackStyled to="/catalog">
         <MdArrowBackIosNew />
         Каталог
@@ -102,7 +101,12 @@ const Product = () => {
         <BlockImgStyled>
           <ListImgStyled>
             {product.photos.map((photo, index) => (
-              <ItemImgStyled key={index} src={photo.image} onClick={() => setActiveIndex(index)} $active={activeIndex === index} />
+              <ItemImgStyled
+                key={index}
+                src={photo.image}
+                onClick={() => setActiveIndex(index)}
+                $active={activeIndex === index}
+              />
             ))}
           </ListImgStyled>
           <BlockBaseImgStyled>
@@ -119,7 +123,7 @@ const Product = () => {
           <LinkPadding content={"Добавить в корзину"} />
         </BlockUtilsStyled>
       </ProductStyled>
-    </ContainerStyled>
+    </>
   );
 };
 

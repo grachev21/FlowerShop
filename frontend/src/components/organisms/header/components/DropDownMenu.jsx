@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import styleTools from "../../../styles/styleTools";
+import styleTools from "@/styles/styleTools";
 
 const MenuStyled = styled.div`
   padding-bottom: 20px;
@@ -46,7 +46,6 @@ const ShowMenuStyled = styled.div`
 const DropDownMenu = ({ downMenu }) => {
   const [isOpacity, setOpacity] = useState(0);
   const [isCursor, setCursor] = useState("none");
-  
 
   const showMenu = (props) => {
     props ? setOpacity(100) : setOpacity(0);

@@ -1,6 +1,6 @@
-import { Color } from "antd/es/color-picker";
 import { useState } from "react";
 import styled from "styled-components";
+
 
 const SliderStyled = styled.div`
   height: 100%;

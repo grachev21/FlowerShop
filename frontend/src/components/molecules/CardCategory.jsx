@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import LinkPadding from "../atoms/linkPadding";
-import styleTools from "../../styles/styleTools";
 import { Link } from "react-router-dom";
+import styleTools from "@/styles/styleTools";
+import { LinkPadding } from "@/components";
 
 const CardStyled = styled.div`
   display: flex;

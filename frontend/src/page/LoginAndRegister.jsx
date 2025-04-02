@@ -1,7 +1,5 @@
 import styled from "styled-components";
-
-import Login from "../components/login/Login";
-import Register from "../components/register/Register";
+import { Login, Register } from "@/components";
 
 const ContainerStyled = styled.div`
   display: flex;

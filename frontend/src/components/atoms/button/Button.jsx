@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import styleTools from "../../../styles/styleTools";
+import styleTools from "@/styles/styleTools";
 
 const ButtonStyled = styled.button`
   position: relative;

@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import styleTools from "../../styles/styleTools";
-import LinkBlock from "./components/LinkBlock";
-import Basket from "./components/Basket";
-import DropDownMenu from "./components/DropDownMenu";
-import MobileMenu from "./components/MobileMenu";
-import useAuthCheck from "../../customHooks/useAuthCheck";
+import { useAuthCheck } from "@/hooks";
+import { Basket, DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
 import { Logo } from "@/components";
+import styleTools from "@/styles/styleTools";
 
 const menu = [
   { link: "/", name: "главная" },

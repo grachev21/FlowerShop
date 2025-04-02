@@ -1,13 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GlobalStyle from "./styles/GlobalStyles";
-
-import Home from "./page/Home";
-import Catalog from "./page/Catalog";
-import LoginAndRegister from "./page/LoginAndRegister";
-import Header from "./components/header/Header";
-
-import { Footer } from "@/components";
-import Product from "./page/Product";
+import GlobalStyle from "@/styles/GlobalStyles";
+import { Home, Catalog, LoginAndRegister, Product } from "@/page";
+import { Footer, Header } from "@/components";
 
 const App = () => {
   return (

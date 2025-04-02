@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import styleTools from "../../styles/styleTools";
 import { useState } from "react";
-import useLogin from "../../customHooks/useLogin";
+import styled from "styled-components";
+import { useLogin } from "@/hooks";
+import styleTools from "@/styles/styleTools";
 
-import Input from "../atoms/Input";
-import Button from "../atoms/button/Button";
+import { Input, Button } from "@/components";
 
 const LoginStyled = styled.form`
   width: 320px;
@@ -31,7 +30,12 @@ const Login = () => {
   return (
     <LoginStyled onSubmit={handleSubmit}>
       <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
-      <Input onDataSend={(data) => setPassword(data)} placeholder={"Введите пароль"} type={"password"} value={password} />
+      <Input
+        onDataSend={(data) => setPassword(data)}
+        placeholder={"Введите пароль"}
+        type={"password"}
+        value={password}
+      />
       <Button content={["Войти", "Входим"]} type={"submit"} loading={loading} />
       {error && <ErrorStyled>{JSON.stringify(error)}</ErrorStyled>}
       {success && <SuccessStyled>Вы вошли!</SuccessStyled>}

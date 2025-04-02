@@ -1,9 +1,9 @@
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import styled from "styled-components";
-import styleTools from "../../../styles/styleTools";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import styleTools from "@/styles/styleTools";
 
 const ContainerStyled = styled.div`
   display: flex;
@@ -78,16 +78,11 @@ const MobileMenu = ({ menu, downMenu }) => {
 
   return (
     <ContainerStyled>
-      <MenuIconStyled onClick={menuShowHidden}>
-        {isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}
-      </MenuIconStyled>
+      <MenuIconStyled onClick={menuShowHidden}>{isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}</MenuIconStyled>
       <SlidingBarStyled $scale={isScale}>
         {downMenu.map((value, index) => {
           return (
-            <DownMenuStyled
-              to={value.link}
-              key={index}
-              activeclassname="active">
+            <DownMenuStyled to={value.link} key={index} activeclassname="active">
               {value.name}
             </DownMenuStyled>
           );

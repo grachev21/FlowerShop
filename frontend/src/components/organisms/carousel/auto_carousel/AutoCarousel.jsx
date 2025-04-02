@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import useInterval from "use-interval";
-import useWindowWidth from "../../../../customHooks/useWindowWidth";
+import { useWindowWidth } from "@/hooks";
 import styled from "styled-components";
-import styleTools from "../../../../styles/styleTools";
+import styleTools from "@/styles/styleTools";
 
 const ContainerStyled = styled.div`
   height: 500px;

@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import styleTools from "../../../styles/styleTools";
 import { NavLink } from "react-router-dom";
-
-import useLogout from "../../../customHooks/useLogout";
+import styleTools from "@/styles/styleTools";
+import { useLogout } from "@/hooks";
 
 const LinkBlockStyled = styled.div`
   display: none;
@@ -55,7 +54,11 @@ const LinkBlock = ({ menu, isAuthenticated }) => {
       <LinkStyled to={menu[0].link}>{menu[0].name}</LinkStyled>
       <LinkStyled to={menu[1].link}>{menu[1].name}</LinkStyled>
       <LinkStyled to={menu[2].link}>{menu[2].name}</LinkStyled>
-      {isAuthenticated ? <LogOutStyled onClick={logout}>Выйти</LogOutStyled> : <LinkStyled to={menu[3].link}>{menu[3].name}</LinkStyled>}
+      {isAuthenticated ? (
+        <LogOutStyled onClick={logout}>Выйти</LogOutStyled>
+      ) : (
+        <LinkStyled to={menu[3].link}>{menu[3].name}</LinkStyled>
+      )}
     </LinkBlockStyled>
   );
 };
