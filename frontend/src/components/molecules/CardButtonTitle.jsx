@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import styleTools from "@/styles/styleTools";
-import { LinkPadding } from "@/components";
+import { LinkPadding, ImageTable, TitleXL } from "@/components";
 
 const CardStyled = styled.div`
   display: flex;
@@ -9,18 +8,15 @@ const CardStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 58vh;
   @media (min-width: ${styleTools.size.sm}) {
     width: 100%;
-    height: 48vh;
   }
 `;
-const ImgStyled = styled(Link)`
+const ImgStyled = styled.div`
   height: 100%;
   width: 100%;
   background-size: cover;
   background-position: center;
-  background-image: url(${(props) => props.$img});
   margin: 20px;
   cursor: pointer;
 `;
@@ -31,12 +27,12 @@ const TitleStyled = styled.div`
   font-weight: 300;
 `;
 
-const CardCategory = ({ id, img, title, button }) => {
+const CardCategory = ({ image, slogan, name }) => {
   return (
     <CardStyled>
-      <ImgStyled to={`/ProductCard/${id}`} $img={img}></ImgStyled>
-      <TitleStyled>{title}</TitleStyled>
-      <LinkPadding content={button} />
+      <ImageTable image={image} />
+      <TitleXL content={slogan} />
+      <LinkPadding content={name} />
     </CardStyled>
   );
 };
