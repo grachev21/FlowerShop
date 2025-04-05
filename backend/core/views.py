@@ -1,10 +1,10 @@
 from rest_framework import viewsets
-
-from .models import Carousel, ProductCard, TypeProduct
+from .models import Carousel, ProductCard, TypeProduct, Category
 from .serializers import (
     CarouselSerializer,
     ProductCardSerializer,
     TypeProductSerializer,
+    CategorySerializer,
 )
 
 
@@ -13,9 +13,21 @@ class TypeProductSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TypeProductSerializer
 
 
+class CategorySet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
 class ProductCardSet(viewsets.ReadOnlyModelViewSet):
     queryset = ProductCard.objects.all()
     serializer_class = ProductCardSerializer
+
+    def get_queryset(self):
+        queryset = ProductCard.objects.all()
+        category_id = self.request.query_params.get("category_id")
+        if category_id is not None:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset
 
 
 class CarouselSet(viewsets.ReadOnlyModelViewSet):

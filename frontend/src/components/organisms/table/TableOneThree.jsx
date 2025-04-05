@@ -9,11 +9,11 @@ const TableOneThreeStyled = styled.div`
   width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
-  margin-top: 100px;
+  margin-top: 4rem;
   @media (min-width: ${styleTools.size.sm}) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem;
+    grid-gap: 3rem;
   }
   @media (min-width: ${styleTools.size.md}) {
     display: grid;

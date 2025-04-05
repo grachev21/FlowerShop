@@ -1,6 +1,6 @@
 import { useGetRequest } from "@/hooks";
 import styled from "styled-components";
-import { TitleXXL, Banner, AutoCarousel, TableOneThree } from "@/components";
+import { TitleXXL, Banner, AutoCarousel, TableOneThree, Container } from "@/components";
 
 import banerImg from "../media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
 
@@ -22,12 +22,14 @@ const Home = () => {
 
   return (
     <ContainerStyled>
+      <Container />
       <TitleXXL content={title_1} />
       <AutoCarousel data={dataCarousel.data} />
       <TitleXXL content={title_2} />
       <TableOneThree data={dataType} />
       <Banner img={banerImg} />
-      {/* <Table /> */}
+      <TableOneThree data={dataType} />
+      <Banner img={banerImg} />
     </ContainerStyled>
   );
 };

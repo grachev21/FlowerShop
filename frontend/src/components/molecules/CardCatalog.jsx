@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LinkPadding } from "@/components";
+import { LinkPadding, ImageTable } from "@/components";
 import styleTools from "@/styles/styleTools";
 import { MdOutlineCurrencyRuble } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -10,10 +10,8 @@ const CardStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 58vh;
   @media (min-width: ${styleTools.size.sm}) {
     width: 100%;
-    height: 48vh;
   }
 `;
 const ImgStyled = styled(Link)`

@@ -18,8 +18,14 @@ const downMenu = [
   { link: "push", name: "блог " },
 ];
 const ContainerStyled = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: ${styleTools.color.white};
+  width: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 50;
 `;
 const HeaderStyled = styled.div`
   max-width: 100%;

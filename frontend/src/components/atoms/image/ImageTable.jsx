@@ -6,9 +6,23 @@ const ImageTableStyled = styled.div`
   background-position: center;
   background-image: url(${(props) => props.$image});
   width: 100%;
-  height: 320px;
+  height: 380px;
+  transition: all 0.3s;
+  &:hover {
+    opacity: 80%;
+    box-shadow: ${styleTools.shadow.boxShadow};
+  }
   @media (min-width: ${styleTools.size.sm}) {
-    height: 300px;
+    height: 280px;
+  }
+  @media (min-width: ${styleTools.size.md}) {
+    height: 200px;
+  }
+  @media (min-width: ${styleTools.size.lg}) {
+    height: 250px;
+  }
+  @media (min-width: ${styleTools.size.xl}) {
+    height: 320px;
   }
 `;
 const ImageTable = ({ image }) => {
