@@ -17,11 +17,19 @@ const CardStyled = styled.div`
     width: 100%;
   }
 `;
-const CardCategory = ({ image, slogan, name }) => {
+const CardCategory = ({ image, slogan, name, price }) => {
+  console.log(price, "price");
   return (
     <CardStyled>
       <ImageTable image={image} />
       <TitleXL content={slogan} />
+      {/* {price != null ? (
+        <PriceStyled>
+          {price} <MdOutlineCurrencyRuble />
+        </PriceStyled>
+      ) : (
+        "xxx"
+      )} */}
       <LinkStyled>
         <LinkPadding content={name} />
       </LinkStyled>

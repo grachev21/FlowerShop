@@ -8,7 +8,7 @@ export { default as ImageTable } from "./atoms/image/ImageTable";
 export { default as Container } from "./atoms/container/Container";
 
 export { default as CardCatalog } from "./molecules/CardCatalog";
-export { default as CardButtonTitle } from "./molecules/CardButtonTitle";
+export { default as CardButtonTitle } from "./molecules/Card";
 
 export { default as Footer } from "./organisms/Footer";
 export { default as Header } from "./organisms/header/Header";

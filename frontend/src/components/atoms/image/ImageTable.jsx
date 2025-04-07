@@ -8,6 +8,7 @@ const ImageTableStyled = styled.div`
   width: 100%;
   height: 380px;
   transition: all 0.3s;
+  cursor: pointer;
   &:hover {
     opacity: 80%;
     box-shadow: ${styleTools.shadow.boxShadow};

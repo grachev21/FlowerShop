@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useGetRequest } from "@/hooks";
-import { CardCatalog, Container } from "@/components";
+import { CardCatalog, Container, TableOneThree } from "@/components";
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
@@ -27,44 +27,6 @@ const TableStyled = styled.div`
 `;
 const Catalog = () => {
   const { data, loading, error } = useGetRequest("http://127.0.0.1:8000/api/ProductCard/");
-  const [isCategories, setCategories] = useState([]);
-  const [isProducts, setProducts] = useState([]);
-  const [isSelectCategory, setSelectedCategory] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-  const [isError, setError] = useState(null);
-
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/Category")
-      .then((response) => {
-        setCategories(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    let url = "http://127.0.0.1:8000/api/ProductCard/";
-    if (isSelectCategory) {
-      url += `?category_id=${isSelectCategory}`;
-    }
-    axios
-      .get(url)
-      .then((response) => {
-        setProducts(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, [isSelectCategory]);
-
-  console.log(isCategories, "<<<");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
-import { CardButtonTitle } from "@/components";
 
 const TableOneThreeStyled = styled.div`
   display: grid;
@@ -10,28 +9,30 @@ const TableOneThreeStyled = styled.div`
   padding-left: 2rem;
   padding-right: 2rem;
   margin-top: 4rem;
+
   @media (min-width: ${styleTools.size.sm}) {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 3rem;
   }
+
   @media (min-width: ${styleTools.size.md}) {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2rem;
-    width: 100%;
   }
 `;
 
-const TableOneThree = ({ data, index }) => {
+const TableOneThree = ({ data, PropsComponent }) => {
+  if (!PropsComponent) return null;
+
   return (
     <TableOneThreeStyled>
-      {data.data == null
-        ? ""
+      {!data || !data.data
+        ? null
         : data.data.map((value, index) => (
-            <CardButtonTitle key={index} image={value.image} slogan={value.slogan} name={value.name} />
+            <PropsComponent key={index} {...value} />
           ))}
     </TableOneThreeStyled>
   );
 };
+
 export default TableOneThree;

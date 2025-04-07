@@ -29,10 +29,6 @@ const TitleStyled = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-  font-weight: 300; */
 `;
 const PriceStyled = styled.div`
   display: flex;

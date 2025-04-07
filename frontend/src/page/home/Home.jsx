@@ -1,8 +1,8 @@
 import { useGetRequest } from "@/hooks";
 import styled from "styled-components";
-import { TitleXXL, Banner, AutoCarousel, TableOneThree, Container } from "@/components";
+import { TitleXXL, Banner, AutoCarousel, TableOneThree, Container, CardButtonTitle } from "@/components";
 
-import banerImg from "../media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
+import banerImg from "@/media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
 
 const title_1 = "Добро пожаловать в магазины FlowerShop";
 const title_2 = "Цветы FlowerShop - на нас полагается - и уже более 20 лет!";
@@ -26,9 +26,9 @@ const Home = () => {
       <TitleXXL content={title_1} />
       <AutoCarousel data={dataCarousel.data} />
       <TitleXXL content={title_2} />
-      <TableOneThree data={dataType} />
+      <TableOneThree data={dataType} PropsComponent={CardButtonTitle} />
       <Banner img={banerImg} />
-      <TableOneThree data={dataType} />
+      {/* <TableOneThree data={dataType} /> */}
       <Banner img={banerImg} />
     </ContainerStyled>
   );
