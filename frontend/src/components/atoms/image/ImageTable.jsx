@@ -26,7 +26,7 @@ const ImageTableStyled = styled.div`
     height: 320px;
   }
 `;
-const ImageTable = ({ image }) => {
-  return <ImageTableStyled $image={image} />;
+const ImageTable = ({ image, onClick }) => {
+  return <ImageTableStyled onClick={onClick} $image={image} />;
 };
 export default ImageTable;

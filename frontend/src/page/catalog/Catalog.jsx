@@ -1,7 +1,5 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useGetRequest } from "@/hooks";
-import { CardCatalog, Container, TableOneThree } from "@/components";
+import { Container, TableOneThree, CardImgTitBtnPrc } from "@/components";
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
@@ -26,24 +24,15 @@ const TableStyled = styled.div`
   }
 `;
 const Catalog = () => {
-  const { data, loading, error } = useGetRequest("http://127.0.0.1:8000/api/ProductCard/");
+  const dataProduct = useGetRequest("http://127.0.0.1:8000/api/ProductCard/");
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+  console.log(dataProduct);
   return (
     <>
       <Container />
-      <TableStyled>
-        {data &&
-          data.map((value) => (
-            <CardCatalog
-              key={value.id}
-              id={value.id}
-              img={value.photos[0].image}
-              title={value.name}
-              button={"Добавить в корзину"}></CardCatalog>
-          ))}
-      </TableStyled>
+      <TableOneThree data={dataProduct} page={"catalog"} />
     </>
   );
 };

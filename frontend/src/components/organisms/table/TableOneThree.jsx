@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
+import { CardImgTitBtn, CardImgTitBtnPrc } from "@/components";
 
 const TableOneThreeStyled = styled.div`
   display: grid;
@@ -21,18 +22,26 @@ const TableOneThreeStyled = styled.div`
   }
 `;
 
-const TableOneThree = ({ data, PropsComponent }) => {
-  if (!PropsComponent) return null;
+const TableOneThree = ({ data, page }) => {
+  if (data.loading) return <div>load</div>;
 
-  return (
-    <TableOneThreeStyled>
-      {!data || !data.data
-        ? null
-        : data.data.map((value, index) => (
-            <PropsComponent key={index} {...value} />
-          ))}
-    </TableOneThreeStyled>
-  );
+  if (page == "home")
+    return (
+      <TableOneThreeStyled>
+        {data.data.map((value, index) => (
+          <CardImgTitBtn key={index} value={value} />
+        ))}
+      </TableOneThreeStyled>
+    );
+
+  if (page == "catalog")
+    return (
+      <TableOneThreeStyled>
+        {data.data.map((value, index) => (
+          <CardImgTitBtnPrc key={index} value={value} />
+        ))}
+      </TableOneThreeStyled>
+    );
 };
 
 export default TableOneThree;
