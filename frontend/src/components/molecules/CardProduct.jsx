@@ -25,7 +25,7 @@ const PriceStyled = styled.div`
   font-size: 1.6rem;
   margin: 1rem;
 `;
-const CardImgTitBtn = ({ value }) => {
+const CardProduct = ({ value }) => {
   return (
     <CardStyled>
       <ImageTable image={value.image} />
@@ -36,4 +36,4 @@ const CardImgTitBtn = ({ value }) => {
     </CardStyled>
   );
 };
-export default CardImgTitBtn;
+export default CardProduct;

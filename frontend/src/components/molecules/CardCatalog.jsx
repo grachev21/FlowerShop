@@ -32,6 +32,7 @@ const PriceStyled = styled.div`
 `;
 
 const CardCatalog = ({ value }) => {
+  console.log(value, "<");
   const navigate = useNavigate();
 
   const handleClick = () => {

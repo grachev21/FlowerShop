@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
-import { CardImgTitBtn, CardImgTitBtnPrc } from "@/components";
+import { CardCatalog, CardProduct } from "@/components";
 
 const TableOneThreeStyled = styled.div`
   display: grid;
@@ -29,7 +29,7 @@ const TableOneThree = ({ data, page }) => {
     return (
       <TableOneThreeStyled>
         {data.data.map((value, index) => (
-          <CardImgTitBtn key={index} value={value} />
+          <CardProduct key={index} value={value} />
         ))}
       </TableOneThreeStyled>
     );
@@ -38,7 +38,7 @@ const TableOneThree = ({ data, page }) => {
     return (
       <TableOneThreeStyled>
         {data.data.map((value, index) => (
-          <CardImgTitBtnPrc key={index} value={value} />
+          <CardCatalog key={index} value={value} />
         ))}
       </TableOneThreeStyled>
     );

@@ -8,9 +8,7 @@ const ListLinksStyled = styled.div`
 `;
 
 const ListLinks = ({ dataCategory, dataProduct }) => {
-  const handleClick = (id) => {
-    console.log(id);
-  };
+  console.log(dataProduct);
   return (
     <ListLinksStyled>
       <LinkSimple
@@ -23,6 +21,7 @@ const ListLinks = ({ dataCategory, dataProduct }) => {
             key={value.id}
             onClick={() => dataProduct.setCategory(value.id)}
             content={value.name}
+            flag={dataProduct.category === value.id ? true : false}
           />
         );
       })}
