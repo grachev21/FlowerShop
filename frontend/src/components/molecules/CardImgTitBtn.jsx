@@ -30,9 +30,6 @@ const CardImgTitBtn = ({ value }) => {
     <CardStyled>
       <ImageTable image={value.image} />
       <TitleXL content={value.slogan} />
-      <PriceStyled>
-        {value.price} <MdOutlineCurrencyRuble />
-      </PriceStyled>
       <LinkStyled>
         <LinkPadding content={value.name} />
       </LinkStyled>

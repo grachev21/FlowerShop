@@ -6,9 +6,12 @@ export { default as TitleXXL } from "./atoms/title/TitleXXl";
 export { default as TitleXL } from "./atoms/title/TitleXL";
 export { default as ImageTable } from "./atoms/image/ImageTable";
 export { default as Container } from "./atoms/container/Container";
+export { default as LinkSimple } from "@/components/atoms/link/LinkSimple";
 
 export { default as CardImgTitBtn } from "./molecules/CardImgTitBtn";
 export { default as CardImgTitBtnPrc } from "@/components/molecules/CardImgTitBtnPrc";
+export { default as ListLinks } from "@/components/molecules/ListLinks";
+export { default as Load } from "@/components/molecules/Load";
 
 export { default as Footer } from "./organisms/Footer";
 export { default as Header } from "./organisms/header/Header";

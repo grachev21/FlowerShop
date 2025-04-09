@@ -5,19 +5,19 @@ from .models import ProductCard, Photo, Carousel, TypeProduct, Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["name"]
+        fields = ["id", "name"]
 
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ["image"]
+        fields = ["id", "image"]
 
 
 class TypeProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = TypeProduct
-        fields = ["name", "image", "slogan"]
+        fields = ["id", "name", "image", "slogan"]
 
 
 class ProductCardSerializer(serializers.ModelSerializer):
@@ -32,4 +32,4 @@ class ProductCardSerializer(serializers.ModelSerializer):
 class CarouselSerializer(serializers.ModelSerializer):
     class Meta:
         model = Carousel
-        fields = ["title", "image"]
+        fields = ["id", "title", "image"]

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
-import { LinkPadding } from "@/components";
+import { LinkPadding, LinkSimple } from "@/components";
 import styleTools from "@/styles/styleTools";
 
 const ProductStyled = styled.div`
@@ -16,12 +16,8 @@ const ProductStyled = styled.div`
 `;
 const LinkBackStyled = styled(NavLink)`
   color: ${styleTools.color.green};
-  padding-left: 1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  width: 100px;
-  font-weight: bold;
 `;
 const BlockImgStyled = styled.div`
   display: flex;
@@ -41,7 +37,8 @@ const ItemImgStyled = styled.img`
   margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0px 5px 9px 0px rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
+  box-shadow: 0px 5px 9px 0px
+    rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
 `;
 const BlockBaseImgStyled = styled.div`
   width: 100%;
@@ -93,10 +90,11 @@ const Product = () => {
 
   return (
     <>
-      <LinkBackStyled to="/catalog">
+      <LinkBackStyled to={"/catalog"}>
         <MdArrowBackIosNew />
-        Каталог
+        <LinkSimple content={"Каталог"} />
       </LinkBackStyled>
+
       <ProductStyled>
         <BlockImgStyled>
           <ListImgStyled>

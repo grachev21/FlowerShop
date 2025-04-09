@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const ContainerStyled = styled.div`
   margin-top: 14rem;
+  padding: 1rem;
 `;
 
 const App = () => {
