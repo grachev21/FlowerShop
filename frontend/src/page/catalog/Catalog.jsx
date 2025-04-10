@@ -11,7 +11,7 @@ const Catalog = () => {
   return (
     <>
       <ListLinks dataCategory={dataCategory} dataProduct={dataProduct} />
-      <CatalogList data={dataProduct} />
+      <ProductList data={dataProduct} />
     </>
   );
 };

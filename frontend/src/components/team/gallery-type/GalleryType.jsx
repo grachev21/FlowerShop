@@ -1,10 +1,10 @@
-import { TableOneThree, CardCatalog } from "@/components";
+import { TableOneThree, CardITB} from "@/components";
 
 const GalleryType = ({ data }) => {
   return (
     <TableOneThree>
       {data.data.map((value) => (
-        <CardCatalog key={value.id} value={value} />
+        <CardITB key={value.id} value={value} />
       ))}
     </TableOneThree>
   );

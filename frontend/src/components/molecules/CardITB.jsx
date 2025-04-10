@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 import { LinkPadding, ImageTable, TitleXL } from "@/components";
-import { MdOutlineCurrencyRuble } from "react-icons/md";
 
 const LinkStyled = styled.div`
   width: 100%;
@@ -18,14 +17,7 @@ const CardStyled = styled.div`
     width: 100%;
   }
 `;
-const PriceStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 1.6rem;
-  margin: 1rem;
-`;
-const CardCatalog = ({ value }) => {
+const CardITB= ({ value }) => {
   return (
     <CardStyled>
       <ImageTable image={value.image} />
@@ -36,4 +28,4 @@ const CardCatalog = ({ value }) => {
     </CardStyled>
   );
 };
-export default CardCatalog;
+export default CardITB;
