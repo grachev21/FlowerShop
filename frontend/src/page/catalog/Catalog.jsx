@@ -1,5 +1,5 @@
 import { useGetIdRequest, useGetRequest } from "@/hooks";
-import { TableOneThree, ListLinks, Load } from "@/components";
+import { CatalogList, ListLinks, Load } from "@/components";
 
 const Catalog = () => {
   const dataCategory = useGetRequest("http://127.0.0.1:8000/api/Category/");
@@ -11,7 +11,7 @@ const Catalog = () => {
   return (
     <>
       <ListLinks dataCategory={dataCategory} dataProduct={dataProduct} />
-      <TableOneThree data={dataProduct} page={"catalog"} />
+      <CatalogList data={dataProduct} />
     </>
   );
 };

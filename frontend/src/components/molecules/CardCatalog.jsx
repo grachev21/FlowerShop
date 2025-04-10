@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { LinkPadding, ImageTable } from "@/components";
 import styleTools from "@/styles/styleTools";
+import { LinkPadding, ImageTable, TitleXL } from "@/components";
 import { MdOutlineCurrencyRuble } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 
+const LinkStyled = styled.div`
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+`;
 const CardStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,15 +18,6 @@ const CardStyled = styled.div`
     width: 100%;
   }
 `;
-const TitleStyled = styled.div`
-  cursor: pointer;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Количество строк */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 1rem;
-`;
 const PriceStyled = styled.div`
   display: flex;
   flex-direction: row;
@@ -30,22 +25,14 @@ const PriceStyled = styled.div`
   font-size: 1.6rem;
   margin: 1rem;
 `;
-
 const CardCatalog = ({ value }) => {
-  console.log(value, "<");
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/ProductCard/${value.id}`);
-  };
   return (
     <CardStyled>
-      <ImageTable onClick={handleClick} image={value.photos[0].image} />
-      <TitleStyled onClick={handleClick}>{value.name}...</TitleStyled>
-      <PriceStyled>
-        {value.price} <MdOutlineCurrencyRuble />
-      </PriceStyled>
-      <LinkPadding content={"Добавить в корзину"} />
+      <ImageTable image={value.image} />
+      <TitleXL content={value.slogan} />
+      <LinkStyled>
+        <LinkPadding content={value.name} />
+      </LinkStyled>
     </CardStyled>
   );
 };
