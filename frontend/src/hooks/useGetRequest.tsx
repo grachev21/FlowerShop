@@ -25,3 +25,4 @@ const useGetRequest = (url) => {
 };
 
 export default useGetRequest;
+

@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-const LinkSimpleStyled = styled.div`
+interface LinkSimpleStyledProps {
+  $flag?: boolean;
+}
+
+const LinkSimpleStyled = styled.div<LinkSimpleStyledProps>`
   color: ${styleTools.color.green};
   margin-left: 1rem;
   font-weight: bold;
@@ -9,19 +13,26 @@ const LinkSimpleStyled = styled.div`
   border-bottom: 1px solid transparent;
   transition: all 0.6s ease;
   opacity: ${(props) => (props.$flag ? "0.7" : "100%")};
-  border-bottom-color: ${(props) =>
-    props.$flag ? styleTools.color.green : styleTools.color.white};
+  border-bottom-color: ${(props) => (props.$flag ? styleTools.color.green : styleTools.color.white)};
   &:hover {
     opacity: 0.7;
     border-bottom-color: ${styleTools.color.green};
   }
 `;
 
-const LinkSimple = ({ content, onClick, flag }) => {
+interface LinkSimpleProps {
+  content: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  flag?: boolean;
+}
+
+const LinkSimple: React.FC<LinkSimpleProps> = ({ content, onClick, flag = false }) => {
+  console.log(typeof onClick, "<<< onClick");
   return (
     <LinkSimpleStyled $flag={flag} onClick={onClick}>
       {content}
     </LinkSimpleStyled>
   );
 };
+
 export default LinkSimple;
