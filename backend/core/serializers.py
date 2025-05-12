@@ -23,10 +23,19 @@ class TypeProductSerializer(serializers.ModelSerializer):
 class ProductCardSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True, read_only=True)
     typeproduct = TypeProductSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
 
     class Meta:
         model = ProductCard
-        fields = ["id", "typeproduct", "name", "price", "description", "photos"]
+        fields = [
+            "id",
+            "typeproduct",
+            "category",
+            "name",
+            "price",
+            "description",
+            "photos",
+        ]
 
 
 class CarouselSerializer(serializers.ModelSerializer):

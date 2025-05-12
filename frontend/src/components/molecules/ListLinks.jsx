@@ -6,9 +6,7 @@ const ListLinksStyled = styled.div`
   flex-direction: row;
   height: 2rem;
 `;
-
 const ListLinks = ({ dataCategory, dataProduct }) => {
-  console.log(dataProduct);
   return (
     <ListLinksStyled>
       <LinkSimple

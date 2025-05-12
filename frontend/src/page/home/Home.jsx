@@ -34,7 +34,6 @@ const Home = () => {
       <AutoCarousel data={dataCarousel.data} />
       <TitleXXL content={title_2} />
       <GalleryType data={dataType} />
-      {/* <TableOneThree data={dataType} page={"home"} /> */}
       <Banner img={banerImg} />
       {/* <TableOneThree data={dataType} /> */}
       <Banner img={banerImg} />

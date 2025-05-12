@@ -8,6 +8,12 @@ import axios from "axios";
  * @param {string} baseUrl - Базовый URL API endpoint
  * @param {string|null} initialCategory - Начальная категория для фильтрации (опционально)
  * @returns {object} Объект с данными и методами управления запросом
+ *
+ * @data  Полученные данные
+ * @loading Флаг загрузки (true/false)
+ * @error Ошибка (если возникла)
+ * @category  Текущая выбранная категория
+ * @setCategory Функция для изменения категории
  */
 
 const useGetIdRequest = (baseUrl, initialCategory = null) => {
@@ -23,40 +29,32 @@ const useGetIdRequest = (baseUrl, initialCategory = null) => {
   // Состояние текущей выбранной категории
   const [category, setCategory] = useState(initialCategory);
 
+  const [paramName, setParamName] = useState(null);
+
   // Эффект, выполняющийся при изменении baseUrl или category
   useEffect(() => {
-    // Асинхронная функция для выполнения запроса
     const fetchData = async () => {
-      // Выходим если baseUrl не указан
-      if (!baseUrl) return;
+      if (!baseUrl || !paramName) return; // Проверка paramName
 
-      // Устанавливаем состояние загрузки и сбрасываем ошибки
       setLoading(true);
       setError(null);
 
       try {
-        // Формируем URL в зависимости от наличия категории
         const url = category
-          ? `${baseUrl}?category_id=${category}` // URL с параметром фильтрации
-          : baseUrl; // Базовый URL без фильтров
+          ? `${baseUrl}?${paramName}_id=${category}`
+          : baseUrl;
 
-        // Выполняем GET-запрос
         const response = await axios.get(url);
-
-        // Обновляем данные в состоянии
         setData(response.data);
       } catch (err) {
-        // Обрабатываем ошибки (используем сообщение ошибки или дефолтное)
         setError(err.message || "Error fetching data");
       } finally {
-        // В любом случае снимаем состояние загрузки
         setLoading(false);
       }
     };
 
-    // Вызываем функцию запроса
     fetchData();
-  }, [baseUrl, category]); // Эффект зависит от этих значений
+  }, [baseUrl, category, paramName]); // Добавлен paramName в зависимости
 
   // Возвращаемый объект с данными и методами
   return {
@@ -65,6 +63,7 @@ const useGetIdRequest = (baseUrl, initialCategory = null) => {
     error, // Ошибка (если возникла)
     category, // Текущая выбранная категория
     setCategory, // Функция для изменения категории
+    setParamName,
 
     // Функция для принудительного обновления данных
     refetch: () => {

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
+import { useNavigate } from "react-router-dom";
 import { LinkPadding, ImageTable, TitleXL } from "@/components";
 
 const LinkStyled = styled.div`
@@ -17,13 +18,18 @@ const CardStyled = styled.div`
     width: 100%;
   }
 `;
-const CardITB= ({ value }) => {
+const CardITB = ({ value }) => {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate("/catalog", { state: value.id })
+  }
+
   return (
     <CardStyled>
       <ImageTable image={value.image} />
       <TitleXL content={value.slogan} />
       <LinkStyled>
-        <LinkPadding content={value.name} />
+        <LinkPadding onClick={handleClick} content={value.name} />
       </LinkStyled>
     </CardStyled>
   );

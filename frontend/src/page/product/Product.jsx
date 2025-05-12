@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
-import { LinkPadding, LinkSimple } from "@/components";
+import { useGetRequest } from "@/hooks";
+import { Load, Price, MiniImageShadow, Paragraph, LinkPadding, LinkSimple } from "@/components";
 import styleTools from "@/styles/styleTools";
 
 const ProductStyled = styled.div`
@@ -31,29 +31,13 @@ const ListImgStyled = styled.div`
   width: 40px;
   margin-right: 2rem;
 `;
-const ItemImgStyled = styled.img`
-  min-width: 40px;
-  height: auto;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0px 5px 9px 0px
-    rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
-`;
 const BlockBaseImgStyled = styled.div`
   width: 100%;
   height: auto;
 `;
-
 const BaseImgStyled = styled.img``;
 const BlockUtilsStyled = styled.div`
   margin-left: 1rem;
-  margin-top: 1rem;
-`;
-
-const DescriptionStyled = styled.div`
-  font-size: small;
-  width: 100%;
   margin-top: 1rem;
 `;
 const NameStyled = styled.div`
@@ -61,32 +45,13 @@ const NameStyled = styled.div`
   font-size: 1.8rem;
   margin-top: 1rem;
 `;
-const PriceStyled = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  margin: 1rem 0;
-`;
-
 const Product = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  // const [ post, loading, error, data ] = useAuthPost()
+  const dataProduct = useGetRequest(`http://localhost:8000/api/ProductCard/${id}/`)
 
-  console.log(id, "<<< id");
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/ProductCard/${id}/`)
-      .then((response) => {
-        setProduct(response.data);
-      })
-      .catch((error) => {
-        console.error("Ошибка при загрузке продукта:", error);
-      });
-  }, [id]);
 
-  if (!product) return <div>Загрузка...</div>;
+  if (dataProduct.loading) return <Load />
 
   return (
     <>
@@ -98,26 +63,24 @@ const Product = () => {
       <ProductStyled>
         <BlockImgStyled>
           <ListImgStyled>
-            {product.photos.map((photo, index) => (
-              <ItemImgStyled
+            {dataProduct.data.photos.map((value, index) => (
+              <MiniImageShadow
                 key={index}
-                src={photo.image}
+                image={value.image}
                 onClick={() => setActiveIndex(index)}
-                $active={activeIndex === index}
+                active={activeIndex === index}
               />
             ))}
           </ListImgStyled>
           <BlockBaseImgStyled>
-            <BaseImgStyled src={product.photos[activeIndex].image} />
-            <DescriptionStyled>{product.description}</DescriptionStyled>
+            <BaseImgStyled src={dataProduct.data.photos[activeIndex].image} />
+            <Paragraph content={dataProduct.data.description} />
           </BlockBaseImgStyled>
         </BlockImgStyled>
 
         <BlockUtilsStyled>
-          <NameStyled>{product.name}</NameStyled>
-          <PriceStyled>
-            {product.price} <MdOutlineCurrencyRuble />
-          </PriceStyled>
+          <NameStyled>{dataProduct.data.name}</NameStyled>
+          <Price content={dataProduct.data.price} />
           <LinkPadding content={"Добавить в корзину"} />
         </BlockUtilsStyled>
       </ProductStyled>

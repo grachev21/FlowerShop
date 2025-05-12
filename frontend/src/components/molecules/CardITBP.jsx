@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { LinkPadding, ImageTable } from "@/components";
 import styleTools from "@/styles/styleTools";
-import { MdOutlineCurrencyRuble } from "react-icons/md";
+import { LinkPadding, ImageTable, Price } from "@/components";
 import { useNavigate } from "react-router-dom";
 
 const CardStyled = styled.div`
@@ -23,16 +22,8 @@ const TitleStyled = styled.div`
   text-overflow: ellipsis;
   padding: 1rem;
 `;
-const PriceStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 1.6rem;
-  margin: 1rem;
-`;
 
-const CardProduct = ({ value }) => {
-  console.log(value, "<");
+const CardITBP = ({ value }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -42,11 +33,9 @@ const CardProduct = ({ value }) => {
     <CardStyled>
       <ImageTable onClick={handleClick} image={value.photos[0].image} />
       <TitleStyled onClick={handleClick}>{value.name}...</TitleStyled>
-      <PriceStyled>
-        {value.price} <MdOutlineCurrencyRuble />
-      </PriceStyled>
+      <Price content={value.price} />
       <LinkPadding content={"Добавить в корзину"} />
     </CardStyled>
   );
 };
-export default CardProduct;
+export default CardITBP;

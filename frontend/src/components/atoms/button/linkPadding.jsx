@@ -27,7 +27,7 @@ const LinkPaddingStyled = styled.div`
     opacity: 15%;
   }
 `;
-const LinkPadding = ({ content }) => {
-  return <LinkPaddingStyled>{content}</LinkPaddingStyled>;
+const LinkPadding = ({ onClick, content }) => {
+  return <LinkPaddingStyled onClick={onClick}>{content}</LinkPaddingStyled>;
 };
 export default LinkPadding;

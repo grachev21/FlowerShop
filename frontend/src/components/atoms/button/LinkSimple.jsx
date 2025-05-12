@@ -18,7 +18,6 @@ const LinkSimpleStyled = styled.div`
 `;
 
 const LinkSimple = ({ content, onClick, flag }) => {
-  console.log(flag);
   return (
     <LinkSimpleStyled $flag={flag} onClick={onClick}>
       {content}

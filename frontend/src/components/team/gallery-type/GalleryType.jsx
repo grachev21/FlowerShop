@@ -1,4 +1,4 @@
-import { TableOneThree, CardITB} from "@/components";
+import { TableOneThree, CardITB } from "@/components";
 
 const GalleryType = ({ data }) => {
   return (
