@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-interface ImageTableStyledProps {
-  $img: string;
-}
-
 const ImageTableStyled = styled.div<ImageTableStyledProps>`
   background-size: cover;
   background-position: center;
@@ -31,12 +27,16 @@ const ImageTableStyled = styled.div<ImageTableStyledProps>`
   }
 `;
 
-interface ImageTableProps {
-  image: string;
-  onClick: React.MouseEventHandler<HTMLAnchorElement>;
-}
-
 const ImageTable: React.FC<ImageTableProps> = ({ image, onClick }) => {
   return <ImageTableStyled onClick={onClick} $img={image} />;
 };
 export default ImageTable;
+
+interface ImageTableStyledProps {
+  $img: string;
+}
+interface ImageTableProps {
+  image: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  img: string;
+}

@@ -27,12 +27,11 @@ const LinkPaddingStyled = styled.div`
     opacity: 15%;
   }
 `;
+const LinkPadding: React.FC<LinkPadding> = ({ onClick, content }) => {
+  return <LinkPaddingStyled onClick={onClick}>{content}</LinkPaddingStyled>;
+};
+export default LinkPadding;
 interface LinkPadding {
   onClick: React.MouseEventHandler<HTMLDivElement>;
   content: string;
 }
-const LinkPadding: React.FC<LinkPadding> = ({ onClick, content }) => {
-  console.log(typeof onClick, "<<<");
-  return <LinkPaddingStyled onClick={onClick}>{content}</LinkPaddingStyled>;
-};
-export default LinkPadding;

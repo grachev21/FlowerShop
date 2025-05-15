@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const TitleXLStyled = styled.div`
   margin-top: 3rem;
   margin-bottom: 2rem;
@@ -8,7 +9,11 @@ const TitleXLStyled = styled.div`
   text-transform: none;
   text-align: center;
 `;
-const TitleXL = ({ content }) => {
+const TitleXL: React.FC<TitleXL> = ({ content }) => {
   return <TitleXLStyled>{content}</TitleXLStyled>;
 };
 export default TitleXL;
+
+interface TitleXL {
+  content: string;
+}

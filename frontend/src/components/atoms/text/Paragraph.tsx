@@ -6,9 +6,11 @@ const ParagraphStyled = styled.div`
   margin-top: 1rem;
 `;
 
-const Paragraph = ({ content }) => {
-    return (
-        <ParagraphStyled>{content}</ParagraphStyled>
-    );
-}
+const Paragraph: React.FC<ParagraphProps> = ({ content }) => {
+  return <ParagraphStyled>{content}</ParagraphStyled>;
+};
 export default Paragraph;
+
+interface ParagraphProps {
+  content: string;
+}

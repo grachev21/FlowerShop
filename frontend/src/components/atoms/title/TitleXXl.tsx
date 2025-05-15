@@ -8,7 +8,11 @@ const TitleXXLStyled = styled.div`
   margin-bottom: 4rem;
 `;
 
-const TitleXXL = ({ content }) => {
+const TitleXXL: React.FC<TitleXXL> = ({ content }) => {
   return <TitleXXLStyled>{content}</TitleXXLStyled>;
 };
 export default TitleXXL;
+
+interface TitleXXL {
+  content: string;
+}

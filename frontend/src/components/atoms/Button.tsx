@@ -29,7 +29,7 @@ const ButtonStyled = styled.button`
   }
 `;
 
-const Button = ({ content, type, loading }) => {
+const Button: React.FC<Button> = ({ content, type, loading }) => {
   return (
     <ButtonStyled type={type} disabled={loading}>
       {loading ? content[1] : content[0]}
@@ -37,3 +37,9 @@ const Button = ({ content, type, loading }) => {
   );
 };
 export default Button;
+
+interface Button {
+  content: string;
+  type: any;
+  loading: boolean;
+}

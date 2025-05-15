@@ -9,12 +9,16 @@ const PriceStyled = styled.div`
   margin: 1rem;
 `;
 
-const Price = ({ content }) => {
-    return (
-        <PriceStyled>
-            <p>{content}</p>
-            <MdOutlineCurrencyRuble size={26}/>
-        </PriceStyled>
-    );
-}
+const Price: React.FC<Price> = ({ content }) => {
+  return (
+    <PriceStyled>
+      <p>{content}</p>
+      <MdOutlineCurrencyRuble size={26} />
+    </PriceStyled>
+  );
+};
 export default Price;
+
+interface Price {
+  content: number;
+}

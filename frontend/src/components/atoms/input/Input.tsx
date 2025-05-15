@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-const InputContainerStyled = styled.div`
+const InputContainerStyled = styled.div<InputContainerStyledProps>`
   position: relative;
   height: 3rem;
   margin-top: 2rem;
@@ -27,7 +27,8 @@ const InputContainerStyled = styled.div`
     transition: all 1s;
   }
 `;
-const PlaceholderStyled = styled.div`
+
+const PlaceholderStyled = styled.div<PlaceholderStyledProps>`
   position: absolute;
   left: 0px;
   top: -4px;
@@ -35,24 +36,27 @@ const PlaceholderStyled = styled.div`
   color: ${(props) => props.$colorText};
   font-size: ${(props) => props.$sizeText}rem;
 `;
+
 const InputStyled = styled.input`
   width: 100%;
   height: 100%;
   font-size: 0.9rem;
   font-weight: 300;
 `;
-const Input = ({ placeholder, type, value, onDataSend }) => {
-  const [isPlaceholder, setPlaceholder] = useState(1.2);
-  const [isColorPlaceholder, setColorPlaceholder] = useState(styleTools.color.black);
-  const [isLength, setLength] = useState(false);
-  const [isLine, setLine] = useState(0);
 
-  const focus = () => {
+const Input: React.FC<InputProps> = ({ placeholder, type, value, onDataSend }) => {
+  const [isPlaceholder, setPlaceholder] = useState<number>(1.2);
+  const [isColorPlaceholder, setColorPlaceholder] = useState<string>(styleTools.color.black);
+  const [isLength, setLength] = useState<boolean>(false);
+  const [isLine, setLine] = useState<number>(0);
+
+  const focus = (): void => {
     setPlaceholder(0.9);
     setColorPlaceholder(styleTools.color.green);
     setLine(100);
   };
-  const blur = () => {
+
+  const blur = (): void => {
     if (isLength) {
       setColorPlaceholder(styleTools.color.black);
       setLine(0);
@@ -62,14 +66,10 @@ const Input = ({ placeholder, type, value, onDataSend }) => {
       setLine(0);
     }
   };
-  const handleInputChange = (e) => {
-    onDataSend(e.target.value);
 
-    if (e.target.value.length === 0) {
-      setLength(false);
-    } else {
-      setLength(true);
-    }
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    onDataSend(e.target.value);
+    setLength(e.target.value.length > 0);
   };
 
   return (
@@ -77,8 +77,25 @@ const Input = ({ placeholder, type, value, onDataSend }) => {
       <PlaceholderStyled $sizeText={isPlaceholder} $colorText={isColorPlaceholder}>
         {placeholder}
       </PlaceholderStyled>
-      <InputStyled onFocus={focus} onBlur={blur} onChange={handleInputChange} type={type} value={value}></InputStyled>
+      <InputStyled onFocus={focus} onBlur={blur} onChange={handleInputChange} type={type} value={value} />
     </InputContainerStyled>
   );
 };
+
 export default Input;
+
+interface InputContainerStyledProps {
+  $sizeLine: number;
+}
+
+interface PlaceholderStyledProps {
+  $colorText: string;
+  $sizeText: number;
+}
+
+interface InputProps {
+  placeholder: string;
+  type: React.HTMLInputTypeAttribute;
+  value: string;
+  onDataSend: (value: string) => void;
+}

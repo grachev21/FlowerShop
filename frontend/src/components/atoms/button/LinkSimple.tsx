@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-interface LinkSimpleStyledProps {
-  $flag?: boolean;
-}
-
 const LinkSimpleStyled = styled.div<LinkSimpleStyledProps>`
   color: ${styleTools.color.green};
   margin-left: 1rem;
@@ -20,14 +16,7 @@ const LinkSimpleStyled = styled.div<LinkSimpleStyledProps>`
   }
 `;
 
-interface LinkSimpleProps {
-  content: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
-  flag?: boolean;
-}
-
 const LinkSimple: React.FC<LinkSimpleProps> = ({ content, onClick, flag = false }) => {
-  console.log(typeof onClick, "<<< onClick");
   return (
     <LinkSimpleStyled $flag={flag} onClick={onClick}>
       {content}
@@ -36,3 +25,12 @@ const LinkSimple: React.FC<LinkSimpleProps> = ({ content, onClick, flag = false 
 };
 
 export default LinkSimple;
+
+interface LinkSimpleStyledProps {
+  $flag?: boolean;
+}
+interface LinkSimpleProps {
+  content: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  flag?: boolean;
+}
