@@ -44,22 +44,22 @@ const AutoCarousel = ({ data }) => {
   const [isPositionLeft, setPositionLeft] = useState(0); // Позиция карусели
   const dataSlice = data.slice(0, 4);
 
-  // Количество фотографий
+  // number of photos
   const isNumberPhotos = dataSlice.length;
 
-  // Обновляем базовый размер при изменении ширины окна
+  // Update the basic size when the window width changes
   useEffect(() => {
     if (isWidthWindow) {
       setBaseSize(isWidthWindow * isNumberPhotos);
     }
   }, [isWidthWindow, isNumberPhotos]);
 
-  // Автоматическая прокрутка карусели
+  // Automatic scrolling of the carousel
   useInterval(() => {
     if (-isPositionLeft >= isBaseSize - isWidthWindow) {
-      setPositionLeft(0); // Сброс позиции, если дошли до конца
+      setPositionLeft(0); // resetting the position if reached the end
     } else {
-      setPositionLeft(isPositionLeft - isWidthWindow); // Прокрутка на одну фотографию
+      setPositionLeft(isPositionLeft - isWidthWindow); // scrolling per photographers
     }
   }, 4000);
 

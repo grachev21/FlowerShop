@@ -6,7 +6,7 @@ from users.models import CustomUser
 class Category(models.Model):
     name = models.CharField(max_length=200)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
     class Meta:
@@ -51,7 +51,7 @@ class ProductCard(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Товар"
+        verbose_name: str = "Товар"
         verbose_name_plural = "Товары"
 
 
@@ -94,10 +94,3 @@ class Cart(models.Model):
         )  # Убедимся, что товар не добавляется в корзину дважды
 
 
-class Carousel(models.Model):
-    title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to="photos/", verbose_name="Фото")
-
-    class Meta:
-        verbose_name = "Карусель"
-        verbose_name_plural = "Карусели"

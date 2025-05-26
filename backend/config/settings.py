@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",  # Токен-аутентификация для REST Framework
     "users",  # Пользовательское приложение (ваше)
     "core",  # Основное приложение (ваше)
+    "assets",
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"

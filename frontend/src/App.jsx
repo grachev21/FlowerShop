@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GlobalStyle from "@/styles/GlobalStyles";
-import { Home, Catalog, LoginAndRegister, Product } from "@/page";
-import { Footer, Header } from "@/components";
+import { Footer, Header, Home, Catalog, LoginAndRegister, Product } from "@/components";
 import styled from "styled-components";
+import GlobalStyle from "@/styles/GlobalStyles";
 
 const ContainerStyled = styled.div`
   margin-top: 14rem;

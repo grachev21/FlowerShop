@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
+import { Logo } from "@/components";
 
 const FooterStyled = styled.div`
   padding-top: 5rem;
@@ -46,7 +47,7 @@ const Footer = () => {
   return (
     <FooterStyled>
       <SeparatingLineStyled />
-      {/* <Logo /> */}
+      <Logo />
       <TopBlockStyled>
         {footerData.map((value, index) => {
           return <ListStyled key={index}> {value}</ListStyled>;

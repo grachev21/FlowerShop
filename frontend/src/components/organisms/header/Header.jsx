@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import { useAuthCheck } from "@/hooks";
+import { useAuthCheck, useGetRequest } from "@/hooks";
 import { Basket, DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
-import { Logo } from "@/components";
+import { Logo, Load } from "@/components";
 import styleTools from "@/styles/styleTools";
+
+// const dataType = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
 
 const menu = [
   { link: "/", name: "главная" },
@@ -74,14 +76,21 @@ const LinkLargeStyled = styled.div`
 const Header = () => {
   const { isAuthenticated, loading, error } = useAuthCheck();
 
+  const dataMenuTop = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
+
+  if (dataMenuTop.loading) return <Load />;
+  console.log(dataMenuTop.data)
+  // if (dataMenuTop.loading) return <div>Загрузка...</div>;
+  // if (dataMenuTop.error) return <div>Ошибка: {dataCarousel.error.message}</div>;
+
   return (
     <ContainerStyled>
       <HeaderStyled>
         <Logo />
         <NavStyled>
-          <LinkBlock menu={menu} isAuthenticated={isAuthenticated} />
+          <LinkBlock menu={dataMenuTop} isAuthenticated={isAuthenticated} />
           {isAuthenticated ? <Basket /> : ""}
-          <MobileMenu menu={menu} downMenu={downMenu} />
+          <MobileMenu menu={dataMenuTop} downMenu={downMenu} />
         </NavStyled>
       </HeaderStyled>
       <BottomhMenuStyled>
