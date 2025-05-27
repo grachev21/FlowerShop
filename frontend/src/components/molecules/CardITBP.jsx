@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
-import { LinkPadding, ImageTable, Price } from "@/components";
+import { ButtonPadding, ImageTable, Price } from "@/components";
 import { useNavigate } from "react-router-dom";
 
 const CardStyled = styled.div`
@@ -34,7 +34,7 @@ const CardITBP = ({ value }) => {
       <ImageTable onClick={handleClick} image={value.photos[0].image} />
       <TitleStyled onClick={handleClick}>{value.name}...</TitleStyled>
       <Price content={value.price} />
-      <LinkPadding content={"Добавить в корзину"} />
+      <ButtonPadding content={"Добавить в корзину"} />
     </CardStyled>
   );
 };

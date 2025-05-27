@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-const LinkSimpleStyled = styled.div`
+const ButtonSimpleStyled = styled.div`
   color: ${styleTools.color.green};
   margin-left: 1rem;
   font-weight: bold;
@@ -17,11 +17,11 @@ const LinkSimpleStyled = styled.div`
   }
 `;
 
-const LinkSimple = ({ content, onClick, flag }) => {
+const ButtonSimple = ({ content, onClick, flag }) => {
   return (
-    <LinkSimpleStyled $flag={flag} onClick={onClick}>
+    <ButtonSimpleStyled $flag={flag} onClick={onClick}>
       {content}
-    </LinkSimpleStyled>
+    </ButtonSimpleStyled>
   );
 };
-export default LinkSimple;
+export default ButtonSimple;

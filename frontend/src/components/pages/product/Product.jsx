@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams, NavLink } from "react-router-dom";
 import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
 import { useGetRequest } from "@/hooks";
-import { Load, Price, MiniImageShadow, Paragraph, LinkPadding, LinkSimple } from "@/components";
+import { Load, Price, MiniImageShadow, Paragraph, ButtonPadding, ButtonSimple } from "@/components";
 import styleTools from "@/styles/styleTools";
 
 const ProductStyled = styled.div`
@@ -57,7 +57,7 @@ const Product = () => {
     <>
       <LinkBackStyled to={"/catalog"}>
         <MdArrowBackIosNew />
-        <LinkSimple content={"Каталог"} />
+        <ButtonSimple content={"Каталог"} />
       </LinkBackStyled>
 
       <ProductStyled>
@@ -81,7 +81,7 @@ const Product = () => {
         <BlockUtilsStyled>
           <NameStyled>{dataProduct.data.name}</NameStyled>
           <Price content={dataProduct.data.price} />
-          <LinkPadding content={"Добавить в корзину"} />
+          <ButtonPadding content={"Добавить в корзину"} />
         </BlockUtilsStyled>
       </ProductStyled>
     </>

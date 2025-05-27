@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-const TableOneThreeStyled = styled.div`
+const FramesOneThreeStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-row-gap: 4rem;
@@ -19,8 +19,8 @@ const TableOneThreeStyled = styled.div`
   }
 `;
 
-const TableOneThree = ({ children }) => {
-  return <TableOneThreeStyled>{children}</TableOneThreeStyled>;
+const FramesOneThree = ({ children }) => {
+  return <FramesOneThreeStyled>{children}</FramesOneThreeStyled>;
 };
 
-export default TableOneThree;
+export default FramesOneThree;

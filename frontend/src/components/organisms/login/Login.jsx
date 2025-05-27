@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useLogin } from "@/hooks";
 import styleTools from "@/styles/styleTools";
 
-import { Input, Button } from "@/components";
+import { Input, Button, ButtonPadding } from "@/components";
 
 const LoginStyled = styled.form`
   width: 320px;

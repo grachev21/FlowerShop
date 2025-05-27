@@ -25,7 +25,7 @@ const Logo = () => {
   if (dataLogo.loading) return <Load />
 
   return (
-    <NavLink to={"/"}>
+    <NavLink to={dataLogo.data[0].link}>
       <ContainerStyled>
         <LogoStyled $logo={dataLogo.data[0].image} />
       </ContainerStyled>

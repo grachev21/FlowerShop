@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 import { useNavigate } from "react-router-dom";
-import { LinkPadding, ImageTable, TitleXL } from "@/components";
+import { ButtonPadding, ImageTable, TitleXL } from "@/components";
 
 const LinkStyled = styled.div`
   width: 100%;
@@ -29,7 +29,7 @@ const CardITB = ({ value }) => {
       <ImageTable image={value.image} />
       <TitleXL content={value.slogan} />
       <LinkStyled>
-        <LinkPadding onClick={handleClick} content={value.name} />
+        <ButtonPadding onClick={handleClick} content={value.name} />
       </LinkStyled>
     </CardStyled>
   );

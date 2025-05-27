@@ -26,6 +26,7 @@ const Catalog = () => {
   return (
     <>
       <ListLinks dataCategory={dataCategory} dataProduct={dataProduct} />
+      <ListLinks dataCategory={dataCategory} dataProduct={dataProduct} />
       <ProductList data={dataProduct} />
     </>
   );

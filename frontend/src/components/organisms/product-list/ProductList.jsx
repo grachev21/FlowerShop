@@ -1,12 +1,12 @@
-import { TableOneThree, CardITBP } from "@/components";
+import { FramesOneThree, CardITBP } from "@/components";
 
 const ProductList = ({ data }) => {
   return (
-    <TableOneThree>
+    <FramesOneThree>
       {data.data.map((value, index) => (
         <CardITBP key={index} value={value} />
       ))}
-    </TableOneThree>
+    </FramesOneThree>
   );
 };
 export default ProductList;

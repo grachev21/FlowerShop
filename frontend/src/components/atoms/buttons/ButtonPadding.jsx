@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 
-const LinkPaddingStyled = styled.div`
+const ButtonPaddingStyled = styled.div`
   position: relative;
   color: ${styleTools.color.green};
   padding-top: 0.8rem;
@@ -27,7 +27,7 @@ const LinkPaddingStyled = styled.div`
     opacity: 15%;
   }
 `;
-const LinkPadding = ({ onClick, content }) => {
-  return <LinkPaddingStyled onClick={onClick}>{content}</LinkPaddingStyled>;
+const ButtonPadding = ({ onClick, content }) => {
+  return <ButtonPaddingStyled onClick={onClick}>{content}</ButtonPaddingStyled>;
 };
-export default LinkPadding;
+export default ButtonPadding;

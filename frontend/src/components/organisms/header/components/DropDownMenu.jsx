@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import styleTools from "@/styles/styleTools";
+import { ButtonHoverColor } from "@/components";
 
 const MenuStyled = styled.div`
   padding-bottom: 20px;
@@ -8,16 +9,6 @@ const MenuStyled = styled.div`
   padding-right: 20px;
   padding-left: 20px;
   cursor: pointer;
-`;
-const LinkLargeStyled = styled.div`
-  padding-right: 20px;
-  padding-left: 20px;
-  padding: 0.5rem;
-  transition: all 0.3s;
-  cursor: pointer;
-  &:hover {
-    color: ${styleTools.color.green};
-  }
 `;
 const ShowMenuStyled = styled.div`
   position: absolute;
@@ -60,10 +51,10 @@ const DropDownMenu = ({ menu }) => {
   };
   return (
     <MenuStyled onMouseEnter={() => showMenu(true)} onMouseLeave={() => showMenu(false)}>
-      Что мы делаем
+      <ButtonHoverColor content={"Что мы делаем"} />
       <ShowMenuStyled $opacity={isOpacity} $cursor={isCursor}>
         {menu.data.map((value, index) => {
-          return <LinkLargeStyled key={index}>{value.name}</LinkLargeStyled>;
+          return <ButtonHoverColor key={index} content={value.name} />;
         })}
       </ShowMenuStyled>
     </MenuStyled>

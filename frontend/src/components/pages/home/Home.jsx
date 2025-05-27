@@ -1,6 +1,6 @@
 import { useGetRequest } from "@/hooks";
 import styled from "styled-components";
-import { TitleXXL, Banner, AutoCarousel, Load, TableOneThree, CardITB } from "@/components";
+import { TitleXXL, Banner, AutoCarousel, Load, FramesOneThree, CardITB } from "@/components";
 
 import banerImg from "@/media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
 
@@ -26,15 +26,15 @@ const Home = () => {
       <TitleXXL content={title_1} />
       <AutoCarousel data={dataCarousel.data} />
       <TitleXXL content={title_2} />
-      <TableOneThree>
+      <FramesOneThree>
         {dataType.data.map((value) => (
           <CardITB key={value.id} value={value} />
         ))}
-      </TableOneThree>
+      </FramesOneThree>
 
       <Banner img={banerImg} />
 
-      {/* <TableOneThree data={dataType} /> */}
+      {/* <FramesOneThree data={dataType} /> */}
       <Banner img={banerImg} />
     </ContainerStyled>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LinkSimple, Load } from "@/components";
+import { ButtonSimple, Load } from "@/components";
 
 const ListLinksStyled = styled.div`
   display: flex;
@@ -9,13 +9,13 @@ const ListLinksStyled = styled.div`
 const ListLinks = ({ dataCategory, dataProduct }) => {
   return (
     <ListLinksStyled>
-      <LinkSimple
+      <ButtonSimple
         onClick={() => dataProduct.setCategory(null)}
         content={"Все"}
       />
       {dataCategory.data.map((value) => {
         return (
-          <LinkSimple
+          <ButtonSimple
             key={value.id}
             onClick={() => dataProduct.setCategory(value.id)}
             content={value.name}

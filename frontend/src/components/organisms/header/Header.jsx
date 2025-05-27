@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useAuthCheck, useGetRequest } from "@/hooks";
 import { Basket, DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
-import { Logo, Load } from "@/components";
+import { Logo, Load, ButtonGreenPadding, ButtonHoverColor } from "@/components";
 import styleTools from "@/styles/styleTools";
-
 
 const ContainerStyled = styled.div`
   position: fixed;
@@ -42,26 +41,8 @@ const BottomhMenuStyled = styled.div`
     display: flex;
   }
 `;
-const GreenLinkStyled = styled.div`
-  color: ${styleTools.color.white};
-  background-color: ${styleTools.color.green};
-  padding-right: 20px;
-  padding-left: 20px;
-  cursor: pointer;
-  height: min-content;
-`;
-const LinkLargeStyled = styled.div`
-  padding-right: 20px;
-  padding-left: 20px;
-  transition: all 0.3s;
-  cursor: pointer;
-  &:hover {
-    color: ${styleTools.color.green};
-  }
-`;
+
 const Header = () => {
-
-
   const dataAuthenticated = useAuthCheck();
   const dataMenuTop = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
   const dataMenuDown = useGetRequest("http://127.0.0.1:8000/assets/api/MenuDown/");
@@ -69,6 +50,7 @@ const Header = () => {
   if (dataAuthenticated.loading) return <Load />;
   if (dataMenuTop.loading) return <Load />;
   if (dataMenuDown.loading) return <Load />;
+
 
   return (
     <ContainerStyled>
@@ -81,9 +63,9 @@ const Header = () => {
         </NavStyled>
       </HeaderStyled>
       <BottomhMenuStyled>
-        <GreenLinkStyled>Служба доставки цветов</GreenLinkStyled>
+        <ButtonGreenPadding content="Служба доставки цветов" />
         <DropDownMenu menu={dataMenuDown} />
-        <LinkLargeStyled>Блог</LinkLargeStyled>
+        <ButtonHoverColor content={"Блог"} />
       </BottomhMenuStyled>
     </ContainerStyled>
   );
