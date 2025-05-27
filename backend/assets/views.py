@@ -1,5 +1,6 @@
 from rest_framework import viewsets
-from .models import Carousel, MenuDown, FooterText, Logo, MenuTop
+
+from .models import Carousel, FooterText, Logo, MenuDown, MenuTop
 from .serializers import (
     CarouselSerializer,
     FooterTextSerializer,
@@ -37,4 +38,3 @@ class MenuDownSet(viewsets.ReadOnlyModelViewSet):
 class MenuTopSet(viewsets.ReadOnlyModelViewSet):
     queryset = MenuTop.objects.all()
     serializer_class = MenuTopSerializer
-    lookup_field = "slug"

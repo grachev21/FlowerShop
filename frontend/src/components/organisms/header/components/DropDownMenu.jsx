@@ -12,6 +12,7 @@ const MenuStyled = styled.div`
 const LinkLargeStyled = styled.div`
   padding-right: 20px;
   padding-left: 20px;
+  padding: 0.5rem;
   transition: all 0.3s;
   cursor: pointer;
   &:hover {
@@ -21,7 +22,6 @@ const LinkLargeStyled = styled.div`
 const ShowMenuStyled = styled.div`
   position: absolute;
   width: 240px;
-  height: 200px;
   top: 40px;
   display: flex;
   flex-direction: column;
@@ -43,10 +43,11 @@ const ShowMenuStyled = styled.div`
     height: 100%;
   }
 `;
-const DropDownMenu = ({ downMenu }) => {
+const DropDownMenu = ({ menu }) => {
   const [isOpacity, setOpacity] = useState(0);
   const [isCursor, setCursor] = useState("none");
 
+  if (menu.loading) return <Load />;
   const showMenu = (props) => {
     props ? setOpacity(100) : setOpacity(0);
     if (props) {
@@ -61,7 +62,7 @@ const DropDownMenu = ({ downMenu }) => {
     <MenuStyled onMouseEnter={() => showMenu(true)} onMouseLeave={() => showMenu(false)}>
       Что мы делаем
       <ShowMenuStyled $opacity={isOpacity} $cursor={isCursor}>
-        {downMenu.map((value, index) => {
+        {menu.data.map((value, index) => {
           return <LinkLargeStyled key={index}>{value.name}</LinkLargeStyled>;
         })}
       </ShowMenuStyled>

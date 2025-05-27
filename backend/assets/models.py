@@ -1,11 +1,11 @@
 from django.db import models
-from django.urls import reverse
-from django.utils.text import slugify
 
 
 class Logo(models.Model):
     image = models.ImageField(upload_to="photos/", null=True, verbose_name="Логотип")
-    link = models.SlugField(max_length=200, unique=True, null=True, verbose_name="Ссылка")
+    link = models.CharField(
+        max_length=200, unique=True, null=True, verbose_name="Ссылка"
+    )
 
     class Meta:
         verbose_name = "Логотип"
@@ -14,15 +14,9 @@ class Logo(models.Model):
 
 class MenuTop(models.Model):
     name = models.CharField(max_length=200, null=True, verbose_name="Имя")
-    slug = models.SlugField(max_length=100, unique=True, blank=True)
-
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:  # Генерируем slug только при создании
-    #         self.slug = slugify(self.name)  # "My Article" → "my-article"
-    #     super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse('MenuTop', kwargs={'slug': self.slug})
+    link = models.CharField(
+        max_length=200, unique=True, null=True, verbose_name="Ссылка"
+    )
 
     class Meta:
         verbose_name = "Верхнее меню"
@@ -30,9 +24,10 @@ class MenuTop(models.Model):
 
 
 class MenuDown(models.Model):
-    title = models.CharField(max_length=200, null=True)
     name = models.CharField(max_length=200, null=True, verbose_name="Имя")
-    link = models.SlugField(max_length=200, unique=True, null=True, verbose_name="Ссылка")
+    link = models.CharField(
+        max_length=200, unique=True, null=True, verbose_name="Ссылка"
+    )
 
     class Meta:
         verbose_name = "Нижнее меню"
@@ -48,7 +43,7 @@ class FooterText(models.Model):
 
 
 class Carousel(models.Model):
-    title = models.CharField(max_length=200, null=True)
+    title = models.CharField(max_length=200, null=True, verbose_name="Заголовок")
     image = models.ImageField(upload_to="photos/", null=True, verbose_name="Фото")
 
     class Meta:

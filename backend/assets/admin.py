@@ -1,25 +1,28 @@
 from django.contrib import admin
-from .models import MenuDown, MenuTop, Carousel, FooterText, Logo
 
-# Register your models here.
+from .models import Carousel, FooterText, Logo, MenuDown, MenuTop
+
+
 @admin.register(MenuDown)
 class MenuDownAdmin(admin.ModelAdmin):
-    list_display = ("title", "link")
+    list_display = ("name", "link")
+
 
 @admin.register(MenuTop)
 class MenuTopAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug" )
-    prepopulated_fields = {"slug": ("name",)}
+    list_display = ("name", "link")
+
 
 @admin.register(Carousel)
 class CarouselAdmin(admin.ModelAdmin):
-    list_display = ("title", "image" )
+    list_display = ("title", "image")
 
 
 @admin.register(FooterText)
 class FooterTextAdmin(admin.ModelAdmin):
-    list_display = ("text", )
+    list_display = ("text",)
+
 
 @admin.register(Logo)
 class LogoAdmin(admin.ModelAdmin):
-    list_display = ("image", )
+    list_display = ("image",)

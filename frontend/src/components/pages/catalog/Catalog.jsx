@@ -6,8 +6,8 @@ import { useEffect } from "react";
 const Catalog = () => {
   const location = useLocation();
   const id = location.state;
-  const dataCategory = useGetRequest("http://127.0.0.1:8000/api/Category/");
-  const dataProduct = useGetIdRequest("http://127.0.0.1:8000/api/ProductCard/");
+  const dataCategory = useGetRequest("http://127.0.0.1:8000/core/api/Category/");
+  const dataProduct = useGetIdRequest("http://127.0.0.1:8000/core/api/ProductCard/");
 
   useEffect(() => {
     if (id !== null) {

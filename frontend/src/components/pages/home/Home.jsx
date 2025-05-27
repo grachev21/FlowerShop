@@ -14,11 +14,11 @@ const ContainerStyled = styled.div`
 `;
 
 const Home = () => {
-  const dataCarousel = useGetRequest("http://127.0.0.1:8000/api/Carousel/");
-  const dataType = useGetRequest("http://127.0.0.1:8000/api/TypeProduct/");
+  const dataCarousel = useGetRequest("http://127.0.0.1:8000/assets/api/Carousel/");
+  const dataType = useGetRequest("http://127.0.0.1:8000/core/api/TypeProduct/");
 
   if (dataType.loading) return <Load />;
-  if (dataCarousel.loading) return <div>Загрузка...</div>;
+  if (dataCarousel.loading) return <Load />;
   if (dataCarousel.error) return <div>Ошибка: {dataCarousel.error.message}</div>;
 
   return (

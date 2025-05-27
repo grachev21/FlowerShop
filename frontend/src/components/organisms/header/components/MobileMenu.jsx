@@ -80,7 +80,7 @@ const MobileMenu = ({ menu, downMenu }) => {
     <ContainerStyled>
       <MenuIconStyled onClick={menuShowHidden}>{isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}</MenuIconStyled>
       <SlidingBarStyled $scale={isScale}>
-        {downMenu.map((value, index) => {
+        {downMenu.data.map((value, index) => {
           return (
             <DownMenuStyled to={value.link} key={index} activeclassname="active">
               {value.name}
@@ -88,7 +88,7 @@ const MobileMenu = ({ menu, downMenu }) => {
           );
         })}
 
-        {menu.map((value, index) => {
+        {menu.data.map((value, index) => {
           return (
             <LinkStyled to={value.link} key={index} activeclassname="active">
               {value.name}

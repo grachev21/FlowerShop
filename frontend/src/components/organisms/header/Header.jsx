@@ -4,21 +4,7 @@ import { Basket, DropDownMenu, MobileMenu, LinkBlock } from "@/components/organi
 import { Logo, Load } from "@/components";
 import styleTools from "@/styles/styleTools";
 
-// const dataType = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
 
-const menu = [
-  { link: "/", name: "главная" },
-  { link: "/catalog", name: "каталог" },
-  { link: "/gallery", name: "галерея" },
-  { link: "/login", name: "войти" },
-];
-const downMenu = [
-  { link: "delivery", name: "Служба доставки цветов" },
-  { link: "floristics", name: "флористика" },
-  { link: "floral_floristic", name: "траурная флористическая" },
-  { link: "gallery", name: "галерея" },
-  { link: "push", name: "блог " },
-];
 const ContainerStyled = styled.div`
   position: fixed;
   top: 0;
@@ -74,28 +60,29 @@ const LinkLargeStyled = styled.div`
   }
 `;
 const Header = () => {
-  const { isAuthenticated, loading, error } = useAuthCheck();
 
+
+  const dataAuthenticated = useAuthCheck();
   const dataMenuTop = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
+  const dataMenuDown = useGetRequest("http://127.0.0.1:8000/assets/api/MenuDown/");
 
+  if (dataAuthenticated.loading) return <Load />;
   if (dataMenuTop.loading) return <Load />;
-  console.log(dataMenuTop.data)
-  // if (dataMenuTop.loading) return <div>Загрузка...</div>;
-  // if (dataMenuTop.error) return <div>Ошибка: {dataCarousel.error.message}</div>;
+  if (dataMenuDown.loading) return <Load />;
 
   return (
     <ContainerStyled>
       <HeaderStyled>
         <Logo />
         <NavStyled>
-          <LinkBlock menu={dataMenuTop} isAuthenticated={isAuthenticated} />
-          {isAuthenticated ? <Basket /> : ""}
-          <MobileMenu menu={dataMenuTop} downMenu={downMenu} />
+          <LinkBlock menu={dataMenuTop} isAuthenticated={dataAuthenticated.isAuthenticated} />
+          {dataAuthenticated.isAuthenticated ? <Basket /> : ""}
+          <MobileMenu menu={dataMenuTop} downMenu={dataMenuDown} />
         </NavStyled>
       </HeaderStyled>
       <BottomhMenuStyled>
         <GreenLinkStyled>Служба доставки цветов</GreenLinkStyled>
-        <DropDownMenu downMenu={downMenu} />
+        <DropDownMenu menu={dataMenuDown} />
         <LinkLargeStyled>Блог</LinkLargeStyled>
       </BottomhMenuStyled>
     </ContainerStyled>

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from .models import Carousel, FooterText, Logo, MenuDown, MenuTop
 
 
@@ -23,13 +24,9 @@ class LogoSerializer(serializers.ModelSerializer):
 
 
 class MenuTopSerializer(serializers.ModelSerializer):
-    url = serializers.SerializerMethodField()
-
-    def get_url(self, obj):
-        return obj.get_absolute_url()
 
     class Meta:
-        model = MenuTop 
+        model = MenuTop
         fields = "__all__"
 
 
