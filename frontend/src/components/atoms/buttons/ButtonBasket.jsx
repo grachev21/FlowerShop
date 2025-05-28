@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { SlBasket } from "react-icons/sl";
+import { NavLink } from "react-router-dom";
 
-const BasketStyled = styled.div`
+const ButtonBasketStyled = styled(NavLink)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,12 +12,12 @@ const NumberStyled = styled.div`
   font-size: 1.2rem;
   margin-left: 10px;
 `;
-const Basket = () => {
+const ButtonBasket = () => {
   return (
-    <BasketStyled>
+    <ButtonBasketStyled to={"/Basket"}>
       <SlBasket size={22} />
       <NumberStyled>0</NumberStyled>
-    </BasketStyled>
+    </ButtonBasketStyled>
   );
 };
-export default Basket;
+export default ButtonBasket;

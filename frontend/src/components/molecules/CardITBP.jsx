@@ -2,6 +2,7 @@ import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 import { ButtonPadding, ImageTable, Price } from "@/components";
 import { useNavigate } from "react-router-dom";
+import { useAuthCheck } from "@/hooks";
 
 const CardStyled = styled.div`
   display: flex;
@@ -25,16 +26,23 @@ const TitleStyled = styled.div`
 
 const CardITBP = ({ value }) => {
   const navigate = useNavigate();
+  const authCheck = useAuthCheck()
 
-  const handleClick = () => {
-    navigate(`/ProductCard/${value.id}`);
+  console.log(authCheck.isAuthenticated, "user")
+  const imageHandleClick = () => {
+    navigate(`/productCard/${value.id}`);
   };
+
+  const buttonHandle = () => {
+    authCheck.isAuthenticated ? "" : ""
+  }
+
   return (
     <CardStyled>
-      <ImageTable onClick={handleClick} image={value.photos[0].image} />
-      <TitleStyled onClick={handleClick}>{value.name}...</TitleStyled>
+      <ImageTable onClick={imageHandleClick} image={value.photos[0].image} />
+      <TitleStyled onClick={imageHandleClick}>{value.name}...</TitleStyled>
       <Price content={value.price} />
-      <ButtonPadding content={"Добавить в корзину"} />
+      <ButtonPadding onClick={authCheck.isAuthenticated ? buttonHandle : imageHandleClick} content={authCheck.isAuthenticated ? "Добавить в корзину" : "Посмотреть"} />
     </CardStyled>
   );
 };

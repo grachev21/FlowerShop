@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// Custom hook to check user authentication status
 const useAuthCheck = () => {
-  // State to track if user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // State to track loading status during auth check
   const [loading, setLoading] = useState(true);
-  // State to store any errors that might occur
   const [error, setError] = useState(null);
 
-  // Effect hook to run authentication check when component mounts
   useEffect(() => {
     // Async function to verify user authentication
     const checkAuth = async () => {

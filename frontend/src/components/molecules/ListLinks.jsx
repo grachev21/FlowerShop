@@ -1,19 +1,20 @@
 import styled from "styled-components";
-import { ButtonSimple, Load } from "@/components";
+import { ButtonSimple } from "@/components";
 
 const ListLinksStyled = styled.div`
   display: flex;
   flex-direction: row;
   height: 2rem;
 `;
-const ListLinks = ({ dataCategory, dataProduct }) => {
+const ListLinks = ({ type, flagContent, dataProduct }) => {
+  console.log(flagContent)
   return (
     <ListLinksStyled>
       <ButtonSimple
         onClick={() => dataProduct.setCategory(null)}
         content={"Все"}
       />
-      {dataCategory.data.map((value) => {
+      {type.data.map((value) => {
         return (
           <ButtonSimple
             key={value.id}

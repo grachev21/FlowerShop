@@ -1,6 +1,4 @@
-// Импорт необходимых хуков из React
 import { useState, useEffect } from "react";
-// Импорт axios для HTTP-запросов
 import axios from "axios";
 
 /**
@@ -17,21 +15,17 @@ import axios from "axios";
  */
 
 const useGetIdRequest = (baseUrl, initialCategory = null) => {
-  // Состояние для хранения полученных данных
+  // The state for storing the received data
   const [data, setData] = useState([]);
-
-  // Состояние для отслеживания процесса загрузки
+  // Status for tracking the loading process
   const [loading, setLoading] = useState(false);
-
-  // Состояние для хранения ошибок запроса
+  // Store for storage of request errors
   const [error, setError] = useState(null);
-
-  // Состояние текущей выбранной категории
+  // The state of the current selected category
   const [category, setCategory] = useState(initialCategory);
-
   const [paramName, setParamName] = useState(null);
 
-  // Эффект, выполняющийся при изменении baseUrl или category
+  // The effect performed with the change in Baseurl or Category
   useEffect(() => {
     const fetchData = async () => {
       if (!baseUrl || !paramName) return; // Проверка paramName
@@ -45,6 +39,7 @@ const useGetIdRequest = (baseUrl, initialCategory = null) => {
           : baseUrl;
 
         const response = await axios.get(url);
+        console.log(url)
         setData(response.data);
       } catch (err) {
         setError(err.message || "Error fetching data");
@@ -64,6 +59,7 @@ const useGetIdRequest = (baseUrl, initialCategory = null) => {
     category, // Текущая выбранная категория
     setCategory, // Функция для изменения категории
     setParamName,
+    paramName,
 
     // Функция для принудительного обновления данных
     refetch: () => {

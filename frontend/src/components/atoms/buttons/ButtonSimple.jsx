@@ -18,6 +18,7 @@ const ButtonSimpleStyled = styled.div`
 `;
 
 const ButtonSimple = ({ content, onClick, flag }) => {
+  console.log(flag)
   return (
     <ButtonSimpleStyled $flag={flag} onClick={onClick}>
       {content}

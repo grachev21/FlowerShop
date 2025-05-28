@@ -12,6 +12,8 @@ export { default as ButtonSimple } from "@/components/atoms/buttons/ButtonSimple
 export { default as Paragraph } from "@/components/atoms/text/Paragraph";
 export { default as MiniImageShadow } from "@/components/atoms/images/MiniImageShadow";
 export { default as Price } from "@/components/atoms/title/Price";
+export { default as ButtonBasket } from "@/components/atoms/buttons/ButtonBasket";
+export { default as SeparatorLine } from "@/components/atoms/other/SeparatorLine";
 
 // moleculs
 export { default as CardITB } from "@/components/molecules/CardITB";
@@ -37,3 +39,4 @@ export { default as Catalog } from "./pages/catalog/Catalog";
 export { default as Home } from "./pages/home/Home";
 export { default as LoginAndRegister } from "./pages/loginandregister/LoginAndRegister";
 export { default as Product } from "./pages/product/Product";
+export { default as Basket } from "@/components/pages/basket/Basket";

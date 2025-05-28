@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAuthCheck, useGetRequest } from "@/hooks";
-import { Basket, DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
-import { Logo, Load, ButtonGreenPadding, ButtonHoverColor } from "@/components";
+import { DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
+import { Logo, Load, ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/components";
 import styleTools from "@/styles/styleTools";
 
 const ContainerStyled = styled.div`
@@ -47,7 +47,6 @@ const Header = () => {
   const dataMenuTop = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
   const dataMenuDown = useGetRequest("http://127.0.0.1:8000/assets/api/MenuDown/");
 
-  if (dataAuthenticated.loading) return <Load />;
   if (dataMenuTop.loading) return <Load />;
   if (dataMenuDown.loading) return <Load />;
 
@@ -58,7 +57,7 @@ const Header = () => {
         <Logo />
         <NavStyled>
           <LinkBlock menu={dataMenuTop} isAuthenticated={dataAuthenticated.isAuthenticated} />
-          {dataAuthenticated.isAuthenticated ? <Basket /> : ""}
+          {dataAuthenticated.isAuthenticated ? <ButtonBasket /> : ""}
           <MobileMenu menu={dataMenuTop} downMenu={dataMenuDown} />
         </NavStyled>
       </HeaderStyled>

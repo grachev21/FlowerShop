@@ -14,7 +14,7 @@ const SuccessStyled = styled.div`
   color: ${styleTools.color.green};
 `;
 const ErrorStyled = styled.div`
-  color: ${styleTools.color.green};
+  color: red;
 `;
 
 const Register = () => {
@@ -39,6 +39,10 @@ const Register = () => {
     navigate("/");
   }
 
+  console.log(error, "<<<")
+  // console.log(success, "<<<")
+  // console.log(loading, "<<<")
+  // console.log(register, "<<<")
   return (
     <RegisterStyled onSubmit={handleSubmit}>
       <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
@@ -55,7 +59,8 @@ const Register = () => {
         value={confirmPassword}
       />
       <Button content={["Регистрация", "Регестрируемся"]} type={"submit"} loading={loading} />
-      {error && <ErrorStyled>{JSON.stringify(error)}</ErrorStyled>}
+      {error && <ErrorStyled>{"email: " + error.email}</ErrorStyled>}
+      {error && <ErrorStyled>{"password: " + error.password}</ErrorStyled>}
       {success && <SuccessStyled>Регистрация прошла успешно!</SuccessStyled>}
     </RegisterStyled>
   );
