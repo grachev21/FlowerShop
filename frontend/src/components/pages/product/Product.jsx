@@ -1,9 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useParams, NavLink } from "react-router-dom";
-import { MdArrowBackIosNew, MdOutlineCurrencyRuble } from "react-icons/md";
 import { useGetRequest, useAuthCheck } from "@/hooks";
-import { Load, Price, MiniImageShadow, Paragraph, ButtonPadding, ButtonSimple } from "@/components";
+import { Load, Price, MiniImageShadow, Paragraph, ButtonPadding, ButtonBack } from "@/components";
 import styleTools from "@/styles/styleTools";
 
 const ProductStyled = styled.div`
@@ -48,18 +47,14 @@ const NameStyled = styled.div`
 const Product = () => {
   const { id } = useParams();
   const [activeIndex, setActiveIndex] = useState(0);
-  const dataProduct = useGetRequest(`http://localhost:8000/core/api/ProductCard/${id}/`)
-  const authCheck = useAuthCheck()
+  const dataProduct = useGetRequest(`http://localhost:8000/core/api/ProductCard/${id}/`);
+  const authCheck = useAuthCheck();
 
-  if (dataProduct.loading) return <Load />
-
+  if (dataProduct.loading) return <Load />;
 
   return (
     <>
-      <LinkBackStyled to={"/catalog"}>
-        <MdArrowBackIosNew />
-        <ButtonSimple content={"Каталог"} />
-      </LinkBackStyled>
+      <ButtonBack to={"/catalog"} content={"Каталог"} />
 
       <ProductStyled>
         <BlockImgStyled>
@@ -83,7 +78,6 @@ const Product = () => {
           <NameStyled>{dataProduct.data.name}</NameStyled>
           <Price content={dataProduct.data.price} />
           {authCheck.isAuthenticated ? <ButtonPadding content={"Добавить в корзину"} /> : ""}
-
         </BlockUtilsStyled>
       </ProductStyled>
     </>

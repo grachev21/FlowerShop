@@ -14,6 +14,8 @@ export { default as MiniImageShadow } from "@/components/atoms/images/MiniImageS
 export { default as Price } from "@/components/atoms/title/Price";
 export { default as ButtonBasket } from "@/components/atoms/buttons/ButtonBasket";
 export { default as SeparatorLine } from "@/components/atoms/other/SeparatorLine";
+export { default as ButtonBack } from "@/components/atoms/buttons/ButtonBack";
+export { default as Dot } from "@/components/atoms/other/Dot";
 
 // moleculs
 export { default as CardITB } from "@/components/molecules/CardITB";

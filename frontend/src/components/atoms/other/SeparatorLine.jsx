@@ -6,7 +6,7 @@ const SeparatorLineStyled = styled.div`
   width: 100%;
   height: 1px;
   background-color: black;
-  opacity: 20%;
+  opacity: 15%;
 `;
 
 const SeparatorLine = () => {

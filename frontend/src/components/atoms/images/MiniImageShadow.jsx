@@ -1,6 +1,6 @@
 import styled from "styled-components";
 const MiniImageShadowStyled = styled.img`
-  min-width: 40px;
+  min-width: 60px;
   height: auto;
   margin-bottom: 1rem;
   cursor: pointer;
