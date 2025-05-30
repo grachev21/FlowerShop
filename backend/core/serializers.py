@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ProductCard, Photo, TypeProduct, Category
+from .models import ProductCard, Photo, TypeProduct, Category, Basket
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -37,3 +37,9 @@ class ProductCardSerializer(serializers.ModelSerializer):
             "photos",
         ]
 
+
+class BasketAddSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Basket
+        fields = "__all__"
+        read_only_fields = ["user"]

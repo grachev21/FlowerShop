@@ -65,7 +65,10 @@ class Photo(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Товар",
     )
-    image = models.ImageField(upload_to="photos/", verbose_name="Фото")
+    image = models.ImageField(
+        upload_to="photos/",
+        verbose_name="Фото"
+    )
 
     def __str__(self):
         return f"Фото для {self.product.name}"
@@ -75,24 +78,36 @@ class Photo(models.Model):
         verbose_name_plural = "Фотографии"
 
 
-class Cart(models.Model):
+class Basket(models.Model):
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь"
+        CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        null=True
     )
     product = models.ForeignKey(
-        ProductCard, on_delete=models.CASCADE, verbose_name="Товар"
+        ProductCard,
+        on_delete=models.CASCADE,
+        verbose_name="Товар",
+        null=True
     )
-    quantity = models.PositiveIntegerField(verbose_name="Количество")
+    quantity = models.PositiveIntegerField(
+        verbose_name="Количество",
+        null=True
+    )
     added_at = models.DateTimeField(
-        auto_now_add=True, verbose_name="Дата добавления")
+        auto_now_add=True,
+        verbose_name="Дата добавления",
+        null=True
+    )
 
     def __str__(self):
-        return f"{self.user.username} - {self.product.name}"
+        return self.user.email
 
-    class Meta:
-        verbose_name = "Корзина"
-        verbose_name_plural = "Корзины"
-        unique_together = (
-            "user",
-            "product",
-        )  # Убедимся, что товар не добавляется в корзину дважды
+    # class Meta:
+    #     verbose_name = "Корзина"
+    #     verbose_name_plural = "Корзины"
+    #     unique_together = (
+    #         "user",
+    #         "product",
+    #     )

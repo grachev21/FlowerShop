@@ -3,25 +3,16 @@ import { Login, Register } from "@/components";
 
 const ContainerStyled = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 1rem;
-  padding-right: 1rem;
-`;
-const LoginStyled = styled.div`
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 1400px;
+  width: 100%;
 `;
 
 const LoginAndRegister = () => {
   return (
     <ContainerStyled>
-      <LoginStyled>
         <Login />
         <Register />
-      </LoginStyled>
     </ContainerStyled>
   );
 };

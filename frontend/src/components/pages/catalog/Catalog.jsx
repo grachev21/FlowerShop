@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useGetIdRequest, useGetRequest } from "@/hooks";
-import { ProductList, ListLinks, ButtonSimple, Load } from "@/components";
+import { ProductList, ButtonSimple, Load } from "@/components";
 import { useEffect } from "react";
 import styled from "styled-components";
 

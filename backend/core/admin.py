@@ -1,8 +1,18 @@
 from django.contrib import admin
-from .models import ProductCard, Cart, Photo, Category, TypeProduct
 
-# Регистрируем модель Cart в админ-панели с использованием декоратора @admin.register
-@admin.register(Cart)
+from .models import (
+    Basket,
+    Category,
+    Photo,
+    ProductCard,
+    TypeProduct,
+    CustomUser
+)
+
+
+# Регистрируем модель Cart в админ-панели с использованием
+# декоратора @admin.register
+@admin.register(Basket)
 class CartAdmin(admin.ModelAdmin):
     # Указываем, какие поля будут отображаться в списке объектов модели Cart
     list_display = ("user", "product", "quantity", "added_at")
@@ -11,7 +21,8 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ("user",)
 
 
-# Создаем inline-класс для отображения связанных фотографий в админ-панели ProductCard
+# Создаем inline-класс для отображения связанных фотографий в
+# админ-панели ProductCard
 class ProductPhotoInline(admin.TabularInline):
     # Указываем модель, с которой связан inline
     model = Photo
@@ -30,8 +41,9 @@ class TypeProductAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-# # Регистрируем модель ProductCard в админ-панели
+# Регистрируем модель ProductCard в админ-панели
 @admin.register(ProductCard)
 class ProductAdmin(admin.ModelAdmin):
-    #     # Указываем, что в админ-панели ProductCard будут отображаться связанные фотографии через inline
+    # Указываем, что в админ-панели ProductCard будут отображаться связанные
+    # фотографии через inline
     inlines = [ProductPhotoInline]

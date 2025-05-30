@@ -1,9 +1,12 @@
 from rest_framework import viewsets
-from .models import ProductCard, TypeProduct, Category
+from rest_framework.permissions import IsAuthenticated
+
+from .models import Category, ProductCard, TypeProduct, Basket
 from .serializers import (
+    CategorySerializer,
     ProductCardSerializer,
     TypeProductSerializer,
-    CategorySerializer,
+    BasketAddSerializer,
 )
 
 
@@ -33,3 +36,15 @@ class ProductCardSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(typeproduct_id=typeproduct_id)
 
         return queryset
+
+
+class BaskeAddSet(viewsets.ModelViewSet):
+    queryset = Basket.objects.all()
+    serializer_class = BasketAddSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Basket.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
