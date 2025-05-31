@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { useGetRequest } from "@/hooks";
 import { Load } from "@/components";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ContainerStyled = styled.div`
   display: flex;
@@ -20,14 +21,26 @@ const LogoStyled = styled.div`
 `;
 
 const Logo = () => {
+  const [isLogo, setLogo] = useState(null)
 
-  const dataLogo = useGetRequest("http://127.0.0.1:8000/assets/api/Logo/")
-  if (dataLogo.loading) return <Load />
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/assets/api/Logo/")
+        setLogo(response.data)
+      } catch {
+        console.log("error request:", error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  if (!isLogo) return <Load />
 
   return (
-    <NavLink to={dataLogo.data[0].link}>
+    <NavLink to={isLogo[0].link}>
       <ContainerStyled>
-        <LogoStyled $logo={dataLogo.data[0].image} />
+        <LogoStyled $logo={isLogo[0].image} />
       </ContainerStyled>
     </NavLink>
   );

@@ -1,8 +1,9 @@
 import { useLocation } from "react-router-dom";
-import { useGetIdRequest, useGetRequest } from "@/hooks";
+import { useGetIdRequest } from "@/hooks";
 import { ProductList, ButtonSimple, Load } from "@/components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const ListLinksStyled = styled.div`
   display: flex;
@@ -12,9 +13,13 @@ const ListLinksStyled = styled.div`
 const Catalog = () => {
   const location = useLocation();
   const id = location.state;
-  const dataCategory = useGetRequest("http://127.0.0.1:8000/core/api/Category/");
-  const dataTypeProduct = useGetRequest("http://127.0.0.1:8000/core/api/TypeProduct/")
   const dataProduct = useGetIdRequest("http://127.0.0.1:8000/core/api/ProductCard/");
+
+  const [isCategory, setCategory] = useState(null)
+  const [isType, setType] = useState(null)
+  const [isParam, setParam] = useState(null)
+  const [isId, setId] = useState(null)
+  const [isProduct, setProduct] = useState(null)
 
   useEffect(() => {
     if (id !== null) {
@@ -26,15 +31,38 @@ const Catalog = () => {
     }
   }, [id]);
 
-  if (dataProduct.loading || dataCategory.loading || dataTypeProduct.loading) return <Load />;
-  if (dataProduct.error) return <div>Error: {dataProduct.error}</div>;
-  if (dataCategory.error) return <div>Error: {dataCategory.error}</div>;
+  // http://127.0.0.1:8000/core/api/ProductCard/?category_id=2
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
 
-  console.log(dataProduct.paramName, "<><>")
-  const dataRequest = (value, flag) => {
-    dataProduct.setParamName(flag);
-    dataProduct.setCategory(value)
+        const addUrl = isParam && isId ? `?${isParam}_id=${isId}` : ""
+        console.log("http://127.0.0.1:8000/core/api/ProductCard/", addUrl)
+        const [category, type, product] = await Promise.all([
+          axios.get("http://127.0.0.1:8000/core/api/Category/"),
+          axios.get("http://127.0.0.1:8000/core/api/TypeProduct/"),
+          axios.get(`http://127.0.0.1:8000/core/api/ProductCard/${addUrl}`)
+        ])
+        setCategory(category.data);
+        setType(type.data);
+        setProduct(product.data)
+      } catch (error) {
+        console.log("error request:", error)
+      }
+    }
+    fetchData()
+  }, [isId, isParam])
+
+  console.log(isParam && isId ? `?${isParam}_id=${isId}` : "xx")
+  if (!isCategory || !isType) return <Load />
+  if (dataProduct.loading) return <Load />;
+  if (dataProduct.error) return <div>Error: {dataProduct.error}</div>;
+
+  const dataRequest = (id, param) => {
+    setId(id)
+    setParam(param)
   }
+
   return (
     <>
       <ListLinksStyled>
@@ -43,7 +71,7 @@ const Catalog = () => {
           content={"Все"}
         />
         {/* Categories */}
-        {dataCategory.data.map((value) => {
+        {isCategory.map((value) => {
           return (
             <ButtonSimple
               key={value.id}
@@ -54,7 +82,7 @@ const Catalog = () => {
           );
         })}
         {/* Types */}
-        {dataTypeProduct.data.map((value) => {
+        {isType.map((value) => {
           return (
             <ButtonSimple
               key={value.id}
@@ -65,7 +93,7 @@ const Catalog = () => {
           );
         })}
       </ListLinksStyled>
-      <ProductList data={dataProduct} />
+      <ProductList data={isProduct} />
     </>
   );
 };

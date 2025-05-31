@@ -29,7 +29,6 @@ const ButtonBasket = () => {
             Authorization: `Token ${token}`
           }
         });
-        console.log(isBasket)
       } catch (error) {
         console.error("Error basket:", error)
         setError(error.response?.data || "error request")
@@ -39,7 +38,6 @@ const ButtonBasket = () => {
   }, [])
   if (isError) return <div>error</div>
   if (!isBasket) return <Load />
-  console.log(isBasket)
   // === ===
 
 

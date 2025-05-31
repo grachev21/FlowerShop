@@ -1,4 +1,5 @@
-import { useGetRequest } from "@/hooks";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TitleXXL, Banner, AutoCarousel, Load, FramesOneThree, CardITB } from "@/components";
 
@@ -14,20 +15,35 @@ const ContainerStyled = styled.div`
 `;
 
 const Home = () => {
-  const dataCarousel = useGetRequest("http://127.0.0.1:8000/assets/api/Carousel/");
-  const dataType = useGetRequest("http://127.0.0.1:8000/core/api/TypeProduct/");
+  const [isTypeProduct, setTypeProduct] = useState(null)
+  const [isCarousel, setCarousel] = useState(null)
 
-  if (dataType.loading) return <Load />;
-  if (dataCarousel.loading) return <Load />;
-  if (dataCarousel.error) return <div>Ошибка: {dataCarousel.error.message}</div>;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [typeProduct, carousel] = await Promise.all([
+          axios.get("http://127.0.0.1:8000/core/api/TypeProduct/"),
+          axios.get("http://127.0.0.1:8000/assets/api/Carousel/")
+        ]);
+        setTypeProduct(typeProduct.data), setCarousel(carousel.data);
+      }
+      catch (error) {
+        console.log("error request", error)
+      }
+    }
+    fetchData();
+  }, []);
+
+  if (!isTypeProduct || !isCarousel) return <Load />;
+
 
   return (
     <ContainerStyled>
       <TitleXXL content={title_1} />
-      <AutoCarousel data={dataCarousel.data} />
+      <AutoCarousel data={isCarousel} />
       <TitleXXL content={title_2} />
       <FramesOneThree>
-        {dataType.data.map((value) => (
+        {isTypeProduct.map((value) => (
           <CardITB key={value.id} value={value} />
         ))}
       </FramesOneThree>

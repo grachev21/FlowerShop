@@ -39,7 +39,6 @@ const Register = () => {
     navigate("/");
   }
 
-  console.log(error, "<<<")
   // console.log(success, "<<<")
   // console.log(loading, "<<<")
   // console.log(register, "<<<")

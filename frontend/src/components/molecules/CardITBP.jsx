@@ -28,7 +28,6 @@ const CardITBP = ({ value }) => {
   const navigate = useNavigate();
   const authCheck = useAuthCheck()
 
-  console.log(authCheck.isAuthenticated, "user")
   const imageHandleClick = () => {
     navigate(`/productCard/${value.id}`);
   };

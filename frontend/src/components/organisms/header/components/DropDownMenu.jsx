@@ -38,7 +38,6 @@ const DropDownMenu = ({ menu }) => {
   const [isOpacity, setOpacity] = useState(0);
   const [isCursor, setCursor] = useState("none");
 
-  if (menu.loading) return <Load />;
   const showMenu = (props) => {
     props ? setOpacity(100) : setOpacity(0);
     if (props) {
@@ -53,7 +52,7 @@ const DropDownMenu = ({ menu }) => {
     <MenuStyled onMouseEnter={() => showMenu(true)} onMouseLeave={() => showMenu(false)}>
       <ButtonHoverColor content={"Что мы делаем"} />
       <ShowMenuStyled $opacity={isOpacity} $cursor={isCursor}>
-        {menu.data.map((value, index) => {
+        {menu.map((value, index) => {
           return <ButtonHoverColor key={index} content={value.name} />;
         })}
       </ShowMenuStyled>

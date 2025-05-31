@@ -7,7 +7,6 @@ const ListLinksStyled = styled.div`
   height: 2rem;
 `;
 const ListLinks = ({ type, flagContent, dataProduct }) => {
-  console.log(flagContent)
   return (
     <ListLinksStyled>
       <ButtonSimple

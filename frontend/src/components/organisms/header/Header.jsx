@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useAuthCheck, useGetRequest } from "@/hooks";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
 import { Logo, Load, ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/components";
 import styleTools from "@/styles/styleTools";
@@ -43,27 +44,49 @@ const BottomhMenuStyled = styled.div`
 `;
 
 const Header = () => {
-  const dataAuthenticated = useAuthCheck();
-  const dataMenuTop = useGetRequest("http://127.0.0.1:8000/assets/api/MenuTop/");
-  const dataMenuDown = useGetRequest("http://127.0.0.1:8000/assets/api/MenuDown/");
+  const [isDataMenuTop, setDataMenuTop] = useState(null);
+  const [isDataMenuDown, setDataMenuDown] = useState(null);
+  const [isCheckAuth, setCheckAuth] = useState(false);
 
-  if (dataMenuTop.loading) return <Load />;
-  if (dataMenuDown.loading) return <Load />;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: { Authorization: `Token ${token}` },
+        };
 
+        const [topMenu, downMenu, checkAuth] = await Promise.all([
+          axios.get("http://127.0.0.1:8000/assets/api/MenuTop/"),
+          axios.get("http://127.0.0.1:8000/assets/api/MenuDown/"),
+          axios.get("http://127.0.0.1:8000/auth/users/me/", config),
+        ]);
+
+        setDataMenuTop(topMenu.data),
+          setDataMenuDown(downMenu.data),
+          checkAuth.status === 200 ? setCheckAuth(true) : setCheckAuth(false);
+      } catch (error) {
+        console.log("error requiest");
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!isDataMenuTop || !isDataMenuDown) return <Load />;
 
   return (
     <ContainerStyled>
       <HeaderStyled>
         <Logo />
         <NavStyled>
-          <LinkBlock menu={dataMenuTop} isAuthenticated={dataAuthenticated.isAuthenticated} />
-          {dataAuthenticated.isAuthenticated ? <ButtonBasket /> : ""}
-          <MobileMenu menu={dataMenuTop} downMenu={dataMenuDown} />
+          <LinkBlock menu={isDataMenuTop} isAuthenticated={isCheckAuth} />
+          {isCheckAuth ? <ButtonBasket /> : ""}
+          <MobileMenu menu={isDataMenuTop} downMenu={isDataMenuDown} />
         </NavStyled>
       </HeaderStyled>
       <BottomhMenuStyled>
         <ButtonGreenPadding content="Служба доставки цветов" />
-        <DropDownMenu menu={dataMenuDown} />
+        <DropDownMenu menu={isDataMenuDown} />
         <ButtonHoverColor content={"Блог"} />
       </BottomhMenuStyled>
     </ContainerStyled>

@@ -51,13 +51,13 @@ const LinkBlock = ({ menu, isAuthenticated }) => {
 
   return (
     <LinkBlockStyled>
-      <LinkStyled to={menu.data[0].link}>{menu.data[0].name}</LinkStyled>
-      <LinkStyled to={menu.data[1].link}>{menu.data[1].name}</LinkStyled>
-      <LinkStyled to={menu.data[2].link}>{menu.data[2].name}</LinkStyled>
+      <LinkStyled to={menu[0].link}>{menu[0].name}</LinkStyled>
+      <LinkStyled to={menu[1].link}>{menu[1].name}</LinkStyled>
+      <LinkStyled to={menu[2].link}>{menu[2].name}</LinkStyled>
       {isAuthenticated ? (
         <LogOutStyled onClick={logout}>Выйти</LogOutStyled>
       ) : (
-        <LinkStyled to={menu.data[3].link}>{menu.data[3].name}</LinkStyled>
+        <LinkStyled to={menu[3].link}>{menu[3].name}</LinkStyled>
       )}
     </LinkBlockStyled>
   );
