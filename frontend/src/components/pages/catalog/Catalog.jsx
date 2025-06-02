@@ -31,13 +31,11 @@ const Catalog = () => {
     }
   }, [id]);
 
-  // http://127.0.0.1:8000/core/api/ProductCard/?category_id=2
   useEffect(() => {
     const fetchData = async () => {
       try {
 
         const addUrl = isParam && isId ? `?${isParam}_id=${isId}` : ""
-        console.log("http://127.0.0.1:8000/core/api/ProductCard/", addUrl)
         const [category, type, product] = await Promise.all([
           axios.get("http://127.0.0.1:8000/core/api/Category/"),
           axios.get("http://127.0.0.1:8000/core/api/TypeProduct/"),
@@ -53,12 +51,12 @@ const Catalog = () => {
     fetchData()
   }, [isId, isParam])
 
-  console.log(isParam && isId ? `?${isParam}_id=${isId}` : "xx")
   if (!isCategory || !isType) return <Load />
   if (dataProduct.loading) return <Load />;
   if (dataProduct.error) return <div>Error: {dataProduct.error}</div>;
 
   const dataRequest = (id, param) => {
+    console.log(id, param, "id param")
     setId(id)
     setParam(param)
   }
@@ -67,8 +65,8 @@ const Catalog = () => {
     <>
       <ListLinksStyled>
         <ButtonSimple
-          onClick={() => dataProduct.setCategory(null)}
-          content={"Все"}
+          onClick={() => dataRequest(null, null)}
+          content={"Все.."}
         />
         {/* Categories */}
         {isCategory.map((value) => {

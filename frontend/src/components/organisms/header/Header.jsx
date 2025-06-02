@@ -55,18 +55,16 @@ const Header = () => {
         const config = {
           headers: { Authorization: `Token ${token}` },
         };
-
         const [topMenu, downMenu, checkAuth] = await Promise.all([
           axios.get("http://127.0.0.1:8000/assets/api/MenuTop/"),
           axios.get("http://127.0.0.1:8000/assets/api/MenuDown/"),
-          axios.get("http://127.0.0.1:8000/auth/users/me/", config),
+          config.Token ? axios.get("http://127.0.0.1:8000/auth/users/me/", config) : Promise.resolve(null)
         ]);
-
         setDataMenuTop(topMenu.data),
           setDataMenuDown(downMenu.data),
-          checkAuth.status === 200 ? setCheckAuth(true) : setCheckAuth(false);
+          checkAuth ? checkAuth.status === 200 ? setCheckAuth(true) : setCheckAuth(false) : null
       } catch (error) {
-        console.log("error requiest");
+        console.log("error requiest: ", error);
       }
     };
     fetchData();
