@@ -44,8 +44,6 @@ const BottomhMenuStyled = styled.div`
 `;
 
 const Header = () => {
-  const [isDataMenuTop, setDataMenuTop] = useState(null);
-  const [isDataMenuDown, setDataMenuDown] = useState(null);
   const [isCheckAuth, setCheckAuth] = useState(false);
 
   useEffect(() => {
@@ -55,23 +53,16 @@ const Header = () => {
         const config = {
           headers: { Authorization: `Token ${token}` },
         };
-        const [topMenu, downMenu, checkAuth] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/assets/api/MenuTop/"),
-          axios.get("http://127.0.0.1:8000/assets/api/MenuDown/"),
-          config.Token ? axios.get("http://127.0.0.1:8000/auth/users/me/", config) : Promise.resolve(null)
+        const [checkAuth] = await Promise.all([
+          config.Token ? axios.get("http://127.0.0.1:8000/auth/users/me/", config) : Promise.resolve(null),
         ]);
-        setDataMenuTop(topMenu.data),
-          setDataMenuDown(downMenu.data),
-          checkAuth ? checkAuth.status === 200 ? setCheckAuth(true) : setCheckAuth(false) : null
+        checkAuth ? (checkAuth.status === 200 ? setCheckAuth(true) : setCheckAuth(false)) : null;
       } catch (error) {
-        console.log("error requiest: ", error);
+        console.log("error request: ", error);
       }
     };
     fetchData();
   }, []);
-
-  if (!isDataMenuTop || !isDataMenuDown) return <Load />;
-
   return (
     <ContainerStyled>
       <HeaderStyled>
