@@ -67,7 +67,7 @@ const LinkStyled = styled(NavLink)`
     border-bottom: 1px solid ${styleTools.color.green};
   }
 `;
-const MobileMenu = ({ menu, downMenu }) => {
+const MobileMenu = ({ menu }) => {
   const [isScale, setScale] = useState(0);
   const [isLuck, setLuck] = useState(true);
 
@@ -80,7 +80,7 @@ const MobileMenu = ({ menu, downMenu }) => {
     <ContainerStyled>
       <MenuIconStyled onClick={menuShowHidden}>{isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}</MenuIconStyled>
       <SlidingBarStyled $scale={isScale}>
-        {downMenu.map((value, index) => {
+        {menu.map((value, index) => {
           return (
             <DownMenuStyled to={value.link} key={index} activeclassname="active">
               {value.name}

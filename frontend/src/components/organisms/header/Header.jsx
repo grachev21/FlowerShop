@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
-import { Logo, Load, ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/components";
+import { Logo,  ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/components";
 import styleTools from "@/styles/styleTools";
+import menu from "@/assets/menu";
 
 const ContainerStyled = styled.div`
   position: fixed;
@@ -29,7 +30,7 @@ const NavStyled = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-const BottomhMenuStyled = styled.div`
+const BottomMenuStyled = styled.div`
   width: 100%;
   display: none;
   flex-direction: row;
@@ -68,16 +69,16 @@ const Header = () => {
       <HeaderStyled>
         <Logo />
         <NavStyled>
-          <LinkBlock menu={isDataMenuTop} isAuthenticated={isCheckAuth} />
+          <LinkBlock menu={menu} isAuthenticated={isCheckAuth} />
           {isCheckAuth ? <ButtonBasket /> : ""}
-          <MobileMenu menu={isDataMenuTop} downMenu={isDataMenuDown} />
+          <MobileMenu menu={menu}  />
         </NavStyled>
       </HeaderStyled>
-      <BottomhMenuStyled>
+      <BottomMenuStyled>
         <ButtonGreenPadding content="Служба доставки цветов" />
-        <DropDownMenu menu={isDataMenuDown} />
+        {/* <DropDownMenu menu={isDataMenuDown} /> */}
         <ButtonHoverColor content={"Блог"} />
-      </BottomhMenuStyled>
+      </BottomMenuStyled>
     </ContainerStyled>
   );
 };

@@ -1,9 +1,10 @@
+import carousel from "@/assets/carousel";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TitleXXL, Banner, AutoCarousel, Load, FramesOneThree, CardITB } from "@/components";
 
-import banerImg from "@/media/img/46deb9ec9a0baaf5972b03c82fe968f4.jpg";
+import bannerImg from "@/media/img/banner.jpg";
 
 const title_1 = "Добро пожаловать в магазины FlowerShop";
 const title_2 = "Цветы FlowerShop - на нас полагается - и уже более 20 лет!";
@@ -15,32 +16,25 @@ const ContainerStyled = styled.div`
 `;
 
 const Home = () => {
-  const [isTypeProduct, setTypeProduct] = useState(null)
-  const [isCarousel, setCarousel] = useState(null)
+  const [isTypeProduct, setTypeProduct] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [typeProduct, carousel] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/core/api/TypeProduct/"),
-          axios.get("http://127.0.0.1:8000/assets/api/Carousel/")
-        ]);
-        setTypeProduct(typeProduct.data), setCarousel(carousel.data);
+        const [typeProduct] = await Promise.all([axios.get("http://127.0.0.1:8000/core/api/TypeProduct/")]);
+        console.log(typeProduct);
+        setTypeProduct(typeProduct.data);
+      } catch (error) {
+        console.log("error request", error);
       }
-      catch (error) {
-        console.log("error request", error)
-      }
-    }
+    };
     fetchData();
   }, []);
-
-  if (!isTypeProduct || !isCarousel) return <Load />;
-
-
+  if (!isTypeProduct ) return <Load />;
   return (
     <ContainerStyled>
       <TitleXXL content={title_1} />
-      <AutoCarousel data={isCarousel} />
+      <AutoCarousel data={carousel} />
       <TitleXXL content={title_2} />
       <FramesOneThree>
         {isTypeProduct.map((value) => (
@@ -48,10 +42,10 @@ const Home = () => {
         ))}
       </FramesOneThree>
 
-      <Banner img={banerImg} />
+      <Banner img={bannerImg} />
 
       {/* <FramesOneThree data={dataType} /> */}
-      <Banner img={banerImg} />
+      <Banner img={bannerImg} />
     </ContainerStyled>
   );
 };

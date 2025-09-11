@@ -43,6 +43,7 @@ const AutoCarousel = ({ data }) => {
   const [isBaseSize, setBaseSize] = useState(0); // Общая ширина canvas
   const [isPositionLeft, setPositionLeft] = useState(0); // Позиция карусели
   const dataSlice = data.slice(0, 4);
+  console.log(dataSlice);
 
   // number of photos
   const isNumberPhotos = dataSlice.length;
@@ -67,7 +68,7 @@ const AutoCarousel = ({ data }) => {
     <ContainerStyled>
       <BoardPhotoStyled $multWi={isBaseSize} $position={isPositionLeft}>
         {dataSlice.map((value, index) => (
-          <PhotoStyled key={index} $photo={value.image} $wi={isWidthWindow}>
+          <PhotoStyled key={index} $photo={value.img} $wi={isWidthWindow}>
             <TitleStyled>{value.title}</TitleStyled>
           </PhotoStyled>
         ))}

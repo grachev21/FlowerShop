@@ -1,3 +1,4 @@
+import logo from "@/media/logo/logo.webp";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Load } from "@/components";
@@ -21,26 +22,10 @@ const LogoStyled = styled.div`
 `;
 
 const Logo = () => {
-  const [isLogo, setLogo] = useState(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/assets/api/Logo/")
-        setLogo(response.data)
-      } catch {
-        console.log("error request:", error)
-      }
-    }
-    fetchData()
-  }, [])
-
-  if (!isLogo) return <Load />
-
   return (
-    <NavLink to={isLogo[0].link}>
+    <NavLink to={"/"}>
       <ContainerStyled>
-        <LogoStyled $logo={isLogo[0].image} />
+        <LogoStyled $logo={logo} />
       </ContainerStyled>
     </NavLink>
   );
