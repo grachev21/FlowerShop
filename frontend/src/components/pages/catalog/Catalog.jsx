@@ -13,6 +13,7 @@ const ListLinksStyled = styled.div`
 const Catalog = () => {
   const location = useLocation();
   const id = location.state;
+  console.log(id);
   const dataProduct = useGetIdRequest("http://127.0.0.1:8000/core/api/ProductCard/");
 
   const [isCategory, setCategory] = useState(null)

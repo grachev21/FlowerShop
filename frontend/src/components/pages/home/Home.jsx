@@ -30,7 +30,7 @@ const Home = () => {
     };
     fetchData();
   }, []);
-  if (!isTypeProduct ) return <Load />;
+  if (!isTypeProduct) return <Load />;
   return (
     <ContainerStyled>
       <TitleXXL content={title_1} />

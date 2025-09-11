@@ -7,11 +7,11 @@ import carousel_6 from "@/media/img/carousel_6.jpg";
 import carousel_7 from "@/media/img/carousel_7.jpg";
 
 const carousel = [
-  { img: carousel_1, title: "" },
+  { img: carousel_1, title: "Наши цветы приезжают всегда вовремя" },
   { img: carousel_2, title: "" },
-  { img: carousel_3, title: "" },
+  { img: carousel_3, title: "Время радовать близких" },
   { img: carousel_4, title: "" },
-  { img: carousel_5, title: "" },
+  { img: carousel_5, title: "Мы лучшие на рынке" },
   { img: carousel_6, title: "" },
   { img: carousel_7, title: "" },
 ];

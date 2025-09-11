@@ -19,10 +19,10 @@ const CardStyled = styled.div`
   }
 `;
 const CardITB = ({ value }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/catalog", { state: value.id })
-  }
+    navigate("/catalog", { state: value.id });
+  };
 
   return (
     <CardStyled>
