@@ -9,19 +9,14 @@ const ButtonSimpleStyled = styled.div`
   border-bottom: 1px solid transparent;
   transition: all 0.6s ease;
   opacity: ${(props) => (props.$flag ? "0.7" : "100%")};
-  border-bottom-color: ${(props) =>
-    props.$flag ? styleTools.color.green : styleTools.color.white};
+  border-bottom-color: ${(props) => (props.$flag ? styleTools.color.green : styleTools.color.white)};
   &:hover {
     opacity: 0.7;
     border-bottom-color: ${styleTools.color.green};
   }
 `;
 
-const ButtonSimple = ({ content, onClick, flag }) => {
-  return (
-    <ButtonSimpleStyled $flag={flag} onClick={onClick}>
-      {content}
-    </ButtonSimpleStyled>
-  );
+const ButtonSimple = ({ content, onClick }) => {
+  return <ButtonSimpleStyled onClick={onClick}>{content}</ButtonSimpleStyled>;
 };
 export default ButtonSimple;

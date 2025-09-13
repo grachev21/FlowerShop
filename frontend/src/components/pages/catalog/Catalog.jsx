@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
-import { useGetIdRequest } from "@/hooks";
-import { ProductList, ButtonSimple, Load } from "@/components";
+import { useGetIdRequest, useGetRequest } from "@/hooks";
+import { FramesOneThree, CardITBP, ButtonSimple, Load } from "@/components";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+// import axios from "axios";
 
 const ListLinksStyled = styled.div`
   display: flex;
@@ -11,88 +11,63 @@ const ListLinksStyled = styled.div`
   height: 2rem;
 `;
 const Catalog = () => {
+  // load the ID
   const location = useLocation();
-  const id = location.state;
-  console.log(id);
-  const dataProduct = useGetIdRequest("http://127.0.0.1:8000/core/api/ProductCard/");
+  const [isTypeRequest, setTypeRequest] = useState("category");
+  // Download categories
+  const getRequest = useGetRequest("http://127.0.0.1:8000/core/api/ProductCard/");
+  // Get a product by category
+  const getIdRequest = useGetIdRequest(
+    "http://127.0.0.1:8000/core/api/ProductCard/", // baseUrl
+    isTypeRequest, // paramName
+    null // initialCategory (опционально)
+  );
 
-  const [isCategory, setCategory] = useState(null)
-  const [isType, setType] = useState(null)
-  const [isParam, setParam] = useState(null)
-  const [isId, setId] = useState(null)
-  const [isProduct, setProduct] = useState(null)
-
+  // receives ID data from the Home page
   useEffect(() => {
-    if (id !== null) {
-      dataProduct.setParamName("typeproduct");
-      dataProduct.setCategory(id);
-    } else {
-      dataProduct.setParamName("category");
-      dataProduct.setCategory(null);
+    if (location.state !== null && location.state !== undefined) {
+      setTypeRequest("typeproduct");
+      getIdRequest.setCategory(location.state);
     }
-  }, [id]);
+  }, [location.state]); // Добавьте location.state в зависимости
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-
-        const addUrl = isParam && isId ? `?${isParam}_id=${isId}` : ""
-        const [category, type, product] = await Promise.all([
-          axios.get("http://127.0.0.1:8000/core/api/Category/"),
-          axios.get("http://127.0.0.1:8000/core/api/TypeProduct/"),
-          axios.get(`http://127.0.0.1:8000/core/api/ProductCard/${addUrl}`)
-        ])
-        setCategory(category.data);
-        setType(type.data);
-        setProduct(product.data)
-      } catch (error) {
-        console.log("error request:", error)
-      }
-    }
-    fetchData()
-  }, [isId, isParam])
-
-  if (!isCategory || !isType) return <Load />
-  if (dataProduct.loading) return <Load />;
-  if (dataProduct.error) return <div>Error: {dataProduct.error}</div>;
-
-  const dataRequest = (id, param) => {
-    console.log(id, param, "id param")
-    setId(id)
-    setParam(param)
-  }
+  if (getIdRequest.loading) return <Load />;
+  if (getRequest.loading) return <Load />;
 
   return (
     <>
       <ListLinksStyled>
-        <ButtonSimple
-          onClick={() => dataRequest(null, null)}
-          content={"Все.."}
-        />
+        <ButtonSimple onClick={() => getIdRequest.setCategory(null, null)} content={"Все.."} />
         {/* Categories */}
-        {isCategory.map((value) => {
+        {getRequest.data.map((value) => {
           return (
             <ButtonSimple
               key={value.id}
-              onClick={() => dataRequest(value.id, "category")}
-              content={value.name}
-              flag={dataProduct.category === value.id && dataProduct.paramName === "category"}
+              onClick={() => {
+                getIdRequest.setCategory(value.category.id), setTypeRequest("category");
+              }}
+              content={value.category.name}
             />
           );
         })}
         {/* Types */}
-        {isType.map((value) => {
+        {getRequest.data.map((value) => {
           return (
             <ButtonSimple
               key={value.id}
-              onClick={() => dataRequest(value.id, "typeproduct")}
-              content={value.name}
-              flag={dataProduct.category === value.id && dataProduct.paramName === "typeproduct"}
+              onClick={() => {
+                getIdRequest.setCategory(value.typeproduct.id), setTypeRequest("typeproduct");
+              }}
+              content={value.typeproduct.name}
             />
           );
         })}
       </ListLinksStyled>
-      <ProductList data={isProduct} />
+      <FramesOneThree>
+        {getIdRequest.data.map((value, index) => (
+          <CardITBP key={index} value={value} />
+        ))}
+      </FramesOneThree>
     </>
   );
 };

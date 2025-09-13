@@ -20,8 +20,8 @@ const CardStyled = styled.div`
 `;
 const CardITB = ({ value }) => {
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/catalog", { state: value.id });
+  const handleClick = (id) => {
+    navigate("/catalog", { state: id });
   };
 
   return (
@@ -29,7 +29,12 @@ const CardITB = ({ value }) => {
       <ImageTable image={value.image} />
       <TitleXL content={value.slogan} />
       <LinkStyled>
-        <ButtonPadding onClick={handleClick} content={value.name} />
+        <ButtonPadding
+          onClick={() => {
+            handleClick(value.id);
+          }}
+          content={value.name}
+        />
       </LinkStyled>
     </CardStyled>
   );

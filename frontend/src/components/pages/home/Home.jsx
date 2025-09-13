@@ -22,7 +22,6 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const [typeProduct] = await Promise.all([axios.get("http://127.0.0.1:8000/core/api/TypeProduct/")]);
-        console.log(typeProduct);
         setTypeProduct(typeProduct.data);
       } catch (error) {
         console.log("error request", error);
