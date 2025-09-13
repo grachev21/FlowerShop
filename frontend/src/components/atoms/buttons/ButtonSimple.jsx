@@ -16,7 +16,12 @@ const ButtonSimpleStyled = styled.div`
   }
 `;
 
-const ButtonSimple = ({ content, onClick }) => {
-  return <ButtonSimpleStyled onClick={onClick}>{content}</ButtonSimpleStyled>;
+const ButtonSimple = ({ content, onClick, flag = false }) => {
+  console.log(flag, "<<<");
+  return (
+    <ButtonSimpleStyled $flag={flag} onClick={onClick}>
+      {content}
+    </ButtonSimpleStyled>
+  );
 };
 export default ButtonSimple;

@@ -11,6 +11,9 @@ const ListLinksStyled = styled.div`
   height: 2rem;
 `;
 const Catalog = () => {
+  // for an active button
+  const [isActiveCategory, setActiveCategory] = useState(false);
+  const [isActiveType, setActiveType] = useState(false);
   // load the ID
   const location = useLocation();
   const [isTypeRequest, setTypeRequest] = useState("category");
@@ -26,7 +29,9 @@ const Catalog = () => {
   // receives ID data from the Home page
   useEffect(() => {
     if (location.state !== null && location.state !== undefined) {
+      // sets the type of filtering
       setTypeRequest("typeproduct");
+      // transfers ID to user hook useGetIdRequest
       getIdRequest.setCategory(location.state);
     }
   }, [location.state]); // Добавьте location.state в зависимости
@@ -34,19 +39,29 @@ const Catalog = () => {
   if (getIdRequest.loading) return <Load />;
   if (getRequest.loading) return <Load />;
 
+  const handleClick = () => {};
   return (
     <>
       <ListLinksStyled>
-        <ButtonSimple onClick={() => getIdRequest.setCategory(null, null)} content={"Все.."} />
+        <ButtonSimple
+          onClick={() => {
+            getIdRequest.setCategory(null, null), setActiveCategory(false), setActiveType(false);
+          }}
+          content={"Все.."}
+        />
         {/* Categories */}
         {getRequest.data.map((value) => {
           return (
             <ButtonSimple
-              key={value.id}
+              key={value.category.id}
               onClick={() => {
-                getIdRequest.setCategory(value.category.id), setTypeRequest("category");
+                getIdRequest.setCategory(value.category.id),
+                  setTypeRequest("category"),
+                  setActiveType(false),
+                  setActiveCategory(value.category.id);
               }}
               content={value.category.name}
+              flag={isActiveCategory == value.category.id ? true : false}
             />
           );
         })}
@@ -56,9 +71,13 @@ const Catalog = () => {
             <ButtonSimple
               key={value.id}
               onClick={() => {
-                getIdRequest.setCategory(value.typeproduct.id), setTypeRequest("typeproduct");
+                getIdRequest.setCategory(value.typeproduct.id),
+                  setTypeRequest("typeproduct"),
+                  setActiveCategory(false),
+                  setActiveType(value.typeproduct.id);
               }}
               content={value.typeproduct.name}
+              flag={isActiveType == value.typeproduct.id ? true : false}
             />
           );
         })}
