@@ -5,7 +5,7 @@ import GlobalStyle from "@/styles/GlobalStyles";
 
 const ContainerStyled = styled.div`
   margin-top: 14rem;
-  padding: 1rem;
+  padding: 2rem;
 `;
 
 const App = () => {

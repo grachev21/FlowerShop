@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DropDownMenu, MobileMenu, LinkBlock } from "@/components/organisms/header";
-import { Logo,  ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/components";
+import { Logo, ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/components";
+import { useAuthCheck } from "@/hooks";
 import styleTools from "@/styles/styleTools";
 import menu from "@/assets/menu";
 
@@ -45,33 +46,15 @@ const BottomMenuStyled = styled.div`
 `;
 
 const Header = () => {
-  const [isCheckAuth, setCheckAuth] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const config = {
-          headers: { Authorization: `Token ${token}` },
-        };
-        const [checkAuth] = await Promise.all([
-          config.Token ? axios.get("http://127.0.0.1:8000/auth/users/me/", config) : Promise.resolve(null),
-        ]);
-        checkAuth ? (checkAuth.status === 200 ? setCheckAuth(true) : setCheckAuth(false)) : null;
-      } catch (error) {
-        console.log("error request: ", error);
-      }
-    };
-    fetchData();
-  }, []);
+  const { isAuthenticated, loading, error } = useAuthCheck();
   return (
     <ContainerStyled>
       <HeaderStyled>
         <Logo />
         <NavStyled>
-          <LinkBlock menu={menu} isAuthenticated={isCheckAuth} />
-          {isCheckAuth ? <ButtonBasket /> : ""}
-          <MobileMenu menu={menu}  />
+          <LinkBlock menu={menu} isAuthenticated={isAuthenticated} />
+          {isAuthenticated ? <ButtonBasket /> : ""}
+          <MobileMenu menu={menu} />
         </NavStyled>
       </HeaderStyled>
       <BottomMenuStyled>
