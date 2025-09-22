@@ -6,62 +6,84 @@ from django.contrib.auth.models import (
 from django.db import models
 
 
-# Определение менеджера для пользовательской модели
+# Definition of a manager for a user model
 class CustomUserManager(BaseUserManager):
-    # Метод для создания обычного пользователя
+    # Method for creating an ordinary user
+
     def create_user(self, email, password=None, **extra_fields):
-        # Проверка, что поле email задано
+        # Check that the email field is set
+
         if not email:
             raise ValueError("The Email field must be set")
-        # Нормализация email (приведение к нижнему регистру)
+        # Normalization of email (bringing to the lower register)
+
         email = self.normalize_email(email)
-        # Создание экземпляра пользователя
+        # Creating a user instance
+
         user = self.model(email=email, **extra_fields)
-        # Установка пароля
+        # Password setting
+
         user.set_password(password)
-        # Сохранение пользователя в базе данных
+        # Preservation of the user in the database
+
         user.save(using=self._db)
         return user
 
-    # Метод для создания суперпользователя
+    # Method for creating a superpoler
+
     def create_superuser(self, email, password=None, **extra_fields):
-        # Установка значений по умолчанию для полей is_staff и is_superuser
+        # Installation of default values ​​for IS_STAFF and IS_Superuser fields
+
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
-        # Проверка, что is_staff и is_superuser установлены в True
+        # Check that IS_STAFF and IS_SUPERUSER are installed in True
+
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser must have is_staff=True.")
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
 
-        # Создание суперпользователя с использованием метода create_user
+        # Creation of a superpower using the Create_user method
+
         return self.create_user(email, password, **extra_fields)
 
 
-# Определение пользовательской модели пользователя
+# Determining user user's user
+
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    # Поле email, которое является уникальным
+    # Email field, which is unique
+
     email = models.EmailField(unique=True)
-    # Поле first_name, которое может быть пустым
+    # FIRST_NAME field, which can be empty
+
     first_name = models.CharField(max_length=30, blank=True)
-    # Поле last_name, которое может быть пустым
+    # Last_name field, which can be empty
+
     last_name = models.CharField(max_length=30, blank=True)
-    # Поле is_active, которое по умолчанию установлено в True
+    # Os_active field, which by default is installed in True
+
     is_active = models.BooleanField(default=True)
-    # Поле is_staff, которое по умолчанию установлено в False
+    # The IS_STAFF field, which by default is installed in FALSE
+
     is_staff = models.BooleanField(default=False)
-    # Поле date_joined, которое автоматически устанавливается при создании пользователя
+    # Date_Joined field, which is automatically installed when creating a user
+
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    # Использование пользовательского менеджера
+    # Using user manager
+
     objects = CustomUserManager()
 
-    # Установка поля email в качестве уникального идентификатора пользователя
+    # Email installation as a unique user identifier
+
     USERNAME_FIELD = "email"
-    # Список полей, которые требуются при создании пользователя
+    # The list of fields that are required when creating a user
+
     REQUIRED_FIELDS = []
 
-    # Метод для строкового представления пользователя
+    # Method for stringent presentation of the user
+
     def __str__(self):
         return self.email

@@ -43,12 +43,9 @@ class ProductCard(models.Model):
     )
     name = models.CharField(max_length=255, verbose_name="Название товара")
     description = models.TextField(verbose_name="Описание товара")
-    price = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="Цена")
-    created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name="Дата создания")
-    updated_at = models.DateTimeField(
-        auto_now=True, verbose_name="Дата обновления")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
     def __str__(self):
         return self.name
@@ -65,10 +62,7 @@ class Photo(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Товар",
     )
-    image = models.ImageField(
-        upload_to="photos/",
-        verbose_name="Фото"
-    )
+    image = models.ImageField(upload_to="photos/", verbose_name="Фото")
 
     def __str__(self):
         return f"Фото для {self.product.name}"
@@ -80,34 +74,23 @@ class Photo(models.Model):
 
 class Basket(models.Model):
     user = models.ForeignKey(
-        CustomUser,
-        on_delete=models.CASCADE,
-        verbose_name="Пользователь",
-        null=True
+        CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь", null=True
     )
     product = models.ForeignKey(
-        ProductCard,
-        on_delete=models.CASCADE,
-        verbose_name="Товар",
-        null=True
+        ProductCard, on_delete=models.CASCADE, verbose_name="Товар", null=True
     )
     quantity = models.PositiveIntegerField(
-        verbose_name="Количество",
-        null=True
-    )
-    added_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Дата добавления",
-        null=True
-    )
+        verbose_name="Количество", default=1
+    )  # убрал null=True
+    added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     def __str__(self):
-        return self.user.email
+        return f"{self.user.email} - {self.product.name}"
 
-    # class Meta:
-    #     verbose_name = "Корзина"
-    #     verbose_name_plural = "Корзины"
-    #     unique_together = (
-    #         "user",
-    #         "product",
-    #     )
+    def total_price(self):
+        return self.product.price * self.quantity
+
+    class Meta:
+        verbose_name = "Корзина"
+        verbose_name_plural = "Корзины"
+        unique_together = ("user", "product")

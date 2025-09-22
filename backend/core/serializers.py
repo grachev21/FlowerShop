@@ -38,8 +38,27 @@ class ProductCardSerializer(serializers.ModelSerializer):
         ]
 
 
-class BasketAddSerializer(serializers.ModelSerializer):
+class BasketSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(source="product.name", read_only=True)
+    product_price = serializers.DecimalField(
+        source="product.price", max_digits=10, decimal_places=2, read_only=True
+    )
+    total_price = serializers.SerializerMethodField()
+
+    def get_total_price(self, obj):
+        return obj.total_price()
+
     class Meta:
         model = Basket
-        fields = "__all__"
+        fields = [
+            "id",
+            "product",
+            "product_name",
+            "product_price",
+            "quantity",
+            "total_price",
+            "added_at",
+        ]
         read_only_fields = ["user"]
+
+
