@@ -16,6 +16,7 @@ export { default as ButtonBasket } from "@/components/atoms/buttons/ButtonBasket
 export { default as SeparatorLine } from "@/components/atoms/other/SeparatorLine";
 export { default as ButtonBack } from "@/components/atoms/buttons/ButtonBack";
 export { default as Dot } from "@/components/atoms/other/Dot";
+export { default as ButtonAddBasket } from "@/components/atoms/buttons/ButtonAddBasket"
 
 // moleculs
 export { default as CardITB } from "@/components/molecules/CardITB";

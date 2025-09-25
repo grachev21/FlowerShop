@@ -41,66 +41,65 @@ class ProductCardSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
+
 class BasketSet(viewsets.ModelViewSet):
     serializer_class = BasketSerializer
     permission_classes = [IsAuthenticated]
 
+    # Reopers Queryset. In the URL add to the route of this performance 
+    # (basename = "basket")
     def get_queryset(self):
+        # receives all the notes of the volter
         return Basket.objects.filter(user=self.request.user)
-
-    def get_serializer_class(self):
-        if self.action == "create":
-            return BasketSerializer
-        return BasketSerializer
 
     def perform_create(self, serializer):
         product = serializer.validated_data["product"]
         quantity = serializer.validated_data.get("quantity", 1)
 
-        # Проверяем, есть ли уже товар в корзине
+        # Проверяем если товар уже есть в корзине
         basket_item, created = Basket.objects.get_or_create(
-            user=self.request.user, product=product, defaults={"quantity": quantity}
+            user=self.request.user, 
+            product=product, 
+            defaults={"quantity": quantity}
         )
 
-        # Если товар уже есть в корзине, увеличиваем количество
+        # Если товар уже в корзине, увеличиваем количество
         if not created:
             basket_item.quantity += quantity
             basket_item.save()
 
-    # Эндпоинт для быстрого добавления товара: POST /api/Basket/add_to_cart/
+    # Endpoint для быстрого добавления товара: POST /api/basket/add_to_cart/
     @action(detail=False, methods=["post"])
     def add_to_cart(self, request):
-        serializer = BasketSerializer(
-            data=request.data, context={"request": request}
+        # ИСПРАВИТЬ: использовать тот же сериализатор, что и в perform_create
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        product = serializer.validated_data["product"]
+        quantity = serializer.validated_data.get("quantity", 1)
+
+        # Добавляем товар в корзину
+        basket_item, created = Basket.objects.get_or_create(
+            user=request.user, 
+            product=product, 
+            defaults={"quantity": quantity}
         )
-        if serializer.is_valid():
-            product_id = serializer.validated_data["product"].id
-            quantity = serializer.validated_data.get("quantity", 1)
 
-            try:
-                product = ProductCard.objects.get(id=product_id)
-            except ProductCard.DoesNotExist:
-                return Response(
-                    {"error": "Товар не найден"}, status=status.HTTP_404_NOT_FOUND
-                )
+        if not created:
+            basket_item.quantity += quantity
+            basket_item.save()
+            
+        # ИСПРАВИТЬ: использовать сериализатор для ответа
+        return Response(
+            self.get_serializer(basket_item).data, 
+            status=status.HTTP_200_OK
+        )
 
-            # Добавляем товар в корзину
-            basket_item, created = Basket.objects.get_or_create(
-                user=request.user, product=product, defaults={"quantity": quantity}
-            )
-
-            if not created:
-                basket_item.quantity += quantity
-                basket_item.save()
-
-            return Response(
-                BasketSerializer(basket_item).data, status=status.HTTP_200_OK
-            )
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # Эндпоинт для очистки корзины: POST /api/Basket/clear_cart/
+    # Endpoint для очистки корзины: POST /api/basket/clear_cart/
     @action(detail=False, methods=["post"])
     def clear_cart(self, request):
         Basket.objects.filter(user=request.user).delete()
-        return Response({"message": "Корзина очищена"}, status=status.HTTP_200_OK)
+        return Response(
+            {"message": "Корзина очищена"}, 
+            status=status.HTTP_200_OK
+        )

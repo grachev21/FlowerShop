@@ -43,7 +43,6 @@ const AutoCarousel = ({ data }) => {
   const [isBaseSize, setBaseSize] = useState(0); // Общая ширина canvas
   const [isPositionLeft, setPositionLeft] = useState(0); // Позиция карусели
   const dataSlice = data.slice(0, 4);
-  console.log(dataSlice);
 
   // number of photos
   const isNumberPhotos = dataSlice.length;

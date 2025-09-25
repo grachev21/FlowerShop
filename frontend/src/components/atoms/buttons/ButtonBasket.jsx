@@ -14,7 +14,6 @@ const NumberStyled = styled.div`
 `;
 const ButtonBasket = () => {
 
-
   return (
     <ButtonBasketStyled to={"/Basket"}>
       <SlBasket size={22} />

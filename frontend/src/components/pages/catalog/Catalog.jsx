@@ -39,7 +39,7 @@ const Catalog = () => {
   if (getIdRequest.loading) return <Load />;
   if (getRequest.loading) return <Load />;
 
-  const handleClick = () => {};
+  const handleClick = () => { };
   return (
     <>
       <ListLinksStyled>
@@ -50,10 +50,10 @@ const Catalog = () => {
           content={"Все.."}
         />
         {/* Categories */}
-        {getRequest.data.map((value) => {
+        {getRequest.data.map((value, index) => {
           return (
             <ButtonSimple
-              key={value.category.id}
+              key={index}
               onClick={() => {
                 getIdRequest.setCategory(value.category.id),
                   setTypeRequest("category"),
@@ -66,10 +66,10 @@ const Catalog = () => {
           );
         })}
         {/* Types */}
-        {getRequest.data.map((value) => {
+        {getRequest.data.map((value, index) => {
           return (
             <ButtonSimple
-              key={value.id}
+              key={index}
               onClick={() => {
                 getIdRequest.setCategory(value.typeproduct.id),
                   setTypeRequest("typeproduct"),

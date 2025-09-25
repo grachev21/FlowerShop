@@ -11,6 +11,7 @@ const useAuthCheck = () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/auth/users/me/", {
           headers: {
+            "Content-Type": "application/json",  // Indicate the data type
             Authorization: `Token ${localStorage.getItem("token")}`,
           },
         });
