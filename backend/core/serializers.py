@@ -40,11 +40,22 @@ class ProductCardSerializer(serializers.ModelSerializer):
 
 class BasketSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source="product.name", read_only=True)
-    product_price = serializers.DecimalField(source="product.price", max_digits=10, decimal_places=2, read_only=True)
+    product_price = serializers.DecimalField(
+        source="product.price", max_digits=10, decimal_places=2, read_only=True
+    )
+    photos = PhotoSerializer(source="product.photos", many=True, read_only=True)
+
+
 
     class Meta:
         model = Basket
-        fields = "__all__"
+        fields = [
+            "id",
+            "product",
+            "quantity",
+            "added_at",
+            "product_name",
+            "product_price",
+            "photos",
+        ]
         read_only_fields = ["user"]
-
-

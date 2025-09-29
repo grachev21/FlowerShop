@@ -40,13 +40,13 @@ const VerticalStyled = styled.div`
   background-color: ${styleTools.color.white};
 `;
 
-const Dot = ({ flag }) => {
+const Dot = ({ flag, onClick }) => {
   let content;
 
   switch (flag) {
     case "-":
       content = (
-        <DotStyled>
+        <DotStyled onClick={onClick}>
           <HorizontalStyled />
         </DotStyled>
       );
@@ -54,7 +54,7 @@ const Dot = ({ flag }) => {
 
     case "+":
       content = (
-        <DotStyled>
+        <DotStyled onClick={onClick}>
           <HorizontalStyled />
           <VerticalStyled />
         </DotStyled>
@@ -63,7 +63,7 @@ const Dot = ({ flag }) => {
 
     case "x":
       content = (
-        <DotStyled $transform>
+        <DotStyled onClick={onClick} $transform>
           <HorizontalStyled />
           <VerticalStyled />
         </DotStyled>
@@ -72,7 +72,7 @@ const Dot = ({ flag }) => {
 
     default:
       content = (
-        <DotStyled>
+        <DotStyled onClick={onClick}>
           <HorizontalStyled />
         </DotStyled>
       );

@@ -6,7 +6,7 @@ router = routers.DefaultRouter()
 router.register(r"ProductCard", ProductCardSet)
 router.register(r"TypeProduct", TypeProductSet)
 router.register(r"Category", CategorySet)
-router.register(r"Basket", BasketSet, basename="basket")
+router.register(r"Basket", BasketSet, basename="Basket")
 
 
 urlpatterns = [

@@ -74,14 +74,12 @@ class Photo(models.Model):
 
 class Basket(models.Model):
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь", null=True
+        CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь"
     )
     product = models.ForeignKey(
-        ProductCard, on_delete=models.CASCADE, verbose_name="Товар", null=True
+        ProductCard, on_delete=models.CASCADE, verbose_name="Товар"
     )
-    quantity = models.PositiveIntegerField(
-        verbose_name="Количество", default=1
-    )  # убрал null=True
+    quantity = models.PositiveIntegerField(verbose_name="Количество", default=1)
     added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     def __str__(self):
