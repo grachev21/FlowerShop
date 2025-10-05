@@ -1,62 +1,18 @@
-import styled from "styled-components";
-import styleTools from "@/styles/styleTools";
-
-const BannerStyled = styled.div`
-  max-width: 1050px;
-  padding-top: 6rem;
-  padding-bottom: 8rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  @media (min-width: ${styleTools.size.sm}) {
-    flex-direction: row;
-  }
-`;
-const ImageStyled = styled.div`
-  background-size: cover;
-  background-position: center;
-  background-image: url(${(props) => props.$img});
-  width: 100%;
-  height: 36vh;
-  margin-top: 3rem;
-  @media (min-width: ${styleTools.size.sm}) {
-    width: 50%;
-  }
-`;
-const TitleStyled = styled.div`
-  font-size: x-large;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
-`;
-const NameStyled = styled.div`
-  font-size: large;
-  font-weight: bold;
-  margin-bottom: 2rem;
-`;
-const InfoStyled = styled.div`
-  font-size: large;
-  margin-right: 2rem;
-  @media (min-width: ${styleTools.size.sm}) {
-    width: 50%;
-    padding-right: 1rem ;
-  }
-`;
-const TextStyled = styled.div``;
-
 const Banner = ({ img }) => {
   return (
-    <BannerStyled>
-      <InfoStyled>
-        <TitleStyled>ОБНОВЛЕНИЯ</TitleStyled>
-        <NameStyled>Общая информация:</NameStyled>
-        <TextStyled>
-          Мы хотели бы отметить, что наш офис не работает в выходные дни (суббота и воскресенье). Электронные письма и заказы читаются лишь
-          время от времени. Крайний срок приема заказов и заказов Fleurop – пятница в 17:00.
-        </TextStyled>
-      </InfoStyled>
-      <ImageStyled $img={img} />
-    </BannerStyled>
+    <div className="hero bg-base-200 min-h-screen">
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <img src={img} className="max-w-lg rounded-lg shadow-2xl" />
+        <div>
+          <h1 className="text-5xl font-bold">ОБНОВЛЕНИЯ</h1>
+          <p className="py-6">
+            Мы хотели бы отметить, что наш офис не работает в выходные дни (суббота и воскресенье). Электронные письма и
+            заказы читаются лишь // время от времени. Крайний срок приема заказов и заказов Fleurop – пятница в 17:00.
+          </p>
+          <button className="btn btn-primary">Перейти</button>
+        </div>
+      </div>
+    </div>
   );
 };
 export default Banner;

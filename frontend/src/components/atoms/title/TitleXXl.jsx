@@ -1,14 +1,5 @@
-import styled from "styled-components";
-
-const TitleXXLStyled = styled.div`
-  font-size: xx-large;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-`;
-
 const TitleXXL = ({ content }) => {
-  return <TitleXXLStyled>{content}</TitleXXLStyled>;
+  return <main className="text-2xl font-bold text-center my-2">{content}</main>;
 };
+
 export default TitleXXL;

@@ -39,7 +39,7 @@ const LogOutStyled = styled.div`
   margin-right: 20px;
   color: ${styleTools.color.black};
   transition: all 0.3;
-  margin-top: 8px;
+  margin-top: 8px;Styled
   &:hover {
     transition: all 0.3s;
     color: ${styleTools.color.green};

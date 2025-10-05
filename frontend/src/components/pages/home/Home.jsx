@@ -1,7 +1,6 @@
 import carousel from "@/assets/carousel";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { TitleXXL, Banner, AutoCarousel, Load, FramesOneThree, CardITB } from "@/components";
 
 import bannerImg from "@/media/img/banner.jpg";
@@ -9,11 +8,6 @@ import bannerImg from "@/media/img/banner.jpg";
 const title_1 = "Добро пожаловать в магазины FlowerShop";
 const title_2 = "Цветы FlowerShop - на нас полагается - и уже более 20 лет!";
 
-const ContainerStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const Home = () => {
   const [isTypeProduct, setTypeProduct] = useState(null);
@@ -31,7 +25,7 @@ const Home = () => {
   }, []);
   if (!isTypeProduct) return <Load />;
   return (
-    <ContainerStyled>
+    <main className="flex flex-col items-center">
       <TitleXXL content={title_1} />
       <AutoCarousel data={carousel} />
       <TitleXXL content={title_2} />
@@ -45,7 +39,7 @@ const Home = () => {
 
       {/* <FramesOneThree data={dataType} /> */}
       <Banner img={bannerImg} />
-    </ContainerStyled>
+    </main>
   );
 };
 export default Home;

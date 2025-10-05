@@ -1,23 +1,5 @@
-import styled from "styled-components";
-import styleTools from "@/styles/styleTools";
 import { useNavigate } from "react-router-dom";
-import { ButtonPadding, ImageTable, TitleXL } from "@/components";
 
-const LinkStyled = styled.div`
-  width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-`;
-const CardStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  @media (min-width: ${styleTools.size.sm}) {
-    width: 100%;
-  }
-`;
 const CardITB = ({ value }) => {
   const navigate = useNavigate();
   const handleClick = (id) => {
@@ -25,18 +7,25 @@ const CardITB = ({ value }) => {
   };
 
   return (
-    <CardStyled>
-      <ImageTable image={value.image} />
-      <TitleXL content={value.slogan} />
-      <LinkStyled>
-        <ButtonPadding
-          onClick={() => {
-            handleClick(value.id);
-          }}
-          content={value.name}
-        />
-      </LinkStyled>
-    </CardStyled>
+    <div className="card bg-base-100 w-full shadow-sm">
+      <figure className="px-10 pt-10 h-full">
+        <img src={value.image} alt="Shoes" className="rounded-xl h-full" />
+      </figure>
+      <div className="card-body items-center text-center">
+        <h2 className="card-title">{value.name}</h2>
+        <p>{value.slogan}</p>
+        <div className="card-actions w-full px-5">
+          <button
+            onClick={() => {
+              handleClick(value.id);
+            }}
+            className="btn btn-primary w-full"
+          >
+            Перейти
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 export default CardITB;
