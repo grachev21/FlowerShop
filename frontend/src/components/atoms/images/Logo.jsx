@@ -24,9 +24,9 @@ const LogoStyled = styled.div`
 const Logo = () => {
   return (
     <NavLink to={"/"}>
-      <ContainerStyled>
+      <main className="">
         <LogoStyled $logo={logo} />
-      </ContainerStyled>
+      </main>
     </NavLink>
   );
 };

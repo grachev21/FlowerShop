@@ -1,65 +1,60 @@
-import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import styleTools from "@/styles/styleTools";
 import { useLogout } from "@/hooks";
-
-const LinkBlockStyled = styled.div`
-  display: none;
-  flex-direction: row;
-  @media (min-width: ${styleTools.size.lg}) {
-    display: flex;
-  }
-`;
-const LinkStyled = styled(NavLink)`
-  height: 1.6rem;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  font-weight: 300;
-  margin-left: 20px;
-  margin-right: 20px;
-  color: ${styleTools.color.black};
-  transition: all 0.3;
-  margin-top: 8px;
-  &:hover {
-    transition: all 0.3s;
-    color: ${styleTools.color.green};
-  }
-  &.active {
-    color: ${styleTools.color.green};
-    border-bottom: 1px solid ${styleTools.color.green};
-  }
-`;
-const LogOutStyled = styled.div`
-  cursor: pointer;
-  height: 1.6rem;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  font-weight: 300;
-  margin-left: 20px;
-  margin-right: 20px;
-  color: ${styleTools.color.black};
-  transition: all 0.3;
-  margin-top: 8px;Styled
-  &:hover {
-    transition: all 0.3s;
-    color: ${styleTools.color.green};
-  }
-`;
 
 const LinkBlock = ({ menu, isAuthenticated }) => {
   const { logout } = useLogout();
 
+  const linkClasses = "h-6 text-sm uppercase font-light mx-5 mt-2 text-black transition-all duration-300 hover:text-green-500";
+  const activeClasses = "text-green-500 border-b border-green-500";
+
   return (
-    <LinkBlockStyled>
-      <LinkStyled to={menu[0].link}>{menu[0].name}</LinkStyled>
-      <LinkStyled to={menu[1].link}>{menu[1].name}</LinkStyled>
-      <LinkStyled to={menu[2].link}>{menu[2].name}</LinkStyled>
+    <div className="hidden lg:flex flex-row">
+      <NavLink
+        to={menu[0].link}
+        className={({ isActive }) => 
+          `${linkClasses} ${isActive ? activeClasses : ""}`
+        }
+      >
+        {menu[0].name}
+      </NavLink>
+      
+      <NavLink
+        to={menu[1].link}
+        className={({ isActive }) => 
+          `${linkClasses} ${isActive ? activeClasses : ""}`
+        }
+      >
+        {menu[1].name}
+      </NavLink>
+      
+      <NavLink
+        to={menu[2].link}
+        className={({ isActive }) => 
+          `${linkClasses} ${isActive ? activeClasses : ""}`
+        }
+      >
+        {menu[2].name}
+      </NavLink>
+
       {isAuthenticated ? (
-        <LogOutStyled onClick={logout}>Выйти</LogOutStyled>
+        <button
+          onClick={logout}
+          className={`${linkClasses} cursor-pointer hover:text-green-500`}
+        >
+          Выйти
+        </button>
       ) : (
-        <LinkStyled to={menu[3].link}>{menu[3].name}</LinkStyled>
+        <NavLink
+          to={menu[3].link}
+          className={({ isActive }) => 
+            `${linkClasses} ${isActive ? activeClasses : ""}`
+          }
+        >
+          {menu[3].name}
+        </NavLink>
       )}
-    </LinkBlockStyled>
+    </div>
   );
 };
+
 export default LinkBlock;
