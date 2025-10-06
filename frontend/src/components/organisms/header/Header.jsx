@@ -7,7 +7,7 @@ import menu from "@/assets/menu";
 const Header = () => {
   const { isAuthenticated, loading, error } = useAuthCheck();
   return (
-    <main className="fixed top-0 left-0 w-full flex flex-col z-50">
+    <main className="fixed top-0 left-0 w-full flex flex-col z-50 bg-base-100">
       <div className="max-w-full h-32 flex flex-row justify-between items-center p-5">
         <Logo />
         <span className="flex flex-row justify-between">

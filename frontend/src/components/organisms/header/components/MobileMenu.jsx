@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
+import { SlSocialYoutube } from "react-icons/sl";
 
 const ContainerStyled = styled.div`
   display: flex;
@@ -77,26 +78,28 @@ const MobileMenu = ({ menu }) => {
   };
 
   return (
-    <ContainerStyled>
-      <MenuIconStyled onClick={menuShowHidden}>{isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}</MenuIconStyled>
-      <SlidingBarStyled $scale={isScale}>
-        {menu.map((value, index) => {
-          return (
-            <DownMenuStyled to={value.link} key={index} activeclassname="active">
-              {value.name}
-            </DownMenuStyled>
-          );
-        })}
+    <main className="flex items-center">
+      <div className="pl-7 flex cursor-pointer lg:hidden" onClick={menuShowHidden}>
+        {isLuck ? <FiMenu size={26} /> : <IoClose size={26} />}
+      </div>
+      <div
+        style={{ transform: `scaleY(${isScale})` }}
+        className="left-0 top-20 absolute flex flex-col 
+                  bg-red-600/50 backdrop-blur-lg overflow-hidden 
+                  w-full transition-all origin-top pt-3.5 pb-3.5 z-50 lg:hidden"
+      >
 
         {menu.map((value, index) => {
           return (
-            <LinkStyled to={value.link} key={index} activeclassname="active">
-              {value.name}
-            </LinkStyled>
+            <NavLink to={value.link} key={index} className={({ isActive }) => `${isActive ? "text-success border border-b-success" : "h-6 text-base uppercase font-bold ml-5 mr-5 text-base-content transition mt-2 text-end hover:text-success"}`}>
+              <LinkStyled to={value.link} key={index} activeclassname="active">
+                {value.name}
+              </LinkStyled>
+            </NavLink>
           );
         })}
-      </SlidingBarStyled>
-    </ContainerStyled>
+      </div>
+    </main>
   );
 };
 export default MobileMenu;
