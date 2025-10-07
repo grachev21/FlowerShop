@@ -1,19 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { useLogin } from "@/hooks";
-import styleTools from "@/styles/styleTools";
 
-import { Input, Button, ButtonPadding } from "@/components";
-
-const LoginStyled = styled.form`
-  width: 320px;
-`;
-const SuccessStyled = styled.div`
-  color: ${styleTools.color.green};
-`;
-const ErrorStyled = styled.div`
-  color: ${styleTools.color.green};
-`;
+import { Input, Button } from "@/components";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +16,7 @@ const Login = () => {
   };
 
   return (
-    <LoginStyled onSubmit={handleSubmit}>
+    <form className="w-80" onSubmit={handleSubmit}>
       <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
       <Input
         onDataSend={(data) => setPassword(data)}
@@ -36,10 +24,13 @@ const Login = () => {
         type={"password"}
         value={password}
       />
-      <Button content={["Войти", "Входим"]} type={"submit"} loading={loading} />
-      {error && <ErrorStyled>{JSON.stringify(error)}</ErrorStyled>}
-      {success && <SuccessStyled>Вы вошли!</SuccessStyled>}
-    </LoginStyled>
+      <button type="submit" className="btn btn-outline btn-success w-full rounded-none">
+        {loading ? "ВХОДИМ" : "ВОЙТИ"}
+      </button>
+
+      {error && <div className="text-warning">{JSON.stringify(error)}</div>}
+      {success && <div className="text-success">Вы вошли!</div>}
+    </form>
   );
 };
 export default Login;

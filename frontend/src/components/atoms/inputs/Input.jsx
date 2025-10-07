@@ -1,84 +1,36 @@
 import { useState } from "react";
-import styled from "styled-components";
-import styleTools from "@/styles/styleTools";
 
-const InputContainerStyled = styled.div`
-  position: relative;
-  height: 3rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  &::before {
-    content: "";
-    position: absolute;
-    background-color: ${styleTools.color.black};
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    background-color: ${styleTools.color.green};
-    bottom: -1px;
-    left: 0;
-    height: 3px;
-    width: ${(props) => props.$sizeLine}%;
-    transition: all 1s;
-  }
-`;
-const PlaceholderStyled = styled.div`
-  position: absolute;
-  left: 0px;
-  top: -4px;
-  transition: all 0.3s;
-  color: ${(props) => props.$colorText};
-  font-size: ${(props) => props.$sizeText}rem;
-`;
-const InputStyled = styled.input`
-  width: 100%;
-  height: 100%;
-  font-size: 0.9rem;
-  font-weight: 300;
-`;
 const Input = ({ placeholder, type, value, onDataSend }) => {
-  const [isPlaceholder, setPlaceholder] = useState(1.2);
-  const [isColorPlaceholder, setColorPlaceholder] = useState(styleTools.color.black);
-  const [isLength, setLength] = useState(false);
-  const [isLine, setLine] = useState(0);
-
-  const focus = () => {
-    setPlaceholder(0.9);
-    setColorPlaceholder(styleTools.color.green);
-    setLine(100);
-  };
-  const blur = () => {
-    if (isLength) {
-      setColorPlaceholder(styleTools.color.black);
-      setLine(0);
-    } else {
-      setPlaceholder(1.2);
-      setColorPlaceholder(styleTools.color.black);
-      setLine(0);
-    }
-  };
-  const handleInputChange = (e) => {
-    onDataSend(e.target.value);
-
-    if (e.target.value.length === 0) {
-      setLength(false);
-    } else {
-      setLength(true);
-    }
-  };
+  const [isFocused, setFocused] = useState(false);
+  const hasValue = value.length > 0;
 
   return (
-    <InputContainerStyled $sizeLine={isLine}>
-      <PlaceholderStyled $sizeText={isPlaceholder} $colorText={isColorPlaceholder}>
+    <div className="h-12 my-8 relative">
+      <div className="w-full h-px bg-base-content absolute bottom-0 left-0" />
+      <div
+        className={`h-1 bg-success transition-all absolute bottom-0 left-0 duration-1000
+          ${isFocused || hasValue ? "w-full" : "w-0"}
+        `}
+      />
+
+      <div
+        className={`pointer-events-none transition-all absolute left-0 duration-300
+          ${hasValue || isFocused ? "text-sm -top-2" : "text-lg top-3"}
+          ${isFocused ? "text-success" : hasValue ? "text-base-content" : "text-base-content/50"}`}
+      >
         {placeholder}
-      </PlaceholderStyled>
-      <InputStyled onFocus={focus} onBlur={blur} onChange={handleInputChange} type={type} value={value}></InputStyled>
-    </InputContainerStyled>
+      </div>
+
+      <input
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        onChange={(e) => onDataSend(e.target.value)}
+        type={type}
+        value={value}
+        className="w-full h-full text-sm font-light bg-transparent outline-none"
+      />
+    </div>
   );
 };
+
 export default Input;

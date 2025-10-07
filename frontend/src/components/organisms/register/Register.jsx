@@ -1,21 +1,7 @@
 import { useState } from "react";
 import useRegister from "@/hooks/useRegister";
-
-import styled from "styled-components";
-import styleTools from "@/styles/styleTools";
-
 import { Input, Button } from "@/components";
 import { useNavigate } from "react-router-dom";
-
-const RegisterStyled = styled.form`
-  width: 320px;
-`;
-const SuccessStyled = styled.div`
-  color: ${styleTools.color.green};
-`;
-const ErrorStyled = styled.div`
-  color: red;
-`;
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -39,11 +25,8 @@ const Register = () => {
     navigate("/");
   }
 
-  // console.log(success, "<<<")
-  // console.log(loading, "<<<")
-  // console.log(register, "<<<")
   return (
-    <RegisterStyled onSubmit={handleSubmit}>
+    <form className="w-80" onSubmit={handleSubmit}>
       <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
       <Input
         onDataSend={(data) => setPassword(data)}
@@ -57,11 +40,13 @@ const Register = () => {
         type={"password"}
         value={confirmPassword}
       />
-      <Button content={["Регистрация", "Регестрируемся"]} type={"submit"} loading={loading} />
-      {error && <ErrorStyled>{"email: " + error.email}</ErrorStyled>}
-      {error && <ErrorStyled>{"password: " + error.password}</ErrorStyled>}
-      {success && <SuccessStyled>Регистрация прошла успешно!</SuccessStyled>}
-    </RegisterStyled>
+      <button type="submit" className="btn btn-outline btn-success w-full rounded-none">
+        {loading ? "РЕГИСТРАЦИЯ" : "РЕГИСТРИРУЕМСЯ"}
+      </button>
+      {error && <div className="text-warning">{"email: " + error.email}</div>}
+      {error && <div className="text-warning">{"password: " + error.password}</div>}
+      {success && <div className="text-success">Регистрация прошла успешно!</div>}
+    </form>
   );
 };
 export default Register;

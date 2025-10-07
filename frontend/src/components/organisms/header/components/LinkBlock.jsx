@@ -11,7 +11,8 @@ const LinkBlock = ({ menu, isAuthenticated }) => {
           key={index}
           to={item.link}
           className={({ isActive }) =>
-            `h-6 text-sm uppercase font-lg mx-5 mt-2 text-base-content transition-all hover:text-success ${isActive ? "text-success border-b border-success" : ""
+            `h-6 text-sm uppercase font-lg mx-5 mt-2 text-base-content transition-all hover:text-success ${
+              isActive ? "text-success border-b border-success" : ""
             }`
           }
         >
@@ -30,7 +31,8 @@ const LinkBlock = ({ menu, isAuthenticated }) => {
         <NavLink
           to={menu[3].link}
           className={({ isActive }) =>
-            `h-6 text-sm uppercase font-lg mx-5 mt-2 text-base-content transition-all hover:text-success ${isActive ? "text-success border-b border-success" : ""
+            `h-6 text-sm uppercase font-lg mx-5 mt-2 text-base-content transition-all hover:text-success ${
+              isActive ? "text-success border-b border-success" : ""
             }`
           }
         >
