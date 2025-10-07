@@ -2,59 +2,39 @@ import styled from "styled-components";
 import styleTools from "@/styles/styleTools";
 import { Logo } from "@/components";
 
-const FooterStyled = styled.div`
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const SeparatingLineStyled = styled.div`
-  position: relative;
-  width: 100%;
-  height: 1px;
-  background-color: ${styleTools.color.grey};
-  margin-bottom: 5rem;
-`;
-const TopBlockStyled = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
-  width: 100%;
-
-  @media (min-width: ${styleTools.size.xxl}) {
-    width: 1400px;
-  }
-`;
-const LowerBlockStyled = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
-`;
-const ListStyled = styled.div`
-  color: ${styleTools.color.black};
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-  font-weight: 300;
-  font-size: 1.1rem;
-`;
-const footerData = [
-  "Доставка работает без выходных",
-  "Режим работы с 10:00 до 20:00",
-  "Вы можете связаться с нами по телефоно +7 954 322 323 32",
-  "Или по электронной почте grachev@mail.ru",
-];
 
 const Footer = () => {
   return (
-    <FooterStyled>
-      <SeparatingLineStyled />
-      <Logo />
-      <TopBlockStyled>
-        {footerData.map((value, index) => {
-          return <ListStyled key={index}> {value}</ListStyled>;
-        })}
-      </TopBlockStyled>
-      <LowerBlockStyled></LowerBlockStyled>
-    </FooterStyled>
+    <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
+      <aside>
+        <Logo />
+        <p>
+          ACME Industries Ltd.
+          <br />
+          Providing reliable tech since 1992
+        </p>
+      </aside>
+      <nav>
+        <h6 className="footer-title">Services</h6>
+        <a className="link link-hover">Branding</a>
+        <a className="link link-hover">Design</a>
+        <a className="link link-hover">Marketing</a>
+        <a className="link link-hover">Advertisement</a>
+      </nav>
+      <nav>
+        <h6 className="footer-title">Company</h6>
+        <a className="link link-hover">About us</a>
+        <a className="link link-hover">Contact</a>
+        <a className="link link-hover">Jobs</a>
+        <a className="link link-hover">Press kit</a>
+      </nav>
+      <nav>
+        <h6 className="footer-title">Legal</h6>
+        <a className="link link-hover">Terms of use</a>
+        <a className="link link-hover">Privacy policy</a>
+        <a className="link link-hover">Cookie policy</a>
+      </nav>
+    </footer>
   );
 };
 

@@ -8,7 +8,6 @@ import bannerImg from "@/media/img/banner.jpg";
 const title_1 = "Добро пожаловать в магазины FlowerShop";
 const title_2 = "Цветы FlowerShop - на нас полагается - и уже более 20 лет!";
 
-
 const Home = () => {
   const [isTypeProduct, setTypeProduct] = useState(null);
 

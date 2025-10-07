@@ -1,15 +1,7 @@
 @import "tailwindcss";
 
-/* @theme {
-  --color-my_white: #ffffff;
-  --color-my_black: #02021b;
-  --color-my_green: #9cc11a;
-  --color-my_grey: #dadada;
-  --color-my_swamp: #f0f6dd;
-} */
-
 @plugin "daisyui" {
-  themes: dark --default;
+  themes: lemonade --default;
 }
 
 :root {

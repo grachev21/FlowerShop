@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, loading, error, success, token } = useLogin();
+  const { login, loading, error, primary, token } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,12 +24,12 @@ const Login = () => {
         type={"password"}
         value={password}
       />
-      <button type="submit" className="btn btn-outline btn-success w-full rounded-none">
+      <button type="submit" className="btn btn-outline btn-primary w-full rounded-none">
         {loading ? "ВХОДИМ" : "ВОЙТИ"}
       </button>
 
       {error && <div className="text-warning">{JSON.stringify(error)}</div>}
-      {success && <div className="text-success">Вы вошли!</div>}
+      {primary && <div className="text-primary">Вы вошли!</div>}
     </form>
   );
 };

@@ -17,7 +17,6 @@ const Header = () => {
       </div>
       <div className="w-full hidden flex-row uppercase justify-center textarea-lg font-bold text-primary-content lg:flex">
         <ButtonGreenPadding content="Служба доставки цветов" />
-        {/* <DropDownMenu menu={isDataMenuDown} /> */}
         <ButtonHoverColor content={"Блог"} />
       </div>
     </main>

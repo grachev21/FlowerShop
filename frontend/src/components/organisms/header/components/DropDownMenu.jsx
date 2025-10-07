@@ -3,13 +3,6 @@ import { useState } from "react";
 import styleTools from "@/styles/styleTools";
 import { ButtonHoverColor } from "@/components";
 
-const MenuStyled = styled.div`
-  padding-bottom: 20px;
-  position: relative;
-  padding-right: 20px;
-  padding-left: 20px;
-  cursor: pointer;
-`;
 const ShowMenuStyled = styled.div`
   position: absolute;
   width: 240px;
@@ -49,14 +42,14 @@ const DropDownMenu = ({ menu }) => {
     }
   };
   return (
-    <MenuStyled onMouseEnter={() => showMenu(true)} onMouseLeave={() => showMenu(false)}>
+    <main className="pb-5 relative px-5 cursor-pointer" onMouseEnter={() => showMenu(true)} onMouseLeave={() => showMenu(false)}>
       <ButtonHoverColor content={"Что мы делаем"} />
       <ShowMenuStyled $opacity={isOpacity} $cursor={isCursor}>
         {menu.map((value, index) => {
           return <ButtonHoverColor key={index} content={value.name} />;
         })}
       </ShowMenuStyled>
-    </MenuStyled>
+    </main>
   );
 };
 export default DropDownMenu;

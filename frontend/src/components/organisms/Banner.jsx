@@ -1,6 +1,6 @@
 const Banner = ({ img }) => {
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-base-200 min-h-screen rounded-lg my-16">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img src={img} className="max-w-lg rounded-lg shadow-2xl" />
         <div>

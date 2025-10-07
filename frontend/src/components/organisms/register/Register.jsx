@@ -9,7 +9,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const { register, loading, error, success } = useRegister();
+  const { register, loading, error, primary } = useRegister();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Register = () => {
     });
   };
 
-  if (success) {
+  if (primary) {
     navigate("/");
   }
 
@@ -40,12 +40,12 @@ const Register = () => {
         type={"password"}
         value={confirmPassword}
       />
-      <button type="submit" className="btn btn-outline btn-success w-full rounded-none">
+      <button type="submit" className="btn btn-outline btn-primary w-full rounded-none">
         {loading ? "РЕГИСТРАЦИЯ" : "РЕГИСТРИРУЕМСЯ"}
       </button>
       {error && <div className="text-warning">{"email: " + error.email}</div>}
       {error && <div className="text-warning">{"password: " + error.password}</div>}
-      {success && <div className="text-success">Регистрация прошла успешно!</div>}
+      {primary && <div className="text-primary">Регистрация прошла успешно!</div>}
     </form>
   );
 };

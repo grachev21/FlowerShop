@@ -2,14 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useGetIdRequest, useGetRequest } from "@/hooks";
 import { FramesOneThree, CardITBP, ButtonSimple, Load } from "@/components";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-// import axios from "axios";
 
-const ListLinksStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 2rem;
-`;
 const Catalog = () => {
   // for an active button
   const [isActiveCategory, setActiveCategory] = useState(false);
@@ -42,7 +35,7 @@ const Catalog = () => {
   const handleClick = () => { };
   return (
     <>
-      <ListLinksStyled>
+      <main className="flex flex-row h-8">
         <ButtonSimple
           onClick={() => {
             getIdRequest.setCategory(null, null), setActiveCategory(false), setActiveType(false);
@@ -81,7 +74,7 @@ const Catalog = () => {
             />
           );
         })}
-      </ListLinksStyled>
+      </main>
       <FramesOneThree>
         {getIdRequest.data.map((value, index) => (
           <CardITBP key={index} value={value} />

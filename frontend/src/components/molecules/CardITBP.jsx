@@ -3,7 +3,7 @@ import styleTools from "@/styles/styleTools";
 import { ButtonPadding, ButtonAddBasket, ImageTable, Price } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { useAuthCheck } from "@/hooks";
-
+import { MdOutlineCurrencyRuble } from "react-icons/md";
 
 const CardStyled = styled.div`
   display: flex;
@@ -34,16 +34,25 @@ const CardITBP = ({ value }) => {
   };
 
   return (
-    <CardStyled>
-      <ImageTable onClick={imageHandleClick} image={value.photos[0].image} />
-      <TitleStyled onClick={imageHandleClick}>{value.name}...</TitleStyled>
-      <Price content={value.price} />
-      {isAuthenticated ? (
-        <ButtonAddBasket productId={value.id} />
-      ) : (
-        <ButtonPadding onClick={imageHandleClick} content={"Посмотреть"} />
-      )}
-    </CardStyled>
+      <main className="card w-96 bg-base-100 shadow-xl">
+        <figure className="px-10 pt-10">
+          <img onClick={imageHandleClick} src={value.photos[0].image} alt="Shoes" className="rounded-xl cursor-pointer" />
+        </figure>
+        <div className="card-body items-center text-center">
+          <span className="flex flex-row items-center">
+            <h2 className="card-title">{value.price}</h2>
+            <MdOutlineCurrencyRuble size={18} />
+          </span>
+          <p>{value.name}</p>
+          <div className="card-actions w-full">
+            {isAuthenticated ? (
+              <ButtonAddBasket productId={value.id} />
+            ) : (
+              <ButtonPadding onClick={imageHandleClick} content={"Посмотреть"} />
+            )}
+          </div>
+        </div>
+      </main>
   );
 };
 export default CardITBP;
