@@ -32,7 +32,7 @@ const Catalog = () => {
   if (getIdRequest.loading) return <Load />;
   if (getRequest.loading) return <Load />;
 
-  const handleClick = () => { };
+  const handleClick = () => {};
   return (
     <>
       <main className="flex flex-row h-8">

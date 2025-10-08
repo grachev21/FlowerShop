@@ -1,49 +1,8 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { useParams, NavLink } from "react-router-dom";
 import { useGetRequest, useAuthCheck } from "@/hooks";
 import { Load, Price, MiniImageShadow, Paragraph, ButtonPadding, ButtonBack } from "@/components";
-import styleTools from "@/styles/styleTools";
 
-const ProductStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 1rem;
-  @media (min-width: ${styleTools.size.sm}) {
-    flex-direction: row;
-  }
-`;
-const LinkBackStyled = styled(NavLink)`
-  color: ${styleTools.color.green};
-  display: flex;
-  align-items: center;
-`;
-const BlockImgStyled = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-  @media (min-width: ${styleTools.size.sm}) {
-    width: 60%;
-  }
-`;
-const ListImgStyled = styled.div`
-  width: 40px;
-  margin-right: 2rem;
-`;
-const BlockBaseImgStyled = styled.div`
-  width: 100%;
-  height: auto;
-`;
-const BaseImgStyled = styled.img``;
-const BlockUtilsStyled = styled.div`
-  margin-left: 1rem;
-  margin-top: 1rem;
-`;
-const NameStyled = styled.div`
-  font-weight: bold;
-  font-size: 1.8rem;
-  margin-top: 1rem;
-`;
 const Product = () => {
   const { id } = useParams();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -56,9 +15,11 @@ const Product = () => {
     <>
       <ButtonBack to={"/catalog"} content={"Каталог"} />
 
-      <ProductStyled>
-        <BlockImgStyled>
-          <ListImgStyled>
+      <main className="mx-4 flex flex-col sm:flex-row">
+        {/* Блок с изображениями */}
+        <div className="mt-8 flex justify-between sm:w-3/5">
+          {/* Список миниатюр */}
+          <div className="w-10 mr-8">
             {dataProduct.data.photos.map((value, index) => (
               <MiniImageShadow
                 key={index}
@@ -67,19 +28,22 @@ const Product = () => {
                 active={activeIndex === index}
               />
             ))}
-          </ListImgStyled>
-          <BlockBaseImgStyled>
-            <BaseImgStyled src={dataProduct.data.photos[activeIndex].image} />
-            <Paragraph content={dataProduct.data.description} />
-          </BlockBaseImgStyled>
-        </BlockImgStyled>
+          </div>
 
-        <BlockUtilsStyled>
-          <NameStyled>{dataProduct.data.name}</NameStyled>
+          {/* Основное изображение и описание */}
+          <div className="w-full h-auto">
+            <img src={dataProduct.data.photos[activeIndex].image} alt={dataProduct.data.name} className="w-full" />
+            <Paragraph content={dataProduct.data.description} />
+          </div>
+        </div>
+
+        {/* Блок с информацией о товаре */}
+        <div className="ml-4 mt-4">
+          <div className="font-bold text-2xl mt-4">{dataProduct.data.name}</div>
           <Price content={dataProduct.data.price} />
-          {authCheck.isAuthenticated ? <ButtonPadding content={"Добавить в корзину"} /> : ""}
-        </BlockUtilsStyled>
-      </ProductStyled>
+          {authCheck.isAuthenticated && <ButtonPadding content={"Добавить в корзину"} />}
+        </div>
+      </main>
     </>
   );
 };
