@@ -9,6 +9,6 @@ const TitleXLStyled = styled.div`
   text-align: center;
 `;
 const TitleXL = ({ content }) => {
-  return <TitleXLStyled>{content}</TitleXLStyled>;
+  return <main className="mt-12 mb-">{content}</main>;
 };
 export default TitleXL;

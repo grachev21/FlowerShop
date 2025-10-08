@@ -1,35 +1,20 @@
-import styled from "styled-components";
-import styleTools from "@/styles/styleTools";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
-const ButtonBackStyled = styled(NavLink)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Button = styled.div`
-  color: ${styleTools.color.green};
-  margin-left: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  border-bottom: 1px solid transparent;
-  transition: all 0.6s ease;
-  opacity: ${(props) => (props.$flag ? "0.7" : "100%")};
-  border-bottom-color: black;
-  &:hover {
-    opacity: 0.7;
-    border-bottom-color: ${styleTools.color.green};
-  }
-`;
-
 const ButtonBack = ({ to, content }) => {
   return (
-    <ButtonBackStyled to={to}>
-      <MdArrowBackIosNew />
-      <Button>{content}</Button>
-    </ButtonBackStyled>
+    <NavLink
+      to={to}
+      className="flex flex-row items-center group"
+    >
+      <MdArrowBackIosNew color="green" />
+      <div className="ml-4 font-bold cursor-pointer border-b border-transparent 
+                     transition-all ease-in-out group-hover:opacity-70 
+                     group-hover:border-primary text-primary">
+        {content}
+      </div>
+    </NavLink>
   );
 };
+
 export default ButtonBack;

@@ -1,16 +1,14 @@
-import styled from "styled-components";
-const MiniImageShadowStyled = styled.img`
-  min-width: 60px;
-  height: auto;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0px 5px 9px 0px
-    rgba(0, 0, 0, ${(props) => (props.$active ? 0.8 : 0)});
-`;
 const MiniImageShadow = ({ onClick, image, active }) => {
     return (
-        <MiniImageShadowStyled $active={active} onClick={onClick} src={image} />
+        <img
+            onClick={onClick}
+            src={image}
+            className={`min-w-24 h-auto mb-4 cursor-pointer
+            transition-all duration-300 hover:shadow-[0px_5px_9px_0px_rgba(0,0,0,0.8)]
+            ${active ? 'shadow-[0px_5px_9px_0px_rgba(0,0,0,0.8)]' : 'shadow-none'}
+      `}
+        />
     );
-}
+};
+
 export default MiniImageShadow;

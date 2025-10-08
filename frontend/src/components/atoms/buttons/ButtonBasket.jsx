@@ -1,24 +1,18 @@
-import styled from "styled-components";
 import { SlBasket } from "react-icons/sl";
 import { NavLink } from "react-router-dom";
 
-const ButtonBasketStyled = styled(NavLink)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: min-content;
-`;
-const NumberStyled = styled.div`
-  font-size: 1.2rem;
-  margin-left: 10px;
-`;
 const ButtonBasket = () => {
-
   return (
-    <ButtonBasketStyled to={"/Basket"}>
+    <NavLink
+      to={"/Basket"}
+      className="flex flex-row items-center h-min"
+    >
       <SlBasket size={22} />
-      <NumberStyled>0</NumberStyled>
-    </ButtonBasketStyled>
+      <div className="text-xl ml-2.5">
+        0
+      </div>
+    </NavLink>
   );
 };
+
 export default ButtonBasket;

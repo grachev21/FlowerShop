@@ -1,6 +1,4 @@
-import styled from "styled-components";
-const LoadStyled = styled.div``;
 const Load = () => {
-  return <LoadStyled>Данные ещу не загрузились...</LoadStyled>;
+  return <div className="skeleton h-32 w-full"></div>
 };
 export default Load;

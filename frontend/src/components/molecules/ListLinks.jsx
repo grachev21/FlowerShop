@@ -1,14 +1,8 @@
-import styled from "styled-components";
 import { ButtonSimple } from "@/components";
 
-const ListLinksStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 2rem;
-`;
 const ListLinks = ({ type, flagContent, dataProduct }) => {
   return (
-    <ListLinksStyled>
+    <div className="flex flex-row h-8">
       <ButtonSimple
         onClick={() => dataProduct.setCategory(null)}
         content={"Все"}
@@ -23,7 +17,7 @@ const ListLinks = ({ type, flagContent, dataProduct }) => {
           />
         );
       })}
-    </ListLinksStyled>
+    </div>
   );
 };
 export default ListLinks;

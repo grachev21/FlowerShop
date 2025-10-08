@@ -9,10 +9,13 @@ const ButtonAddBasket = ({ productId }) => {
         product: productId,
         quantity: 1,
       });
-    } catch (err) {}
+    } catch (err) { }
   };
   return (
-    <button onClick={handleClick} className="btn btn-outline btn-primary w-full">
+    <button onClick={handleClick} className="relative py-2 uppercase text-lg font-normal w-full 
+                text-center text-primary border border-primary 
+                cursor-pointer hover:bg-primary/20 transition-all
+                rounded-field">
       ДОБАВИТЬ В КОРЗИНУ
     </button>
   );

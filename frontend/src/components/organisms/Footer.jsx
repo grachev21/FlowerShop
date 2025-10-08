@@ -1,7 +1,4 @@
-import styled from "styled-components";
-import styleTools from "@/styles/styleTools";
 import { Logo } from "@/components";
-
 
 const Footer = () => {
   return (

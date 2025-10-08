@@ -1,69 +1,9 @@
+import { RxPlus } from "react-icons/rx";
+import { RxMinus } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 import { BiRuble } from "react-icons/bi";
-import styled from "styled-components";
-import { SeparatorLine, ButtonBack, MiniImageShadow, Dot, Load } from "@/components";
-import styleTools from "@/styles/styleTools";
+import { ButtonBack, MiniImageShadow, Load } from "@/components";
 import { useGetRequestAuth, useAuthPost } from "@/hooks";
-
-const BasketStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const ContainerBasketStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-const ProductItemStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 30%;
-`;
-const ImageItemStyled = styled.img`
-  width: 4rem;
-  height: 4rem;
-  margin: 1rem;
-`;
-const NameProductStyled = styled.div`
-  font-weight: 500;
-  font-size: large;
-`;
-
-const TopBlockStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  box-sizing: border-box;
-  width: 100%;
-`;
-const TitleStyled = styled.div`
-  font-weight: 400;
-  font-size: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-`;
-const FormStyled = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const InputStyled = styled.div`
-  text-align: center;
-  width: 40px;
-  height: 30px;
-  border: 1px solid ${styleTools.color.grey};
-  margin: 1rem;
-`;
-const Margin = styled.div`
-  margin-right: 1rem;
-`;
-const PriceStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 1.2rem;
-`;
 
 const Basket = () => {
   const { data, loading, error } = useGetRequestAuth("http://localhost:8000/core/api/Basket");
@@ -73,7 +13,6 @@ const Basket = () => {
   const removeItem = async (productId) => {
     const result = await removeItemRequest.post({ product: productId });
     if (result?.message) {
-      // Обнови корзину или перезапроси данные
       console.log("Удалено:", result.message);
     }
   };
@@ -81,37 +20,53 @@ const Basket = () => {
   if (loading) return <Load />;
 
   return (
-    <BasketStyled>
-      <TopBlockStyled>
+    <div className="flex flex-col">
+      {/* Верхний блок */}
+      <div className="flex flex-col items-start w-full box-border">
         <ButtonBack content={"Назад"} />
-        <TitleStyled>Корзина</TitleStyled>
-      </TopBlockStyled>
+        <div className="font-normal text-2xl mt-4 mb-2">
+          Корзина
+        </div>
+      </div>
+
       <MiniImageShadow />
 
-      {data.map((value, index) => {
-        return (
-          <ContainerBasketStyled key={index}>
-            <ProductItemStyled>
-              <ImageItemStyled src={value.photos[0].image} />
-              <NameProductStyled>{value.product_name}</NameProductStyled>
-            </ProductItemStyled>
-            <FormStyled>
-              <Margin>
-                <Dot flag={"x"} />
-              </Margin>
-              <Dot flag={"+"} />
-              <InputStyled>{value.quantity}</InputStyled>
-              <Dot flag={"-"} onClick={() => removeItem(value.id)} />
-            </FormStyled>
-            <PriceStyled>
-              {value.product_price}
-              <BiRuble />
-            </PriceStyled>
-          </ContainerBasketStyled>
-        );
-      })}
+      {/* Список товаров */}
+      {data.map((value, index) => (
+        <div key={index} className="flex flex-row justify-between items-center border-b border-base-300">
+          {/* Информация о товаре */}
+          <div className="flex flex-row justify-start items-center w-1/3">
+            <img
+              src={value.photos[0].image}
+              className="w-16 h-16 m-4"
+              alt={value.product_name}
+            />
+            <div className="font-medium text-lg">
+              {value.product_name}
+            </div>
+          </div>
 
-    </BasketStyled>
+          {/* Управление количеством */}
+          <form className="flex justify-center items-center">
+            <div className="mr-4">
+            <RxCross2 className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer" />
+            </div>
+            <RxPlus className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer" />
+            <div className="text-center w-10 h-8 border border-gray-300 m-4 flex items-center justify-center">
+              {value.quantity}
+            </div>
+            <RxMinus className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer" />
+          </form>
+
+          {/* Цена */}
+          <div className="flex flex-row items-center text-xl">
+            {value.product_price}
+            <BiRuble />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
+
 export default Basket;

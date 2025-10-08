@@ -1,4 +1,4 @@
-import { ButtonPadding, ButtonAddBasket, ImageTable, Price } from "@/components";
+import { ButtonPadding, ButtonAddBasket } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { useAuthCheck } from "@/hooks";
 import { MdOutlineCurrencyRuble } from "react-icons/md";

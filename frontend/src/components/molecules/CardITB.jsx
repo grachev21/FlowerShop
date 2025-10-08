@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { ButtonPadding } from "@/components";
 
 const CardITB = ({ value }) => {
   const navigate = useNavigate();
@@ -15,14 +16,12 @@ const CardITB = ({ value }) => {
         <h2 className="card-title">{value.name}</h2>
         <p>{value.slogan}</p>
         <div className="card-actions w-full px-5">
-          <button
+          <ButtonPadding
             onClick={() => {
               handleClick(value.id);
             }}
-            className="btn btn-primary w-full"
-          >
-            Перейти
-          </button>
+            content={"Перейти"}
+          />
         </div>
       </div>
     </div>

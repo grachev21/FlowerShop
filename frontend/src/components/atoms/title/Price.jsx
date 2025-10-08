@@ -1,20 +1,11 @@
 import { MdOutlineCurrencyRuble } from "react-icons/md";
-import styled from "styled-components";
-
-const PriceStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 1.6rem;
-  margin: 1rem;
-`;
 
 const Price = ({ content }) => {
     return (
-        <PriceStyled>
+        <main className="flex flex-row items-center text-2xl m-4" >
             <p>{content}</p>
-            <MdOutlineCurrencyRuble size={26}/>
-        </PriceStyled>
+            <MdOutlineCurrencyRuble size={26} />
+        </main>
     );
 }
 export default Price;
