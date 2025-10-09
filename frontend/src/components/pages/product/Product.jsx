@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetRequest, useAuthCheck } from "@/hooks";
-import { Load, Price, MiniImageShadow, Paragraph, ButtonPadding, ButtonBack } from "@/components";
+import { Load, MiniImageShadow, ButtonPadding, ButtonBack } from "@/components";
 
 const Product = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const Product = () => {
         {/* Images block */}
         <div className="mt-8 flex justify-between sm:w-3/5">
           {/* Thumbnails list */}
-          <div className="w-10 mr-8">
+          <div className="w-24 mr-8">
             {photos.map((photo, index) => (
               <MiniImageShadow
                 key={photo.image} // Better key using unique identifier
@@ -41,14 +41,18 @@ const Product = () => {
               className="w-full"
               loading="lazy" // Added lazy loading
             />
-            <Paragraph content={description} />
+            <div className="text-base-content text-lg font-light
+                  whitespace-break-spaces mt-4"
+            >
+              <p>{description}</p>
+            </div>
           </div>
         </div>
 
         {/* Product info block */}
         <div className="ml-4 mt-4">
           <h1 className="font-bold text-2xl mt-4">{name}</h1> {/* Changed to semantic h1 */}
-          <Price content={price} />
+          <div>{price}</div>
           {isAuthenticated && (
             <ButtonPadding
               content="Добавить в корзину"

@@ -44,8 +44,7 @@ class BasketSerializer(serializers.ModelSerializer):
         source="product.price", max_digits=10, decimal_places=2, read_only=True
     )
     photos = PhotoSerializer(source="product.photos", many=True, read_only=True)
-
-
+    total_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Basket
@@ -53,9 +52,25 @@ class BasketSerializer(serializers.ModelSerializer):
             "id",
             "product",
             "quantity",
+            "total_price",
             "added_at",
             "product_name",
             "product_price",
             "photos",
         ]
-        read_only_fields = ["user"]
+        read_only_fields = ["user", "total_price"]
+
+    def get_total_price(self, obj):
+        # ✅ Безопасная обработка для обоих случаев
+        if hasattr(obj, 'total_price') and callable(obj.total_price):
+            # Если obj - модель Basket, используем ее метод
+            return obj.total_price()
+        else:
+            # Если obj - словарь или другой объект, вычисляем вручную
+            try:
+                if hasattr(obj, 'product') and hasattr(obj.product, 'price'):
+                    return obj.product.price * obj.quantity
+                else:
+                    return 0
+            except:
+                return 0

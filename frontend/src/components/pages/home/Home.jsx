@@ -1,7 +1,7 @@
 import carousel from "@/assets/carousel";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TitleXXL, Banner, AutoCarousel, Load, FramesOneThree, CardITB } from "@/components";
+import { Banner, AutoCarousel, Load, FramesOneThree, CardITB } from "@/components";
 
 import bannerImg from "@/media/img/banner.jpg";
 
@@ -25,9 +25,9 @@ const Home = () => {
   if (!isTypeProduct) return <Load />;
   return (
     <main className="flex flex-col items-center">
-      <TitleXXL content={title_1} />
+      <div className="text-3xl font-bold mb-8 mt-22"  >{title_1}</div>
       <AutoCarousel data={carousel} />
-      <TitleXXL content={title_2} />
+      <div className="text-3xl font-bold mb-8 mt-22"  >{title_2}</div>
       <FramesOneThree>
         {isTypeProduct.map((value) => (
           <CardITB key={value.id} value={value} />

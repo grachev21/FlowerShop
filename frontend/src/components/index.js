@@ -5,13 +5,10 @@ export { default as ButtonGreenPadding } from "@/components/atoms/buttons/Button
 export { default as ButtonHoverColor } from "@/components/atoms/buttons/ButtonHoverColor";
 export { default as Input } from "./atoms/inputs/Input";
 export { default as ButtonPadding } from "@/components/atoms/buttons/ButtonPadding";
-export { default as TitleXXL } from "./atoms/title/TitleXXl";
-export { default as TitleXL } from "./atoms/title/TitleXL";
 export { default as ImageTable } from "./atoms/images/ImageTable";
 export { default as ButtonSimple } from "@/components/atoms/buttons/ButtonSimple";
 export { default as Paragraph } from "@/components/atoms/text/Paragraph";
 export { default as MiniImageShadow } from "@/components/atoms/images/MiniImageShadow";
-export { default as Price } from "@/components/atoms/title/Price";
 export { default as ButtonBasket } from "@/components/atoms/buttons/ButtonBasket";
 export { default as ButtonBack } from "@/components/atoms/buttons/ButtonBack";
 export { default as ButtonAddBasket } from "@/components/atoms/buttons/ButtonAddBasket"
