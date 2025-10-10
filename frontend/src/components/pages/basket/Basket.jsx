@@ -6,14 +6,15 @@ import { ButtonBack, MiniImageShadow, Load } from "@/components";
 import { useGetRequestAuth, useAuthPost } from "@/hooks";
 
 const Basket = () => {
-  const { data, loading, error } = useGetRequestAuth("http://localhost:8000/core/api/Basket");
-  const removeItemRequest = useAuthPost("http://localhost:8000/core/api/Basket/remove_item/");
-  console.log(data);
+  const { data, loading, error } = useGetRequestAuth("http://localhost:8000/core/api/Basket/");
+  const { delete: removeItem, loading: removeLoading } = useAuthPost("http://localhost:8000/core/api/Basket/");
 
-  const removeItem = async (productId) => {
-    const result = await removeItemRequest.post({ product: productId });
-    if (result?.message) {
-      console.log("Удалено:", result.message);
+  const removeProduct = async (basketItemId) => {
+    try {
+      await removeItem(basketItemId); // Передаем ID элемента корзины
+      console.log("Товар удален из корзины");
+    } catch (error) {
+      console.error("Ошибка при удалении:", error);
     }
   };
 
@@ -32,35 +33,41 @@ const Basket = () => {
       <MiniImageShadow />
 
       {/* Список товаров */}
-      {data.map((value, index) => (
-        <div key={index} className="flex flex-row justify-between items-center border-b border-base-300">
+      {data?.map((item) => (
+        <div key={item.id} className="flex flex-row justify-between items-center border-b border-base-300 p-4">
           {/* Информация о товаре */}
           <div className="flex flex-row justify-start items-center w-1/3">
             <img
-              src={value.photos[0].image}
-              className="w-16 h-16 m-4"
-              alt={value.product_name}
+              src={item.product?.photos?.[0]?.image || item.photos?.[0]?.image}
+              className="w-16 h-16 m-4 object-cover"
+              alt={item.product_name || item.product?.name}
             />
             <div className="font-medium text-lg">
-              {value.product_name}
+              {item.product_name || item.product?.name}
             </div>
           </div>
 
           {/* Управление количеством */}
-          <form className="flex justify-center items-center">
+          <div className="flex justify-center items-center">
+            {/* Удаление товара */}
             <div className="mr-4">
-            <RxCross2 className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer" />
+              <RxCross2
+                onClick={() => removeProduct(item.id)} // Используем item.id (ID элемента корзины)
+                disabled={removeLoading}
+                className={`bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer transition-all ${removeLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary/80'
+                  }`}
+              />
             </div>
-            <RxPlus className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer" />
-            <div className="text-center w-10 h-8 border border-gray-300 m-4 flex items-center justify-center">
-              {value.quantity}
+            <RxPlus className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer hover:bg-primary/80 transition-all" />
+            <div className="text-center w-10 h-8 border border-base-content m-4 flex items-center justify-center">
+              {item.quantity}
             </div>
-            <RxMinus className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer" />
-          </form>
+            <RxMinus className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer hover:bg-primary/80 transition-all" />
+          </div>
 
           {/* Цена */}
           <div className="flex flex-row items-center text-xl">
-            {value.product_price}
+            {item.product_price || item.product?.price}
             <BiRuble />
           </div>
         </div>
