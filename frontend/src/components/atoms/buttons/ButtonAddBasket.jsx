@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react";
-import { useAuthPost } from "@/hooks";
-import { useGetRequestAuth } from "@/hooks";
+import { useGetRequestAuth, useRequestPostAuth } from "@/hooks";
 import { NavLink } from "react-router-dom";
 
 const ButtonAddBasket = ({ productId }) => {
   const [isStatusBasket, setStatusBasket] = useState(false);
-  const { post, loading, error, data } = useAuthPost("http://127.0.0.1:8000/core/api/Basket/");
-  const basket = useGetRequestAuth("http://127.0.0.1:8000/core/api/Basket/");
+  const dataPostBasket = useRequestPostAuth("http://127.0.0.1:8000/core/api/Basket/");
+  const dataGetBasket = useGetRequestAuth("http://127.0.0.1:8000/core/api/Basket/");
 
   useEffect(() => {
-    if (!basket.loading && basket.data) {
-      // Проверяем, что basket.data существует и является массивом
-      const foundObject = basket.data.find(item => item.id === productId);
+    if (!dataGetBasket.loading && dataGetBasket.data) {
+      const foundObject = dataGetBasket.data.find(item => item.product === productId);
 
-      // Сначала проверяем, что объект найден, потом сравниваем id
       if (foundObject) {
         setStatusBasket(true);
       } else {
         setStatusBasket(false);
       }
     }
-  }, [basket.data, basket.loading, productId]);
+  }, [dataGetBasket.data, dataGetBasket.loading, productId]);
 
   const handleClick = async () => {
     try {
-      await post({
+      await dataPostBasket.post({
         product: productId,
         quantity: 1,
       });
@@ -48,13 +45,13 @@ const ButtonAddBasket = ({ productId }) => {
   ) : (
     <button
       onClick={handleClick}
-      disabled={loading}
+      disabled={dataPostBasket.loading}
       className="relative py-2 uppercase text-lg font-normal w-full 
                 text-center text-primary border border-primary 
                 cursor-pointer hover:bg-primary/20 transition-all
                 rounded-field disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {loading ? "ДОБАВЛЕНИЕ..." : "ДОБАВИТЬ В КОРЗИНУ"}
+      {dataPostBasket.loading ? "ДОБАВЛЕНИЕ..." : "ДОБАВИТЬ В КОРЗИНУ"}
     </button>
   );
 };

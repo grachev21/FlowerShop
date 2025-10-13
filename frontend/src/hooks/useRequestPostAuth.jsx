@@ -1,40 +1,47 @@
-// src/hooks/useAuthPost.jsx
+// src/hooks/useRequestPostAuth.jsx
 import { useState } from "react";
 
-const useAuthPost = (baseUrl) => {
+const useRequestPostAuth = (baseUrl) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const request = async (method, url, body = null) => {
+  const post = async (body) => {
     setLoading(true);
     setError(null);
 
     try {
       const token = localStorage.getItem("token");
-      console.log(token)
+      console.log("Request body:", body);
 
-      const response = await fetch(url, {
-        method: method,
+      const response = await fetch(baseUrl, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Token ${token}`
         },
-        body: body ? JSON.stringify(body) : null
+        body: JSON.stringify(body) // ✅ FIXED: Convert to JSON string
       });
 
+      console.log("Response status:", response.status);
+
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        // Get detailed error message
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
+        throw new Error(`Error: ${response.status} - ${errorText}`);
       }
 
       if (response.status !== 204) {
         const result = await response.json();
         setData(result);
+        console.log("✅ Success response:", result);
         return result;
       }
 
       return { success: true };
     } catch (err) {
+      console.error("Request error:", err);
       setError(err.message);
       throw err;
     } finally {
@@ -42,23 +49,12 @@ const useAuthPost = (baseUrl) => {
     }
   };
 
-  const post = (body, endpoint = "") => {
-    const url = endpoint ? `${baseUrl}${endpoint}` : baseUrl;
-    return request("POST", url, body);
-  };
-
-  const deleteRequest = (id) => {
-    const url = `${baseUrl}${id}/`;
-    return request("DELETE", url);
-  };
-
   return {
     post,
-    delete: deleteRequest,
     loading,
     error,
     data
   };
 };
 
-export default useAuthPost;
+export default useRequestPostAuth;
