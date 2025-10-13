@@ -1,16 +1,15 @@
 import { RxPlus } from "react-icons/rx";
 import { RxMinus } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 import { BiRuble } from "react-icons/bi";
 import { ButtonBack, MiniImageShadow, Load } from "@/components";
-import { useGetRequestAuth, useRequestCustomEndpoint } from "@/hooks";
-
-import RemoveButton from "./RemoveButton";
-
+import { useGetRequestAuth, useRequestDeleteAuth, useRequestCustomEndpoint } from "@/hooks";
 import { useState, useEffect } from "react";
 
 const Basket = () => {
   const dataGetBasket = useGetRequestAuth("http://localhost:8000/core/api/Basket/");
-  const dataCustomEndpoint = useRequestCustomEndpoint("http://localhost:8000/core/api/Basket/minus_product/");
+  const dataDeleteBasket = useRequestDeleteAuth("http://localhost:8000/core/api/Basket/");
+  const dataCustomEndpoint = useRequestCustomEndpoint("http://localhost:8000/core/api/Basket/plus_minus_product/");
   const [basketItems, setBasketItems] = useState([]); // Локальное состояние для товаров
 
   // Синхронизируем локальное состояние с данными из API
@@ -20,7 +19,22 @@ const Basket = () => {
     }
   }, [dataGetBasket.data]);
 
+  const removeProduct = async (basketItemId) => {
+    try {
+      await dataDeleteBasket.delete(basketItemId);
 
+      setBasketItems(prevItems => prevItems.filter(item => item.id !== basketItemId));
+
+      console.log("Товар удален, список обновлен");
+
+    } catch (err) {
+      console.error("Ошибка при удалении товара:", err);
+    }
+  };
+
+  const increaseQuantity = async (basketItemId) => {
+    console.log("Увеличить количество для:", basketItemId);
+  };
 
   // MINUS
   const minusProduct = async (productId, basketItemId, currentQuantity) => {
@@ -104,7 +118,15 @@ const Basket = () => {
             {/* Управление количеством */}
             <div className="flex justify-center items-center">
               {/* Удаление товара */}
-              <RemoveButton id={item.id} setBasketItems={setBasketItems} />
+              <div className="mr-4">
+                <button
+                  onClick={() => removeProduct(item.id)}
+                  disabled={dataDeleteBasket.loading}
+                  className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 transition-all hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                >
+                  <RxCross2 />
+                </button>
+              </div>
 
               {/* Увеличение количества */}
               <button

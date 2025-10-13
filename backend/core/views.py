@@ -65,7 +65,7 @@ class BasketSet(viewsets.ModelViewSet):
             basket_item.save()
 
     @action(detail=False, methods=["post"])
-    def minus_product(self, request):
+    def plus_minus_product(self, request):
         """Decrease quantity or remove item from cart"""
         # Get product ID from request data
         # Example: {"product": 123}
@@ -84,29 +84,33 @@ class BasketSet(viewsets.ModelViewSet):
             # Find the basket item for current user and product
             # Uses unique_together constraint from Basket model
             item = Basket.objects.get(user=request.user, product_id=product_id)
+            # Handle quantity decrease or removal
+            if flag == "minus":
+                if item.quantity > 1:
+                    item.quantity -= 1
+                    item.save()
+                    return Response(
+                        {"message": f"Quantity decreased to {item.quantity}"},
+                        status=status.HTTP_200_OK,
+                    )
+                else:
+                    # If quantity is 1, remove the item completely from basket
+                    item.delete()
+                    return Response(
+                        {"message": "Product removed from cart"},
+                        status=status.HTTP_200_OK
+                    )
+            if flag == "plus":
+                item.quantity += 1
+                item.save()
+                return Response(
+                    {"message": f"Quantity decreased to {item.quantity}"},
+                    status=status.HTTP_200_OK,
+                )
+
         except Basket.DoesNotExist:
             # Return error if product not found in user's basket
             return Response(
                 {"error": "Product not found"},
                 status=status.HTTP_404_NOT_FOUND
             )
-
-        # Handle quantity decrease or removal
-        if item.quantity > 1:
-            if flag == "minus":
-                item.quantity -= 1
-            if flag == "plus":
-                item.quantity += 1
-
-            item.save()
-            return Response(
-                {"message": f"Quantity decreased to {item.quantity}"},
-                status=status.HTTP_200_OK,
-            )
-
-        # If quantity is 1, remove the item completely from basket
-        # item.delete()
-        return Response(
-            {"message": "Product removed from cart"},
-            status=status.HTTP_200_OK
-        )

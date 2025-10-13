@@ -11,7 +11,7 @@ export { default as Paragraph } from "@/components/atoms/text/Paragraph";
 export { default as MiniImageShadow } from "@/components/atoms/images/MiniImageShadow";
 export { default as ButtonBasket } from "@/components/atoms/buttons/ButtonBasket";
 export { default as ButtonBack } from "@/components/atoms/buttons/ButtonBack";
-export { default as ButtonAddBasket } from "@/components/atoms/buttons/ButtonAddBasket"
+export { default as ButtonAddBasket } from "@/components/atoms/buttons/ButtonAddBasket";
 
 // moleculs
 export { default as CardITB } from "@/components/molecules/CardITB";
@@ -38,3 +38,4 @@ export { default as Home } from "./pages/home/Home";
 export { default as LoginAndRegister } from "./pages/loginandregister/LoginAndRegister";
 export { default as Product } from "./pages/product/Product";
 export { default as Basket } from "@/components/pages/basket/Basket";
+export { default as Order } from "@/components/pages/order/Order";

@@ -1,16 +1,14 @@
 import { RxCross2 } from "react-icons/rx";
 import { useRequestDeleteAuth } from "@/hooks";
 
-
-const RemoveButton = ({ id, setBasketItems }) => {
+const RemoveButton = ({ id, onRemove }) => {
   const dataDeleteBasket = useRequestDeleteAuth("http://localhost:8000/core/api/Basket/");
 
   const removeProduct = async (basketItemId) => {
     try {
       await dataDeleteBasket.delete(basketItemId);
-      setBasketItems(prevItems => prevItems.filter(() => id !== basketItemId));
       console.log("Товар удален, список обновлен");
-
+      onRemove(basketItemId); // Вызываем callback после успешного удаления
     } catch (err) {
       console.error("Ошибка при удалении товара:", err);
     }
