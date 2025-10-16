@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Footer, Header, Home, Catalog, LoginAndRegister, Product, Basket } from "@/components";
+import { Footer, Header, Home, Catalog, LoginAndRegister, Product, Basket, Order } from "@/components";
 import "@/styles/styles.css";
 
 
@@ -15,6 +15,7 @@ const App = () => {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/productCard/:id" element={<Product />} />
             <Route path="/basket" element={<Basket />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </div>
         <Footer />

@@ -1,9 +1,20 @@
-const Order = () => {
+import { ButtonBack, MiniImageShadow } from "@/components";
+
+const Basket = () => {
   return (
-    <main>
+    <div className="flex flex-col">
+      <div className="flex flex-col items-start w-full box-border">
+        <ButtonBack content={"Назад"} />
+        <div className="font-normal text-2xl mt-4 mb-2">
+          Заказы
+        </div>
+      </div>
 
-    </main>
-  )
+      <MiniImageShadow />
 
-}
-export default Order;
+    </div>
+  );
+};
+
+export default Basket;
+

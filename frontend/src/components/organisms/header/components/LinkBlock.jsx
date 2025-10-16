@@ -6,7 +6,7 @@ const LinkBlock = ({ menu, isAuthenticated }) => {
 
   return (
     <div className="hidden lg:flex flex-row">
-      {menu.slice(0, 3).map((item, index) => (
+      {menu.slice(0, 4).map((item, index) => (
         <NavLink
           key={index}
           to={item.link}

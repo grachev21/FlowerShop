@@ -1,10 +1,12 @@
-import { RxPlus } from "react-icons/rx";
-import { RxMinus } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
 import { BiRuble } from "react-icons/bi";
 import { ButtonBack, MiniImageShadow, Load } from "@/components";
 import { useGetRequestAuth, useRequestDeleteAuth, useRequestCustomEndpoint } from "@/hooks";
 import { useState, useEffect } from "react";
+import ButtonPlus from "./ButtonPlus";
+import ButtonMinus from "./ButtonMinus";
+import ButtonDelete from "./ButtonDelete";
+
 
 const Basket = () => {
   const dataGetBasket = useGetRequestAuth("http://localhost:8000/core/api/Basket/");
@@ -37,50 +39,7 @@ const Basket = () => {
   };
 
   // MINUS
-  const minusProduct = async (productId, basketItemId, currentQuantity) => {
-    try {
-      const result = await dataCustomEndpoint.request(productId, "minus");
 
-      setBasketItems(prevItems =>
-        prevItems.map(item => {
-          if (item.id === basketItemId) {
-            if (currentQuantity > 1) {
-              return { ...item, quantity: item.quantity - 1 };
-            } else {
-              return null;
-            }
-          }
-          return item;
-        }).filter(Boolean)
-      );
-      console.log("Результат уменьшения:", result);
-    } catch (err) {
-      console.error("Ошибка при уменьшении количества:", err);
-    }
-  };
-
-  // PLUS
-  const plusProduct = async (productId, basketItemId, currentQuantity) => {
-    try {
-      const result = await dataCustomEndpoint.request(productId, "plus");
-
-      setBasketItems(prevItems =>
-        prevItems.map(item => {
-          if (item.id === basketItemId) {
-            if (currentQuantity > 1) {
-              return { ...item, quantity: item.quantity + 1 };
-            } else {
-              return null;
-            }
-          }
-          return item;
-        }).filter(Boolean)
-      );
-      console.log("Результат уменьшения:", result);
-    } catch (err) {
-      console.error("Ошибка при уменьшении количества:", err);
-    }
-  };
 
   if (dataGetBasket.loading) return <Load />;
 
@@ -129,12 +88,7 @@ const Basket = () => {
               </div>
 
               {/* Увеличение количества */}
-              <button
-                onClick={() => plusProduct(item.product, item.id, item.quantity)}
-                className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer hover:bg-primary/80 transition-all"
-              >
-                <RxPlus />
-              </button>
+              <ButtonPlus item={item} setBasketItems={setBasketItems} />
 
               {/* Отображение количества */}
               <div className="text-center w-10 h-8 border border-base-content m-4 flex items-center justify-center">
@@ -142,12 +96,8 @@ const Basket = () => {
               </div>
 
               {/* Уменьшение количества */}
-              <button
-                onClick={() => minusProduct(item.product, item.id, item.quantity)}
-                className="bg-primary text-base-100 text-xl rounded-full w-6 h-6 p-0.5 cursor-pointer hover:bg-primary/80 transition-all"
-              >
-                <RxMinus />
-              </button>
+
+              <ButtonMinus item={item} setBasketItems={setBasketItems} />
             </div>
 
             {/* Цена */}
