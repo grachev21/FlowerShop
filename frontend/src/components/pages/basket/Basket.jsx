@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import ButtonPlus from "./ButtonPlus";
 import ButtonMinus from "./ButtonMinus";
 import ButtonDelete from "./ButtonDelete";
+import Purchase from "./Purchase";
 
 const Basket = () => {
   const dataGetBasket = useGetRequestAuth("http://localhost:8000/core/api/Basket/");
@@ -17,7 +18,6 @@ const Basket = () => {
       setBasketItems(dataGetBasket.data);
     }
   }, [dataGetBasket.data]);
-
 
   const increaseQuantity = async (basketItemId) => {
     console.log("Увеличить количество для:", basketItemId);
@@ -56,7 +56,7 @@ const Basket = () => {
             {/* Quantity control */}
             <div className="flex justify-center items-center">
               {/* Deleting a product */}
-              <ButtonDelete id={item.id} />
+              <ButtonDelete id={item.id} setBasketItems={setBasketItems} />
 
               {/* Increase in quantity */}
               <ButtonPlus item={item} setBasketItems={setBasketItems} />
@@ -67,13 +67,24 @@ const Basket = () => {
               </div>
 
               {/* Decrease quantity */}
-              <ButtonMinus item={item} setBasketItems={setBasketItems} basketItemId={basketItems}/>
+              <ButtonMinus item={item} setBasketItems={setBasketItems} basketItemId={basketItems} />
             </div>
 
-            {/* Price */}
-            <div className="flex flex-row items-center text-xl">
-              {item.product_price || item.product?.price}
-              <BiRuble />
+            <div>
+              {/* Price */}
+              <div className="flex flex-row items-center text-xl">
+                {item.product_price || item.product?.price}
+                <BiRuble />
+              </div>
+              {/* Buy */}
+
+              <button
+                className="btn btn-success mt-2"
+                onClick={() => document.getElementById("my_modal_1").showModal()}
+              >
+                КУПИТЬ
+              </button>
+              <Purchase />
             </div>
           </div>
         ))

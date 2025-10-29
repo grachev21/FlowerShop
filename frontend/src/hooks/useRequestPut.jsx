@@ -6,7 +6,7 @@ const useRequestPutAuth = (baseUrl) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const request = async (body, id = null) => {
+  const request = async ({ body, id = null }) => {
     setLoading(true);
     setError(null);
     setData(null);

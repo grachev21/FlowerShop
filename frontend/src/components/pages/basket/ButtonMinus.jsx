@@ -19,7 +19,7 @@ const ButtonMinus = ({ item, setBasketItems, basketItemId }) => {
       if (product["quantity"] > 1) {
         // Call a hook
         product["quantity"] -= 1;
-        const result = await requestPut.request(product, product.id);
+        const result = await requestPut.request({ body: product, id: product.id });
 
         // Updating the list on the cart page
         setBasketItems((prevItems) =>

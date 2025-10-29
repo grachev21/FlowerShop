@@ -8,7 +8,7 @@ const ButtonPlus = ({ item, setBasketItems, basketItemId }) => {
     try {
       // Call a hook
       product["quantity"] += 1;
-      const result = await requestPut.request(product, product.id);
+      const result = await requestPut.request({ body: product, id: product.id });
 
       // Updating the list on the cart page
       setBasketItems((prevItems) =>

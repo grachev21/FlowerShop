@@ -1,23 +1,26 @@
 from django.contrib import admin
 
-from .models import (
-    Basket,
-    Category,
-    Photo,
-    ProductCard,
-    TypeProduct,
-    CustomUser
-)
+from .models import Basket, Order, Category, Photo, ProductCard, TypeProduct, CustomUser
 
 
-# Регистрируем модель Cart в админ-панели с использованием
-# декоратора @admin.register
 @admin.register(Basket)
 class CartAdmin(admin.ModelAdmin):
-    # Указываем, какие поля будут отображаться в списке объектов модели Cart
     list_display = ("user", "product", "quantity", "added_at")
+    search_fields = ("user",)
 
-    # Указываем, по каким полям можно выполнять поиск в админ-панели
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "product",
+        "address",
+        "city",
+        "country",
+        "updated",
+        "status",
+        "paid",
+    )
     search_fields = ("user",)
 
 
@@ -26,7 +29,6 @@ class CartAdmin(admin.ModelAdmin):
 class ProductPhotoInline(admin.TabularInline):
     # Указываем модель, с которой связан inline
     model = Photo
-
     # Указываем количество дополнительных пустых форм для добавления фотографий
     extra = 3
 
