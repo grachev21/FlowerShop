@@ -1,7 +1,17 @@
-const Purchase = () => {
+import { BiRuble } from "react-icons/bi";
+import { useState, useRef } from "react";
+
+const Purchase = ({ product }) => {
+  const [selectedCountry, setSelectedCountry] = useState("");
+
+  const modalRef = useRef(null);
+
+  const handleOpenModal = () => {
+    modalRef.current?.showModal();
+  };
   return (
     <main>
-      <dialog id="my_modal_1" className="modal">
+      <dialog ref={modalRef} className="modal">
         <div className="modal-box">
           <form action="" method="post">
             <div className="space-y-4">
@@ -20,13 +30,17 @@ const Purchase = () => {
                 <label className="label">
                   <span className="label-text">Страна</span>
                 </label>
-                <select className="select select-bordered w-full">
-                  <option disabled selected>
+                <select
+                  className="select select-bordered w-full"
+                  value={selectedCountry}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                >
+                  <option value="" disabled>
                     Выберите страну
                   </option>
-                  <option>Россия</option>
-                  <option>Казахстан</option>
-                  <option>Беларусь</option>
+                  <option value="Россия">Россия</option>
+                  <option value="Казахстан">Казахстан</option>
+                  <option value="Беларусь">Беларусь</option>
                 </select>
               </div>
 
@@ -70,16 +84,41 @@ const Purchase = () => {
                   <input type="text" placeholder="42" className="input input-bordered w-full" />
                 </div>
               </div>
+
+              {/* Product */}
+              <div className="stats shadow w-full">
+                <div className="stat">
+                  <div className="stat-figure text-secondary">
+                    <div className="avatar">
+                      <div className="w-16 rounded-b-lg">
+                        <img src={product.photos[0].image} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center">
+                    <div className="stat-value flex-col">{product.product_price}</div>
+                    <BiRuble className="text-xl" />
+                  </div>
+                  <div className="stat-desc text-secondary">Категория - {product.product.category.name}</div>
+                  <div className="stat-title">Название - {product.product_name}</div>
+                </div>
+              </div>
             </div>
           </form>
           <div className="modal-action">
+            <button className="btn btn-primary mr-2">Оплатить</button>
             <form method="dialog">
-              <button className="btn">Close</button>
+              <button className="btn btn-secondary">Закрыть</button>
             </form>
           </div>
         </div>
       </dialog>
+
+      <button className="btn btn-success mt-2" onClick={handleOpenModal}>
+        КУПИТЬ
+      </button>
     </main>
   );
 };
+
 export default Purchase;

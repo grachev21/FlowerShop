@@ -13,6 +13,7 @@ const ButtonMinus = ({ item, setBasketItems, basketItemId }) => {
       setShowButton(true);
     }
   }, [basketItemId]);
+
   const minusProduct = async (product) => {
     try {
       // Subtract the amount before sending it to the hook
@@ -21,6 +22,7 @@ const ButtonMinus = ({ item, setBasketItems, basketItemId }) => {
         product["quantity"] -= 1;
         const result = await requestPut.request({ body: product, id: product.id });
 
+        console.log(result);
         // Updating the list on the cart page
         setBasketItems((prevItems) =>
           prevItems

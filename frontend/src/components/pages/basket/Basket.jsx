@@ -1,6 +1,6 @@
 import { BiRuble } from "react-icons/bi";
 import { ButtonBack, MiniImageShadow, Load } from "@/components";
-import { useGetRequestAuth, useRequestDeleteAuth, useRequestCustomEndpoint } from "@/hooks";
+import { useGetRequestAuth } from "@/hooks";
 import { useState, useEffect } from "react";
 import ButtonPlus from "./ButtonPlus";
 import ButtonMinus from "./ButtonMinus";
@@ -9,25 +9,29 @@ import Purchase from "./Purchase";
 
 const Basket = () => {
   const dataGetBasket = useGetRequestAuth("http://localhost:8000/core/api/Basket/");
-  const dataCustomEndpoint = useRequestCustomEndpoint("http://localhost:8000/core/api/Basket/plus_minus_product/");
-  const [basketItems, setBasketItems] = useState([]); // Локальное состояние для товаров
+  const [isBasketItems, setBasketItems] = useState([]); // Локальное состояние для товаров
+  const [isTrigger, setTrigger] = useState(0);
 
   // Синхронизируем локальное состояние с данными из API
   useEffect(() => {
     if (dataGetBasket.data) {
+      console.log("render");
       setBasketItems(dataGetBasket.data);
     }
-  }, [dataGetBasket.data]);
-
-  const increaseQuantity = async (basketItemId) => {
-    console.log("Увеличить количество для:", basketItemId);
-  };
+  }, [dataGetBasket.data, isTrigger]);
 
   // MINUS
   if (dataGetBasket.loading) return <Load />;
 
+  const triggerEffect = () => {
+    setTrigger((prev) => prev + 1);
+  };
+
   return (
     <div className="flex flex-col">
+      <button onClick={triggerEffect} className="btn">
+        Button
+      </button>
       {/* Верхний блок */}
       <div className="flex flex-col items-start w-full box-border">
         <ButtonBack content={"Назад"} />
@@ -36,9 +40,9 @@ const Basket = () => {
 
       <MiniImageShadow />
 
-      {/* Список товаров - используем локальное состояние basketItems */}
-      {basketItems.length > 0 ? (
-        basketItems.map((item) => (
+      {/* Список товаров - используем локальное состояние isBasketItems */}
+      {isBasketItems.length > 0 ? (
+        isBasketItems.map((item) => (
           <div key={item.id} className="flex flex-row justify-between items-center border-b border-base-300 p-4">
             {/* Информация о товаре */}
             <div className="flex flex-row justify-start items-center w-1/3">
@@ -52,39 +56,27 @@ const Basket = () => {
               />
               <div className="font-medium text-lg">{item.product_name || item.product?.name}</div>
             </div>
-
             {/* Quantity control */}
             <div className="flex justify-center items-center">
               {/* Deleting a product */}
               <ButtonDelete id={item.id} setBasketItems={setBasketItems} />
-
               {/* Increase in quantity */}
               <ButtonPlus item={item} setBasketItems={setBasketItems} />
-
               {/* Display quantity */}
               <div className="text-center w-10 h-8 border border-base-content m-4 flex items-center justify-center">
                 {item.quantity}
               </div>
-
               {/* Decrease quantity */}
-              <ButtonMinus item={item} setBasketItems={setBasketItems} basketItemId={basketItems} />
+              <ButtonMinus item={item} setBasketItems={setBasketItems} basketItemId={isBasketItems} />
             </div>
-
             <div>
               {/* Price */}
               <div className="flex flex-row items-center text-xl">
-                {item.product_price || item.product?.price}
+                {item.total_price}
                 <BiRuble />
               </div>
               {/* Buy */}
-
-              <button
-                className="btn btn-success mt-2"
-                onClick={() => document.getElementById("my_modal_1").showModal()}
-              >
-                КУПИТЬ
-              </button>
-              <Purchase />
+              <Purchase product={item} />
             </div>
           </div>
         ))
