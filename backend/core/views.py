@@ -6,7 +6,7 @@ from .models import Category, ProductCard, TypeProduct, Basket
 from .serializers import (
             CategorySerializer, ProductCardSerializer, 
             TypeProductSerializer, BasketPostSerializer, 
-            BasketGetSerializer
+            BasketGetSerializer, BasketPutSerializer
     )
 
 
@@ -50,13 +50,13 @@ class BasketSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         method = self.request.method
-        print(method, "<- Type method")
-
+        print(method, "<--")
         
         if method == "POST": 
-            return BasketPostSerializer 
+            return BasketPutSerializer 
         elif method in ["PUT"]:
-            return BasketUpdateSerializer  
+            print("puuuut")
+            return BasketPutSerializer 
         else:  
             return BasketGetSerializer 
 
@@ -75,7 +75,7 @@ class BasketSet(viewsets.ModelViewSet):
             basket_item.quantity += data.get("quantity", 1)
             basket_item.save()
 
-        output_data = BasketListSerializer(basket_item).data
+        output_data = BasketPostSerializer(basket_item).data
         return Response(output_data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
 
 

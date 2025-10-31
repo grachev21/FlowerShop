@@ -37,13 +37,19 @@ class BasketPostSerializer(serializers.ModelSerializer):
         fields = ["product", "quantity"]
 
 
+class BasketPutSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Basket
+        fields = ['id', 'product', 'quantity', 'user']
+        read_only_fields = ['user']
+
+
 class BasketGetSerializer(serializers.ModelSerializer):
-    product = ProductCardSerializer(read_only=True)
     product_name = serializers.CharField(source="product.name", read_only=True)
     product_price = serializers.DecimalField(source="product.price", max_digits=10, decimal_places=2, read_only=True)
     photos = PhotoSerializer(source="product.photos", many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
-    print("basket ...")
 
     class Meta:
         model = Basket

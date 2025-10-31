@@ -99,7 +99,7 @@ const Purchase = ({ product }) => {
                     <div className="stat-value flex-col">{product.product_price}</div>
                     <BiRuble className="text-xl" />
                   </div>
-                  <div className="stat-desc text-secondary">Категория - {product.product.category.name}</div>
+                  <div className="stat-desc text-secondary">Категория - {product.product}</div>
                   <div className="stat-title">Название - {product.product_name}</div>
                 </div>
               </div>

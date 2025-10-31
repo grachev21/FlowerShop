@@ -9,7 +9,7 @@ const ButtonAddBasket = ({ productId }) => {
 
   useEffect(() => {
     if (!dataGetBasket.loading && dataGetBasket.data) {
-      const foundObject = dataGetBasket.data.find(item => item.product.id === productId);
+      const foundObject = dataGetBasket.data.find(item => item.product === productId);
 
       if (foundObject) {
         setStatusBasket(true);
