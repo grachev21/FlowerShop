@@ -6,14 +6,12 @@ const useDeleteAxios = (url) => {
   const [error, setError] = useState(null);
 
   const request = async ({ id }) => {
-    console.log(id);
     setLoading(true);
     setError(null);
 
     try {
       const token = localStorage.getItem("token");
       const fullUrl = id ? `${url}${id}/` : url;
-      console.log(fullUrl);
 
       const response = await axios.delete(fullUrl, {
         headers: {

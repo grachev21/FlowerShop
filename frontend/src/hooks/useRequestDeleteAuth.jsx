@@ -21,8 +21,6 @@ const useRequestDeleteAuth = (baseUrl) => {
         throw new Error("ID is required for deletion");
       }
 
-      console.log("Deleting item with ID:", id);
-      console.log("URL:", `${baseUrl}${id}/`);
 
       const response = await fetch(`${baseUrl}${id}/`, {
         method: "DELETE",
@@ -30,8 +28,6 @@ const useRequestDeleteAuth = (baseUrl) => {
           "Authorization": `Token ${token}`
         }
       });
-
-      console.log("Response status:", response.status);
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
@@ -41,7 +37,6 @@ const useRequestDeleteAuth = (baseUrl) => {
       const result = { success: true, message: "Item deleted successfully" };
       setData(result);
 
-      console.log("Delete successful");
       return result;
 
     } catch (err) {

@@ -30,7 +30,6 @@ const useGetIdRequest = (baseUrl, paramName, initialCategory = null) => {
       // Construct URL with category filter if provided
       const url = category ? `${baseUrl}?${paramName}_id=${category}` : baseUrl;
 
-      console.log("API Request URL:", url); // Debug logging
 
       // Execute GET request using axios
       const response = await axios.get(url);

@@ -14,7 +14,7 @@ const Catalog = () => {
   const getRequest = useGetRequest("http://127.0.0.1:8000/core/api/ProductCard/");
   // Get a product by category
   const getIdRequest = useGetIdRequest(
-    "http://127.0.0.1:8000/core/api/ProductCard/", // baseUrl
+    "http://127.0.0.1:8000/core/api/ProductCard/",
     isTypeRequest, // paramName
     null // initialCategory (опционально)
   );

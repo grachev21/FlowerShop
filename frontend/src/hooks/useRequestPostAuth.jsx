@@ -12,7 +12,6 @@ const useRequestPostAuth = (baseUrl) => {
 
     try {
       const token = localStorage.getItem("token");
-      console.log("Request body:", body);
 
       const response = await fetch(baseUrl, {
         method: "POST",
@@ -23,7 +22,6 @@ const useRequestPostAuth = (baseUrl) => {
         body: JSON.stringify(body) // ✅ FIXED: Convert to JSON string
       });
 
-      console.log("Response status:", response.status);
 
       if (!response.ok) {
         // Get detailed error message
@@ -35,7 +33,6 @@ const useRequestPostAuth = (baseUrl) => {
       if (response.status !== 204) {
         const result = await response.json();
         setData(result);
-        console.log("✅ Success response:", result);
         return result;
       }
 

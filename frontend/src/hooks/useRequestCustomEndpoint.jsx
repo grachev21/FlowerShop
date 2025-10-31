@@ -20,8 +20,6 @@ const useRequestCutsomEndpoint = (baseUrl) => {
         throw new Error("Product ID is required");
       }
 
-      console.log("Decreasing quantity for product:", productId);
-
       const response = await fetch(baseUrl, {
         method: "POST",
         headers: {
@@ -34,7 +32,6 @@ const useRequestCutsomEndpoint = (baseUrl) => {
         })
       });
 
-      console.log("Response status:", response.status);
 
       if (!response.ok) {
         // Получаем детальную ошибку от сервера
@@ -45,7 +42,6 @@ const useRequestCutsomEndpoint = (baseUrl) => {
       const result = await response.json();
       setData(result);
 
-      console.log("Minus product successful:", result);
       return result;
 
     } catch (err) {

@@ -85,8 +85,11 @@ class Basket(models.Model):
     def __str__(self):
         return f"{self.user.email} - {self.product.name}"
 
+    @property
     def total_price(self):
-        return self.product.price * self.quantity
+        if hasattr(self, 'product') and self.product:
+            return self.product.price * self.quantity
+        return 0  
 
     class Meta:
         verbose_name = "Корзина"

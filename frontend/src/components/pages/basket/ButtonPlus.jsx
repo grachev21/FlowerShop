@@ -1,44 +1,30 @@
-import { useRequestPut } from "@/hooks";
+// components/ButtonPlus.jsx
 import { RxPlus } from "react-icons/rx";
+import { useBasketActions } from "@/hooks/useBasketAction";
 
-const ButtonPlus = ({ item, setBasketItems, basketItemId }) => {
-  const requestPut = useRequestPut("http://localhost:8000/core/api/Basket/");
+const ButtonPlus = ({ item, setBasketItems }) => {
+  const { updateBasketItem } = useBasketActions();
 
-  const plusProduct = async (product) => {
+  const handlePlus = async () => {
     try {
-      // Call a hook
-      product["quantity"] += 1;
-      const result = await requestPut.request({ body: product, id: product.id });
-
-      // Updating the list on the cart page
-      setBasketItems((prevItems) =>
-        prevItems
-          .map((item) => {
-            if (item.id === basketItemId) {
-              if (currentQuantity > 1) {
-                return { ...item, quantity: item.quantity + 1 };
-              } else {
-                return null;
-              }
-            }
-            return item;
-          })
-          .filter(Boolean)
-      );
+      // Обновляем количество на сервере и в состоянии
+      await updateBasketItem(item, { quantity: item.quantity + 1 }, setBasketItems);
     } catch (err) {
-      console.error("Error when decreasing quantity:", err);
+      console.error("Error increasing quantity:", err);
     }
   };
 
   return (
     <button
-      onClick={() => plusProduct(item)}
+      onClick={handlePlus}
       className="bg-primary text-base-100 text-xl 
         rounded-full w-6 h-6 p-0.5 cursor-pointer 
-        hover:bg-primary/80 transition-all"
+        hover:bg-primary/80 transition-all flex items-center justify-center"
+      title="Увеличить количество"
     >
       <RxPlus />
     </button>
   );
 };
+
 export default ButtonPlus;

@@ -4,11 +4,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Category, ProductCard, TypeProduct, Basket
 from .serializers import (
-    CategorySerializer,
-    ProductCardSerializer,
-    TypeProductSerializer,
-    BasketSerializer,
-)
+            CategorySerializer, ProductCardSerializer, 
+            TypeProductSerializer, BasketPostSerializer, 
+            BasketGetSerializer
+    )
+
+
 
 
 class TypeProductSet(viewsets.ReadOnlyModelViewSet):
@@ -40,77 +41,50 @@ class ProductCardSet(viewsets.ReadOnlyModelViewSet):
 
 
 class BasketSet(viewsets.ModelViewSet):
-    """ViewSet for managing user shopping basket"""
-    serializer_class = BasketSerializer
+    queryset = Basket.objects.all()
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """Get only current user's basket items"""
+        # Get only current user's basket items
         return Basket.objects.filter(user=self.request.user)
 
-    def perform_create(self, serializer):
-        """Create or update basket item on POST"""
-        product = serializer.validated_data["product"]
-        quantity = serializer.validated_data.get("quantity", 1)
+    def get_serializer_class(self):
+        method = self.request.method
+        print(method, "<- Type method")
 
-        # Get or create basket item, update quantity if exists
+        
+        if method == "POST": 
+            return BasketPostSerializer 
+        elif method in ["PUT"]:
+            return BasketUpdateSerializer  
+        else:  
+            return BasketGetSerializer 
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        data = serializer.validated_data
         basket_item, created = Basket.objects.get_or_create(
-            user=self.request.user,
-            product=product,
-            defaults={"quantity": quantity}
+            user=request.user,
+            product=data["product"],
+            defaults={"quantity": data.get("quantity", 1)}
         )
 
         if not created:
-            basket_item.quantity += quantity
+            basket_item.quantity += data.get("quantity", 1)
             basket_item.save()
 
-    @action(detail=False, methods=["post"])
-    def plus_minus_product(self, request):
-        """Decrease quantity or remove item from cart"""
-        # Get product ID from request data
-        # Example: {"product": 123}
-        flag = request.data.get("flag")
-        print(flag)
-        product_id = request.data.get("product")
+        output_data = BasketListSerializer(basket_item).data
+        return Response(output_data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
 
-        # Check if product ID was provided
-        if not product_id:
-            return Response(
-                {"error": "Product ID required"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
 
-        try:
-            # Find the basket item for current user and product
-            # Uses unique_together constraint from Basket model
-            item = Basket.objects.get(user=request.user, product_id=product_id)
-            # Handle quantity decrease or removal
-            if flag == "minus":
-                if item.quantity > 1:
-                    item.quantity -= 1
-                    item.save()
-                    return Response(
-                        {"message": f"Quantity decreased to {item.quantity}"},
-                        status=status.HTTP_200_OK,
-                    )
-                else:
-                    # If quantity is 1, remove the item completely from basket
-                    item.delete()
-                    return Response(
-                        {"message": "Product removed from cart"},
-                        status=status.HTTP_200_OK
-                    )
-            if flag == "plus":
-                item.quantity += 1
-                item.save()
-                return Response(
-                    {"message": f"Quantity decreased to {item.quantity}"},
-                    status=status.HTTP_200_OK,
-                )
 
-        except Basket.DoesNotExist:
-            # Return error if product not found in user's basket
-            return Response(
-                {"error": "Product not found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
+# list	GET	/api/basket/	Получить список всех объектов
+# create	POST	/api/basket/	Создать новый объект
+# retrieve	GET	/api/basket/1/	Получить один конкретный объект
+# update	PUT	/api/basket/1/	Полностью обновить объект
+# partial_update	PATCH	/api/basket/1/	Частично обновить объект
+# destroy	DELETE	/api/basket/1/	Удалить объект
+
+

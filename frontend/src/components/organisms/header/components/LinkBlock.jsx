@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import { useLogout } from "@/hooks";
 
 const LinkBlock = ({ menu, isAuthenticated }) => {
-  console.log(isAuthenticated, "isAuthenticated");
   const { logout } = useLogout();
 
   return (

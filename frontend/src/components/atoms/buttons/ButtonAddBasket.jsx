@@ -9,7 +9,7 @@ const ButtonAddBasket = ({ productId }) => {
 
   useEffect(() => {
     if (!dataGetBasket.loading && dataGetBasket.data) {
-      const foundObject = dataGetBasket.data.find(item => item.product === productId);
+      const foundObject = dataGetBasket.data.find(item => item.product.id === productId);
 
       if (foundObject) {
         setStatusBasket(true);
@@ -26,13 +26,16 @@ const ButtonAddBasket = ({ productId }) => {
         quantity: 1,
       });
       // После успешного добавления обновляем статус
+      console.log(dataPostBasket.data)
       setStatusBasket(true);
+      console.log("Product added to cart")
     } catch (err) {
       console.error("Ошибка при добавлении в корзину:", err);
     }
   };
 
   return isStatusBasket ? (
+    // Переход в корзину
     <NavLink
       to={"/Basket/"}
       className="relative py-2 uppercase text-lg font-normal w-full 
