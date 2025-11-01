@@ -8,6 +8,6 @@ export { default as useLogout } from "./useLogout";
 export { default as useRegister } from "./useRegister";
 export { default as useWindowWidth } from "./useWindowWidth";
 export { default as useGetIdRequest } from "@/hooks/useGetIdRequest";
-export { default as useGetRequestAuth } from "@/hooks/useGetRequestAuth";
+export { default as useGetRequestToken} from "@/hooks/useGetRequestToken";
 export { default as useRequestPut } from "@/hooks/useRequestPut";
 export { default as useRequestDelete } from "@/hooks/useRequestDelete";

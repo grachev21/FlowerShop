@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useGetRequestAuth, useRequestPostAuth } from "@/hooks";
+import { useGetRequestToken, useRequestPostAuth } from "@/hooks";
 import { NavLink } from "react-router-dom";
 
 const ButtonAddBasket = ({ productId }) => {
   const [isStatusBasket, setStatusBasket] = useState(false);
   const dataPostBasket = useRequestPostAuth("http://127.0.0.1:8000/core/api/Basket/");
-  const dataGetBasket = useGetRequestAuth("http://127.0.0.1:8000/core/api/Basket/");
+  const dataGetBasket = useGetRequestToken("http://127.0.0.1:8000/core/api/Basket/");
 
   useEffect(() => {
     if (!dataGetBasket.loading && dataGetBasket.data) {

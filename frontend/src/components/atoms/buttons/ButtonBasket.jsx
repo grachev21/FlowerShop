@@ -1,12 +1,12 @@
 import { SlBasket } from "react-icons/sl";
 import { NavLink } from "react-router-dom";
-import { useGetRequestAuth } from "@/hooks";
+import { useGetRequestToken} from "@/hooks";
 import { Load } from "@/components";
 import { useState, useEffect } from "react"; // ✅ Добавить useEffect
 
 const ButtonBasket = () => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const basketData = useGetRequestAuth("http://localhost:8000/core/api/Basket");
+  const basketData = useGetRequestToken("http://localhost:8000/core/api/Basket");
 
   // Используем useEffect для вычисления суммы
   useEffect(() => {

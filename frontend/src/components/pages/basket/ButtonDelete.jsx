@@ -2,9 +2,22 @@
 import { RxCross2 } from "react-icons/rx";
 import { useBasketActions } from "@/hooks/useBasketAction";
 
+/**
+ * Product removal button
+ * @component
+ * @param {Object} props
+ * @param {Function} props.setBasketItems - Function to update the state of the cart in the render
+ * @param {Object} props.item - An object written to the isBasketItems state for rendering
+ * @param {Object} props.item.id - Product ID
+ */
 const ButtonDelete = ({ item, setBasketItems }) => {
   const { removeBasketItem } = useBasketActions();
 
+  /**
+   * Function onClick.
+   * Calls the function from hook useBasketAction function removeBasketItem and sends to
+   * product id and function for updating the object in the render
+   */
   const handleRemove = async () => {
     try {
       await removeBasketItem(item.id, setBasketItems);
