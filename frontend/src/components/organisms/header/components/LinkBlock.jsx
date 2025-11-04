@@ -31,7 +31,8 @@ const LinkBlock = ({ menu, isAuthenticated }) => {
         <NavLink
           to={menu[4].link}
           className={({ isActive }) =>
-            `h-6 text-sm uppercase font-lg mx-5 mt-2 text-base-content transition-all hover:text-primary ${isActive ? "text-primary border-b border-primary" : ""
+            `h-6 text-sm uppercase font-lg mx-5 mt-2 text-base-content transition-all hover:text-primary ${
+              isActive ? "text-primary border-b border-primary" : ""
             }`
           }
         >

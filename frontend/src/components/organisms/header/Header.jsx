@@ -3,6 +3,9 @@ import { Logo, ButtonGreenPadding, ButtonHoverColor, ButtonBasket } from "@/comp
 import { useAuthCheck } from "@/hooks";
 import menu from "@/assets/menu";
 
+/**
+ * @component
+ */
 const Header = () => {
   const { isAuthenticated, loading, error } = useAuthCheck();
   return (

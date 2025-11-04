@@ -7,6 +7,7 @@ import ButtonMinus from "./ButtonMinus";
 import ButtonDelete from "./ButtonDelete";
 import Purchase from "./Purchase";
 
+
 const Basket = () => {
   const { data: basketData, loading, error } = useGetRequestToken("http://localhost:8000/core/api/Basket/");
 
@@ -50,11 +51,6 @@ const Basket = () => {
  * @param {Object} props
  * @param {Object} props.item - An object written to the isBasketItems state for rendering
  * @param {Function} props.setBasketItems - Function to update the state of the cart in the render
- * @param {number} props.item.quantity - Product quantity
- * @param {number} props.item.total_price - Total position value
- * @param {number} props.item.product_price - Unit price
- * @param {Array} props.item.photos.image - Product Photos
- * @param {string} props.item.product_name - Product name
  */
 const BasketItem = ({ item, setBasketItems }) => {
   return (

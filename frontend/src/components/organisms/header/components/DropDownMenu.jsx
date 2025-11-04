@@ -28,10 +28,7 @@ const DropDownMenu = ({ menu }) => {
           bg-base-100
           before:content-[''] before:absolute before:top-0 before:left-0 
           before:w-1.5 before:h-full before:bg-primary
-          ${isOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-          }
+          ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
         `}
       >
         {menu.map((value, index) => (
