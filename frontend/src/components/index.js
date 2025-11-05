@@ -13,7 +13,7 @@ export { default as ButtonBasket } from "@/components/atoms/buttons/ButtonBasket
 export { default as ButtonBack } from "@/components/atoms/buttons/ButtonBack";
 export { default as ButtonAddBasket } from "@/components/atoms/buttons/ButtonAddBasket";
 
-// moleculs
+// molecules
 export { default as CardITB } from "@/components/molecules/CardITB";
 export { default as CardITBP } from "@/components/molecules/CardITBP";
 export { default as ListLinks } from "@/components/molecules/ListLinks";
@@ -28,6 +28,7 @@ export { default as FramesOneThree } from "@/components/organisms/frames/FramesO
 export { default as Login } from "./organisms/login/Login";
 export { default as Register } from "./organisms/register/Register";
 export { default as ProductList } from "./organisms/product-list/ProductList";
+export { default as Buy } from "@/components/organisms/modal_window/Buy";
 
 //templates
 // export { default as Login } from "./templates/";

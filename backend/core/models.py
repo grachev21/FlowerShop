@@ -107,7 +107,7 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(
-        CustomUser, related_name="orders", on_delete=models.CASCADE
+        CustomUser, on_delete=models.CASCADE
     )
 
     product = models.ForeignKey(ProductCard, on_delete=models.CASCADE)

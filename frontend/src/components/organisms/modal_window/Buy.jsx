@@ -1,7 +1,14 @@
 import { BiRuble } from "react-icons/bi";
 import { useState, useRef } from "react";
 
-const Purchase = ({ product }) => {
+/**
+ * 
+ * @component
+ * @param {Object} props
+ * @param {Object} props.item-An object written to the isBasketItems state for rendering
+ * @param 
+ */
+const Buy = ({ product }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
 
   const modalRef = useRef(null);
@@ -121,4 +128,4 @@ const Purchase = ({ product }) => {
   );
 };
 
-export default Purchase;
+export default Buy;
