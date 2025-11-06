@@ -40,3 +40,4 @@ export { default as LoginAndRegister } from "./pages/loginandregister/LoginAndRe
 export { default as Product } from "./pages/product/Product";
 export { default as Basket } from "@/components/pages/basket/Basket";
 export { default as Order } from "@/components/pages/order/Order";
+export { default as OrderDetail } from "@/components/pages/order/OrderDetail";

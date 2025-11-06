@@ -1,6 +1,15 @@
 // src/hooks/useRequestPostAuth.jsx
 import { useState } from "react";
 
+/**
+ * Custom hook for post request with token-based authorization
+ * @param {string} baseUrl - Url for POST request
+ * @returns {Objectj} - {post, loading, error, data}
+ * @returns {function} post - Function for post request, accepts an object - (body)
+ * @returns {Array} data - Data received from the server
+ * @returns {boolean} loading - Loading state flag
+ * @returns {Error|null} error - Error object if request failed
+ */
 const useRequestPostAuth = (baseUrl) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,14 +26,12 @@ const useRequestPostAuth = (baseUrl) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Token ${token}`
+          Authorization: `Token ${token}`,
         },
-        body: JSON.stringify(body) // ✅ FIXED: Convert to JSON string
+        body: JSON.stringify(body), 
       });
 
-
       if (!response.ok) {
-        // Get detailed error message
         const errorText = await response.text();
         console.error("Server error:", errorText);
         throw new Error(`Error: ${response.status} - ${errorText}`);
@@ -50,7 +57,7 @@ const useRequestPostAuth = (baseUrl) => {
     post,
     loading,
     error,
-    data
+    data,
   };
 };
 

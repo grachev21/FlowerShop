@@ -1,16 +1,32 @@
 import { BiRuble } from "react-icons/bi";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
-/**
- * 
- * @component
- * @param {Object} props
- * @param {Object} props.item-An object written to the isBasketItems state for rendering
- * @param 
- */
 const Buy = ({ product }) => {
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [isFormData, setFormData] = useState({
+    product: "",
+    country: "",
+    city: "",
+    postal_code: "",
+    status: "",
+    paid: false,
+  });
 
+  const handleChange = (e) => {
+    // Set the state for selecting a country
+    const { name, value } = e.target;
+    // prev this is the previous state
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value, // name = key, value = value
+    }));
+  };
+
+  // LOG
+  // useState is asynchronous and therefore can track changes in state
+  // needed in useEffect
+  useEffect(() => {
+    console.log(isFormData);
+  }, [isFormData]);
   const modalRef = useRef(null);
 
   const handleOpenModal = () => {
@@ -29,7 +45,15 @@ const Buy = ({ product }) => {
                 <label className="label">
                   <span className="label-text">Почтовый индекс</span>
                 </label>
-                <input type="text" placeholder="123456" className="input input-bordered w-full" />
+                <input
+                  type="text"
+                  name="postal_code"
+                  onChange={handleChange}
+                  required
+                  value={isFormData.postal_code}
+                  placeholder="123456"
+                  className="input input-bordered w-full"
+                />
               </div>
 
               {/* Страна */}
@@ -39,8 +63,10 @@ const Buy = ({ product }) => {
                 </label>
                 <select
                   className="select select-bordered w-full"
-                  value={selectedCountry}
-                  onChange={(e) => setSelectedCountry(e.target.value)}
+                  name="country"
+                  value={isFormData.country}
+                  onChange={handleChange}
+                  required
                 >
                   <option value="" disabled>
                     Выберите страну
@@ -51,23 +77,23 @@ const Buy = ({ product }) => {
                 </select>
               </div>
 
-              {/* Регион/Область */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Регион/Область</span>
-                </label>
-                <input type="text" placeholder="Московская область" className="input input-bordered w-full" />
-              </div>
-
-              {/* Город */}
+              {/* city */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Город</span>
                 </label>
-                <input type="text" placeholder="Москва" className="input input-bordered w-full" />
+                <input
+                  type="text"
+                  required
+                  name="city"
+                  value={isFormData.city}
+                  onChange={handleChange}
+                  placeholder="Москва"
+                  className="input input-bordered w-full"
+                />
               </div>
 
-              {/* Улица */}
+              {/* address */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Улица</span>

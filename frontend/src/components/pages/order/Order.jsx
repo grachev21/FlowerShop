@@ -1,17 +1,32 @@
+import { useNavigate } from "react-router-dom";
 import { ButtonBack, MiniImageShadow, Load } from "@/components";
 import { useGetRequestToken } from "@/hooks";
 import { BiRuble } from "react-icons/bi";
 
 const Order = () => {
   const dataOrder = useGetRequestToken("http://localhost:8000/core/api/Order/");
+  const navigate = useNavigate();
 
   if (dataOrder.loading) return <Load />;
+
+  const handleOrderDetail = (order) => {
+    navigate("/orderDetail", {
+      state: {
+        order: order,
+      },
+    });
+  };
 
   return (
     <div className="flex flex-col">
       {dataOrder.data.map((item, index) => (
         <div key={index}>
-          <div className="flex flex-row justify-between items-center border-b border-base-300 p-4">
+          <div
+            onClick={() => handleOrderDetail(item)}
+            className="flex flex-row justify-between 
+              items-center border-b border-base-300 p-4 
+              cursor-pointer hover:bg-base-content/2"
+          >
             {/* Product information */}
             <div className="flex flex-row justify-start items-center w-1/3">
               <img

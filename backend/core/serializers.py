@@ -70,7 +70,7 @@ class BasketGetSerializer(serializers.ModelSerializer):
 
 
 class OrderGetSerializer(serializers.ModelSerializer):
-    product = ProductCardSerializer(read_only=True) # Нормальное отображение продукта
+    product = ProductCardSerializer(read_only=True)  # Нормальное отображение продукта
     status_display = serializers.SerializerMethodField()
 
     class Meta:
@@ -81,8 +81,10 @@ class OrderGetSerializer(serializers.ModelSerializer):
             "country",
             "city",
             "postal_code",
+            "address",
             "status_display",
             "paid",
+            "created"
         ]
         read_only_fields = ["user", "created", "updated"]
 
@@ -94,5 +96,5 @@ class OrderGetSerializer(serializers.ModelSerializer):
 class OrderPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ["id", "product", "country", "city", "postal_code", "status", "paid"]
+        fields = ["product", "country", "city", "postal_code", "status", "paid"]
         read_only_fields = ["user", "created", "updated"]

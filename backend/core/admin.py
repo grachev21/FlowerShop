@@ -12,15 +12,18 @@ class CartAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
-        "user",
-        "product",
-        "address",
-        "city",
-        "country",
-        "updated",
-        "status",
-        "paid",
-    )
+            "user",
+            "product",
+            "country",
+            "city",
+            "postal_code",
+            "street",
+            "house",
+            "apartment_office",
+            "created",
+            "status",
+            "paid",
+            )
     search_fields = ("user",)
 
 

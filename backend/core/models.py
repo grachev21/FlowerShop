@@ -73,12 +73,8 @@ class Photo(models.Model):
 
 
 class Basket(models.Model):
-    user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь"
-    )
-    product = models.ForeignKey(
-        ProductCard, on_delete=models.CASCADE, verbose_name="Товар"
-    )
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Пользователь")
+    product = models.ForeignKey(ProductCard, on_delete=models.CASCADE, verbose_name="Товар")
     quantity = models.PositiveIntegerField(verbose_name="Количество", default=1)
     added_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
@@ -87,9 +83,9 @@ class Basket(models.Model):
 
     @property
     def total_price(self):
-        if hasattr(self, 'product') and self.product:
+        if hasattr(self, "product") and self.product:
             return self.product.price * self.quantity
-        return 0  
+        return 0
 
     class Meta:
         verbose_name = "Корзина"
@@ -106,15 +102,14 @@ class Order(models.Model):
         ("cancelled", "отменено"),
     ]
 
-    user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE
-    )
-
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     product = models.ForeignKey(ProductCard, on_delete=models.CASCADE)
-    address = models.TextField()
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    street = models.CharField(max_length=200)
+    house = models.CharField(max_length=200)
+    apartment_office = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="created")
@@ -128,4 +123,3 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
-
