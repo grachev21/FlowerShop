@@ -35,7 +35,7 @@ class ProductCard(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Категория",
     )
-    typeproduct = models.ForeignKey(
+    type_product = models.ForeignKey(
         TypeProduct,
         related_name="typeProduct",
         on_delete=models.CASCADE,
