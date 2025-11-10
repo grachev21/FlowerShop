@@ -9,6 +9,7 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ("user",)
 
 
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = (
