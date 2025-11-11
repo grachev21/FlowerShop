@@ -44,7 +44,7 @@ const useGetRequestToken = (url) => {
     fetchBasket();
   }, [url]);
 
-  return { data, loading, error };
+  return { data, loading, error};
 };
 
 export default useGetRequestToken;

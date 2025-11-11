@@ -79,7 +79,7 @@ const BasketItem = ({ item, setBasketItems }) => {
         </div>
 
         {/* Component for checkout/add to order */}
-        <Buy product={item} />
+        <Buy productId={item.id} />
       </div>
     </div>
   );

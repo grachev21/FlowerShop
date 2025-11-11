@@ -22,12 +22,12 @@ class TypeProductSerializer(serializers.ModelSerializer):
 
 class ProductCardSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True, read_only=True)
-    typeproduct = TypeProductSerializer(read_only=True)
+    type_product = TypeProductSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
 
     class Meta:
         model = ProductCard
-        fields = "__all__"
+        fields = ["id", "category", "type_product", "name", "photos", "description", "price", "created_at", "updated_at"] 
 
 
 class BasketPostSerializer(serializers.ModelSerializer):

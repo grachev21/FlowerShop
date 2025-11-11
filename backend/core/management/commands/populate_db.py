@@ -53,7 +53,6 @@ class Command(BaseCommand):
         for item in DATA["products"]:
             product_obj = ProductCard.objects.get(name=item["name"])
             for photo in item["photos"]:
-                print(photo)
                 img_path = os.path.join(IMG_DIR, photo + ".jpg")
                 photo_obj = Photo(product=product_obj)
                 with open(img_path, "rb") as f:
