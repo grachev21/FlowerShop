@@ -17,9 +17,9 @@ const Login = () => {
 
   return (
     <form className="w-80" onSubmit={handleSubmit}>
-      <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
+      <Input onDataSend={(e) => setEmail(e.target.value)} placeholder={"Введите свой Email"} type={"email"} value={email} />
       <Input
-        onDataSend={(data) => setPassword(data)}
+        onDataSend={(e) => setPassword(e.target.value)}
         placeholder={"Введите пароль"}
         type={"password"}
         value={password}

@@ -10,6 +10,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const { register, loading, error, primary } = useRegister();
+  console.log(register, "register");
+  console.log(loading, "loading");
+  console.log(error, "error");
+  console.log(primary, "primary");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,15 +31,15 @@ const Register = () => {
 
   return (
     <form className="w-80" onSubmit={handleSubmit}>
-      <Input onDataSend={(data) => setEmail(data)} placeholder={"Введите свой Email"} type={"email"} value={email} />
+      <Input onDataSend={(e) => setEmail(e.target.value)} placeholder={"Введите свой Email"} type={"email"} value={email} />
       <Input
-        onDataSend={(data) => setPassword(data)}
+        onDataSend={(e) => setPassword(e.target.value)}
         placeholder={"Введите пароль"}
         type={"password"}
         value={password}
       />
       <Input
-        onDataSend={(data) => setConfirmPassword(data)}
+        onDataSend={(e) => setConfirmPassword(e.target.value)}
         placeholder={"Повторите пароль"}
         type={"password"}
         value={confirmPassword}

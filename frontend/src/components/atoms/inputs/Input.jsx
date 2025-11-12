@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Input = ({ placeholder, type, value, onDataSend }) => {
+const Input = ({ name, placeholder, type, value, onDataSend, requiredOnOff }) => {
   const [isFocused, setFocused] = useState(false);
   const hasValue = value.length > 0;
 
@@ -22,11 +22,13 @@ const Input = ({ placeholder, type, value, onDataSend }) => {
       </div>
 
       <input
+        name={name}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        onChange={(e) => onDataSend(e.target.value)}
+        onChange={(e) => onDataSend(e)}
         type={type}
         value={value}
+        required={requiredOnOff ? "required" : null}
         className="w-full h-full text-sm font-light bg-transparent outline-none"
       />
     </div>

@@ -104,6 +104,7 @@ class Order(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     product = models.ForeignKey(ProductCard, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
@@ -121,5 +122,8 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id}"
 
-    def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+    @property
+    def total_price(self):
+        if hasattr(self, "product") and self.product:
+            return self.product.price * self.quantity
+        return 0
