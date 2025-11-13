@@ -4,7 +4,7 @@ import { useState } from "react";
 /**
  * Custom hook for post request with token-based authorization
  * @param {string} baseUrl - Url for POST request
- * @returns {Objectj} - {post, loading, error, data}
+ * @returns {Object} - {post, loading, error, data}
  * @returns {function} post - Function for post request, accepts an object - (body)
  * @returns {Array} data - Data received from the server
  * @returns {boolean} loading - Loading state flag

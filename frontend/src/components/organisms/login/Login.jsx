@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, loading, error, primary, token } = useLogin();
+  const { login, loading, error, primary } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +17,12 @@ const Login = () => {
 
   return (
     <form className="w-80" onSubmit={handleSubmit}>
-      <Input onDataSend={(e) => setEmail(e.target.value)} placeholder={"Введите свой Email"} type={"email"} value={email} />
+      <Input
+        onDataSend={(e) => setEmail(e.target.value)}
+        placeholder={"Введите свой Email"}
+        type={"email"}
+        value={email}
+      />
       <Input
         onDataSend={(e) => setPassword(e.target.value)}
         placeholder={"Введите пароль"}

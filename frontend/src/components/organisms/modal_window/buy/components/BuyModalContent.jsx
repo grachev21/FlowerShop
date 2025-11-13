@@ -1,13 +1,23 @@
-import { useNavigate } from "react-router-dom";
 import { useGetRequestToken } from "@/hooks";
 import { Load, Input, Select } from "@/components";
-import { BiRuble } from "react-icons/bi";
 import { useState, useEffect } from "react";
+import ProductInfo from "./ProductInfo";
+import { useRequestPostAuth } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
 const BuyModalContent = ({ productId, onClose }) => {
-  const { data, loading, error } = useGetRequestToken("http://localhost:8000/core/api/Basket/");
   const navigate = useNavigate();
-  const product = data.find((item) => item.id === productId);
+  const {
+    post: post,
+    data: dataPost,
+    loading: loadPost,
+    error: errorPost,
+  } = useRequestPostAuth("http://127.0.0.1:8000/core/api/Order/");
+
+  const { data, loading, error } = useGetRequestToken("http://localhost:8000/core/api/Basket/");
+
+  // Добавляем проверку на существование data
+  const product = data?.find((item) => item.id === productId);
 
   const [isFormData, setFormData] = useState({
     product: "",
@@ -18,19 +28,18 @@ const BuyModalContent = ({ productId, onClose }) => {
     street: "",
     house: "",
     apartment_office: "",
-    product: "",
   });
 
   useEffect(() => {
-    console.log(isFormData);
+    console.log("Form data:", isFormData);
   }, [isFormData]);
 
   useEffect(() => {
     if (product) {
       setFormData((prev) => ({
         ...prev,
-        product: product.product,
-        quantity: product.quantity,
+        product: product.product || product.id, // Используем product.id если product.product нет
+        quantity: product.quantity || 1,
       }));
     }
   }, [product]);
@@ -43,17 +52,39 @@ const BuyModalContent = ({ productId, onClose }) => {
     }));
   };
 
-  const goLink = (id) => {
-    navigate(`/productCard/${id}`);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Важно: предотвращаем перезагрузку страницы
+
+    try {
+      await post(isFormData);
+      console.log("Order created:", dataPost);
+
+      navigate("/order/");
+
+      // Если заказ успешно создан, закрываем модальное окно
+      if (dataPost) {
+        alert("Заказ успешно создан!");
+        onClose();
+      }
+    } catch (err) {
+      console.error("Error creating order:", err);
+      console.log("Error details:", errorPost);
+    }
   };
 
+  // Показываем загрузку
   if (loading) return <Load />;
+
+  // Показываем ошибку загрузки данных
+  if (error) return <div className="text-red-500">Ошибка загрузки данных: {error.message}</div>;
+
+  // Если продукт не найден
+  if (!product) return <div className="text-red-500">Продукт не найден</div>;
 
   return (
     <dialog className="modal" open>
       <div className="modal-box">
-        {/* Ваша форма и содержимое модального окна */}
-        <form action="" method="post">
+        <form onSubmit={handleSubmit} method="POST">
           <div className="space-y-4">
             <h2 className="text-2xl font-bold">Адрес доставки</h2>
 
@@ -66,7 +97,8 @@ const BuyModalContent = ({ productId, onClose }) => {
               onDataSend={handleChange}
               requiredOnOff={true}
             />
-            {/* city */}
+
+            {/* Город */}
             <Input
               name={"city"}
               placeholder={"Город"}
@@ -86,7 +118,7 @@ const BuyModalContent = ({ productId, onClose }) => {
               onDataSend={handleChange}
             />
 
-            {/* Street */}
+            {/* Улица */}
             <Input
               name={"street"}
               placeholder={"Улица"}
@@ -97,7 +129,7 @@ const BuyModalContent = ({ productId, onClose }) => {
             />
 
             <div className="grid grid-cols-2 gap-4">
-              {/* house */}
+              {/* Дом */}
               <Input
                 name={"house"}
                 placeholder={"Дом"}
@@ -107,7 +139,7 @@ const BuyModalContent = ({ productId, onClose }) => {
                 onDataSend={handleChange}
               />
 
-              {/* apartment_office */}
+              {/* Квартира/Офис */}
               <Input
                 name={"apartment_office"}
                 placeholder={"Квартира/Офис"}
@@ -118,36 +150,30 @@ const BuyModalContent = ({ productId, onClose }) => {
               />
             </div>
 
-            <div className="stats shadow w-full">
-              <div className="stat">
-                {/* Product info */}
-                <div className="stat-figure text-secondary">
-                  <div onClick={() => goLink(product.product)} className="avatar cursor-pointer">
-                    <div className="w-16 rounded-lg">
-                      <img src={product.photos[0].image} alt={product.product_name} />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center">
-                  <div className="stat-value flex-col">{product.total_price}</div>
-                  <BiRuble className="text-xl" />
-                </div>
-                <div className="stat-desc text-secondary">Количество - {product.quantity}</div>
-                <div className="stat-desc text-accent">Цена за штуку - {product.product_price}</div>
-                <div className="stat-title">Название - {product.product_name}</div>
-              </div>
-            </div>
+            {/* Информация о продукте */}
+            <ProductInfo product={product} />
+          </div>
+
+          {/* Кнопки управления - ПЕРЕНЕСЕНЫ ВНУТРЬ формы */}
+          <div className="modal-action mt-6">
+            <button type="submit" className="btn btn-primary mr-2" disabled={loadPost}>
+              {loadPost ? "Обработка..." : "Оплатить"}
+            </button>
+            <button type="button" className="btn btn-secondary" onClick={onClose}>
+              Закрыть
+            </button>
           </div>
         </form>
 
-        <div className="modal-action">
-          <button className="btn btn-primary mr-2">Оплатить</button>
-          <button className="btn btn-secondary" onClick={onClose}>
-            Закрыть
-          </button>
-        </div>
+        {/* Показываем ошибку создания заказа */}
+        {errorPost && (
+          <div className="alert alert-error mt-4">
+            <span>Ошибка при создании заказа: {errorPost.message}</span>
+          </div>
+        )}
       </div>
     </dialog>
   );
 };
+
 export default BuyModalContent;

@@ -27,7 +27,17 @@ class ProductCardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductCard
-        fields = ["id", "category", "type_product", "name", "photos", "description", "price", "created_at", "updated_at"] 
+        fields = [
+            "id",
+            "category",
+            "type_product",
+            "name",
+            "photos",
+            "description",
+            "price",
+            "created_at",
+            "updated_at",
+        ]
 
 
 class BasketPostSerializer(serializers.ModelSerializer):
@@ -70,7 +80,9 @@ class BasketGetSerializer(serializers.ModelSerializer):
 
 
 class OrderGetSerializer(serializers.ModelSerializer):
-    product = ProductCardSerializer(read_only=True)  # Нормальное отображение продукта
+    product = ProductCardSerializer(
+        read_only=True
+    )  # Нормальное отображение продукта
     status_display = serializers.SerializerMethodField()
 
     class Meta:
@@ -78,13 +90,16 @@ class OrderGetSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "product",
+            "quantity",
             "country",
             "city",
             "postal_code",
-            "address",
+            "street",
+            "house",
+            "apartment_office" "created",
             "status_display",
             "paid",
-            "created"
+            "created",
         ]
         read_only_fields = ["user", "created", "updated"]
 
@@ -96,5 +111,14 @@ class OrderGetSerializer(serializers.ModelSerializer):
 class OrderPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ["product", "country", "city", "postal_code", "status", "paid"]
+        fields = [
+            "product",
+            "quantity",
+            "country",
+            "city",
+            "postal_code",
+            "street",
+            "house",
+            "apartment_office",
+        ]
         read_only_fields = ["user", "created", "updated"]

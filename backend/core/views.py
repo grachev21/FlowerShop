@@ -94,9 +94,22 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         method = self.request.method
         if method == "POST":
+            print("method post ...")
             return OrderPostSerializer
         else:
             return OrderGetSerializer
+
+
+    def perform_create(self, serializer):
+            # Automatically save the current user
+            serializer.save(user=self.request.user)
+
+
+
+
+
+
+
 
 
 # list	GET	/api/basket/	Получить список всех объектов
